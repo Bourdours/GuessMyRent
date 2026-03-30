@@ -1,0 +1,19 @@
+{
+    "name": "bourdours/gm-r",
+    "description": "Projet final pour validation de certification, un jeu web sur l'estimation de loyer",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kerx08\\GmR\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bourdours",
+            "email": "maillot.gaetan@yahoo.fr"
+        }
+    ]
+}
