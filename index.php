@@ -1,13 +1,24 @@
 <?php
+session_start();
+if (!empty($_SESSION['username'])) {
+	echo "<p>Bienvenue " . $_SESSION['username'] . "</p>";
+} else {
+	echo "<p>Bienvenue, n'hésitez pas à vous connecter pour personnaliser votre espace</p>";
+}
+
+
 /*  DEFINITION DES CONSTANCES */
-require dirname(__FILE__) . "/controller/config.php";
+require dirname(__FILE__) . "/config/config.php";
 
 /* UTILISATION COMPOSER */
-require VENDOR . '/autoload.php';
+require VENDOR . 'autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
+/* CONNECTION A LA BD */
+require MODEL . "connect.php";
+
 /* DEFINITION DU ROUTAGE */
-require CONTROLLER . "/root.php";
+require CONFIG . "root.php";
 $load = new Root();
 $load->rooting();

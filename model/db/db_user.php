@@ -1,5 +1,10 @@
 <?php
-class user 
+
+class User extends DbConnect
 {
-    
+    function testConnect()
+    {
+        self::connect();
+        echo "bien connecté";
+    }
 }
