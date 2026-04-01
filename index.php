@@ -16,7 +16,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 /* CONNECTION A LA BD */
-require MODEL . "connect.php";
+require CONFIG . "connect.php";
 
 /* DEFINITION DU ROUTAGE */
 require CONFIG . "root.php";
