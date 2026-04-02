@@ -1,5 +1,5 @@
 <?php
-require_once MODEL . "db_model.php";
+require_once MODEL . "mdl_model.php";
 
 class GameModel extends Model
 {
@@ -25,7 +25,7 @@ class GameModel extends Model
         };
     }
 
-    public function save(int $guess, int $score, int $estateId, ?int $userId): int
+    public function create(int $guess, ?int $score, int $estateId, ?int $userId): int
     {
         $this->executeQueryWithBind(
             'INSERT INTO GAME (guess, game_result, date_, id_estate, id_user)
@@ -33,6 +33,14 @@ class GameModel extends Model
             ['guess' => $guess, 'score' => $score, 'id_estate' => $estateId, 'id_user' => $userId]
         );
         return (int) self::connect()->lastInsertId();
+    }
+
+    public function findById(int $id): array|false
+    {
+        return $this->executeQueryWithBind(
+            'SELECT * FROM GAME WHERE id_game = :id',
+            ['id' => $id]
+        )->fetch();
     }
 
     public function findByUser(int $userId): array
@@ -46,5 +54,14 @@ class GameModel extends Model
              ORDER BY g.date_ DESC',
             ['id_user' => $userId]
         )->fetchAll();
+    }
+
+    // Supprime toutes les parties d'un utilisateur
+    public function deleteByUser(int $userId): bool
+    {
+        return $this->executeQueryWithBind(
+            'DELETE FROM GAME WHERE id_user = :id_user',
+            ['id_user' => $userId]
+        )->rowCount() > 0;
     }
 }

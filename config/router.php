@@ -31,28 +31,66 @@ class Router
                 require CONTROLLER . 'ctl_view.php';
                 (new ViewController())->home();
                 break;
+
             case '/info':
                 require CONTROLLER . 'ctl_view.php';
                 (new ViewController())->info();
                 break;
-                // case "":
-                //     require ;
-                //     break;            
-                // case "":
-                //     require ;
-                //     break;            
-                // case "":
-                //     require ;
-                //     break;            
-                // case "":
-                //     require ;
-                //     break;            
-                // case "":
-                //     require ;
-                //     break;            
-                // case "":
-                //     require ;
-                //     break;
+
+            case '/jeu':
+                require CONTROLLER . 'ctl_view.php';
+                (new ViewController())->play();
+                break;
+
+            case '/regle':
+                require CONTROLLER . 'ctl_view.php';
+                (new ViewController())->rules();
+                break;
+
+            case '/contact':
+                require CONTROLLER . 'ctl_view.php';
+                (new ViewController())->contact();
+                break;
+
+            case '/auth':
+                require CONTROLLER . 'ctl_user.php';
+                (new UserController())->auth();
+                break;
+
+            case '/contact/suggest':
+                require CONTROLLER . 'ctl_user.php';
+                (new UserController())->suggest();
+                break;
+
+            case '/profil':
+                require CONTROLLER . 'ctl_user.php';
+                (new UserController())->profil();
+                break;
+
+            case '/profil/history':
+                require CONTROLLER . 'ctl_user.php';
+                (new UserController())->hictory();
+                break;
+
+            case '/admin':
+                require CONTROLLER . 'ctl_admin.php';
+                (new AdminController())->dashboard();
+                break;
+
+            case '/admin/biens':
+                require CONTROLLER . 'ctl_admin.php';
+                (new AdminController())->estates();
+                break;
+
+            case '/admin/utilisateurs':
+                require CONTROLLER . 'ctl_admin.php';
+                (new AdminController())->users();
+                break;
+
+            default:
+                http_response_code(404);
+                require VIEW . 'v_404.html.php';
+                break;
         }
     }
 }

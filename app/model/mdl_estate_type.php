@@ -1,0 +1,46 @@
+<?php
+require_once MODEL . "mdl_model.php";
+
+class TypeModel extends Model
+{
+    protected string $tableName = 'TYPE';
+
+    // public function findAll(): array
+    // {
+    //     return $this->executeQuery('SELECT * FROM TYPE ORDER BY label ASC')->fetchAll();
+    // }
+
+    public function findById(int $id): array|false
+    {
+        return $this->executeQueryWithBind(
+            'SELECT * FROM TYPE WHERE id_type = :id',
+            ['id' => $id]
+        )->fetch();
+    }
+
+    public function create(string $label): int
+    {
+        $this->executeQueryWithBind(
+            'INSERT INTO TYPE (label) VALUES (:label)',
+            ['label' => $label]
+        );
+        return (int) self::connect()->lastInsertId();
+    }
+
+    public function update(int $id, string $label): bool
+    {
+        return $this->executeQueryWithBind(
+            'UPDATE TYPE SET label = :label WHERE id_type = :id',
+            ['label' => $label, 'id' => $id]
+        )->rowCount() > 0;
+    }
+
+    // Échoue si des biens y sont rattachés
+    public function delete(int $id): bool
+    {
+        return $this->executeQueryWithBind(
+            'DELETE FROM TYPE WHERE id_type = :id',
+            ['id' => $id]
+        )->rowCount() > 0;
+    }
+}

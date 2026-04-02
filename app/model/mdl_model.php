@@ -1,14 +1,14 @@
 <?php
 require_once CONFIG . "connect.php";
 
-class Model extends DbConnect
+abstract class Model extends DbConnect
 {
     protected $tableName;
 
     // Exécute une requête SQL
     protected function executeQuery(string $sql): PDOStatement
     {
-        try {
+        try {var_dump($sql);
             $query = self::connect()->prepare($sql); // récupère la connexion PDO à la DB // compilation requete SQL protection injections
             $query->execute();
             return $query;
@@ -55,5 +55,25 @@ class Model extends DbConnect
                 $e
             );
         }
+    }
+
+    // retourne un array de $this
+    protected function getProperties(): array
+    {
+        var_dump($this);
+        return get_object_vars($this);
+    }
+
+    // transforme l'array en string
+    protected function getPropertiesNamesString(): string
+    {
+        return implode(',', array_keys($this->getProperties()));
+    }
+
+    function findAll(): array
+    {
+        $sql = "SELECT {$this->getPropertiesNamesString()} FROM {$this->tableName}";
+        $stmt = $this->executeQuery($sql);
+        return $stmt->fetchAll();        
     }
 }

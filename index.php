@@ -1,10 +1,10 @@
 <?php
 session_start();
-if (!empty($_SESSION['username'])) {
-	echo "<p>Bienvenue " . $_SESSION['username'] . "</p>";
-} else {
-	echo "<p>Bienvenue, n'hésitez pas à vous connecter pour personnaliser votre espace</p>";
-}
+// if (!empty($_SESSION['username'])) {
+// 	echo "<p>Bienvenue " . $_SESSION['username'] . "</p>";
+// } else {
+// 	echo "<p>Bienvenue, n'hésitez pas à vous connecter pour personnaliser votre espace</p>";
+// }
 
 
 /*  DEFINITION DES CONSTANCES */
