@@ -1,0 +1,128 @@
+/* ── Variables ─────────────────────────────────────────────── */
+:root {
+    /* Colors */
+    --c-navy: #1B0140;
+    --c-purple-dk: #461973;
+    --c-purple: #692DA6;
+    --c-gold: #F2B05E;
+    --c-cream: #F2EBDC;
+    --c-white: #ffffff;
+
+    /* Spacing */
+    --r-lg: 20px;
+
+    /* Border radii */
+    --rad-md: 20px;
+
+}
+
+/* ── Section spacing ─────────────────────────────────────────── */
+.section {
+    margin-bottom: 56px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HOME PAGE
+═══════════════════════════════════════════════════════════════ */
+
+.hero {
+    background: linear-gradient(160deg, var(--c-navy) 0%, var(--c-purple-dk) 60%, var(--c-purple) 100%);
+    color: var(--c-white);
+    text-align: center;
+    padding: 64px var(--r-lg) 80px;
+}
+
+.hero h1 {
+    color: var(--c-white);
+    margin-bottom: 16px;
+}
+
+.hero h1 span {
+    color: var(--c-gold);
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 32px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+/* Stats band */
+.stats-band {
+    background: var(--c-cream);
+    border-top: 3px solid var(--c-gold);
+    border-bottom: 3px solid var(--c-gold);
+    padding: 24px var(--r-lg);
+}
+
+.stats-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    color: var(--c-purple);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: rgba(27, 1, 64, 0.6);
+    margin-top: 4px;
+}
+
+@media (min-width: 600px) {
+    .stats-inner {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+
+/* How to play */
+.how-to-play { padding: 48px var(--r-lg); }
+.how-to-play h2 { text-align: center; margin-bottom: 36px; }
+.steps-grid {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (min-width: 768px) { .steps-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.step-card {
+  background: var(--c-white);
+  border-radius: var(--rad-md);
+  padding: 24px 16px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(27,1,64,0.07);
+}
+.step-number {
+  width: 44px;
+  height: 44px;
+  background: var(--c-purple);
+  color: var(--c-white);
+  font-size: 1.3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+.step-card h3 { font-size: 0.95rem; margin-bottom: 6px; }
+.step-card p { font-size: 0.8rem; color: rgba(27,1,64,0.6); }

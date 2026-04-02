@@ -19,6 +19,6 @@ $dotenv->load();
 require CONFIG . "connect.php";
 
 /* DEFINITION DU ROUTAGE */
-require CONFIG . "root.php";
-$load = new Root();
-$load->rooting();
+require CONFIG . "router.php";
+$load = new Router();
+$load->routing();
