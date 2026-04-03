@@ -1,0 +1,12 @@
+// ============================================================
+//   GUESS MY RENT — Mixins
+// ============================================================
+
+@use "variables" as *;
+
+// ── Flexbox helpers ──────────────────────────────────────────
+@mixin flex-center($display: flex) {
+  display: $display;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "gmr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch static/sass/main.scss:static/css/main.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bourdours/GuessMyRent.git"
+  },
+  "author": "Bourdours",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bourdours/GuessMyRent/issues"
+  },
+  "homepage": "https://github.com/Bourdours/GuessMyRent#readme",
+  "dependencies": {
+    "sass": "^1.99.0"
+  }
+}

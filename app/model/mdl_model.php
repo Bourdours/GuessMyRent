@@ -8,7 +8,7 @@ abstract class Model extends DbConnect
     // Exécute une requête SQL
     protected function executeQuery(string $sql): PDOStatement
     {
-        try {var_dump($sql);
+        try {
             $query = self::connect()->prepare($sql); // récupère la connexion PDO à la DB // compilation requete SQL protection injections
             $query->execute();
             return $query;
@@ -57,11 +57,18 @@ abstract class Model extends DbConnect
         }
     }
 
-    // retourne un array de $this
+    // retourne un array des propriétés de la classe enfant uniquement
     protected function getProperties(): array
     {
-        var_dump($this);
-        return get_object_vars($this);
+        $childProps = (new ReflectionClass(static::class))->getProperties();
+        $result = [];
+        foreach ($childProps as $prop) {
+            if ($prop->class === static::class) {
+                $prop->setAccessible(true);
+                $result[$prop->getName()] = $prop->isInitialized($this) ? $prop->getValue($this) : null;
+            }
+        }
+        return $result;
     }
 
     // transforme l'array en string
