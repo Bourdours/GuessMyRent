@@ -243,6 +243,20 @@ header {
     display: none !important;
   }
 }
+footer {
+  background: #1B0140;
+  color: rgba(242, 235, 220, 0.7);
+  text-align: center;
+  padding: 32px 20px;
+  font-size: 0.85rem;
+}
+footer a {
+  color: #F2B05E;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    HOME PAGE
 ═══════════════════════════════════════════════════════════════ */

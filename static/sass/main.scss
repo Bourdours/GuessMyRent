@@ -237,6 +237,22 @@ header {
   }
 }
 
+// ── Footer ───────────────────────────────────────────────────
+footer {
+  background: $c-navy;
+  color: rgba($c-cream, 0.7);
+  text-align: center;
+  padding: $r-xl $r-lg;
+  font-size: 0.85rem;
+
+  a {
+    color: $c-gold;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    HOME PAGE
 ═══════════════════════════════════════════════════════════════ */
