@@ -10,3 +10,10 @@
   align-items: center;
   justify-content: center;
 }
+// ── Uppercase label ──────────────────────────────────────────
+@mixin uppercase-label($size: 0.7rem, $spacing: 0.05em) {
+  font-size: $size;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: $spacing;
+}

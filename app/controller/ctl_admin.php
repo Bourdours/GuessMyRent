@@ -6,7 +6,10 @@ class AdminController extends ViewController
     /** Redirige vers / si l'utilisateur n'est pas admin. */
     private function requireAdmin(): void
     {
-        // . . .
+        if (empty($_SESSION['user_id']) || empty($_SESSION['is_admin'])) {
+            header('Location: /');
+            exit;
+        }
     }
 
     public function dashboard(): void
@@ -16,13 +19,15 @@ class AdminController extends ViewController
     }
 
 
-    public function estate(): void {
+    public function estate(): void
+    {
         $this->requireAdmin();
         // ...
         $this->render(V_ADMIN . 'v_admin_estate.html.php');
     }
 
-        public function users(): void {
+    public function users(): void
+    {
         $this->requireAdmin();
         // ...
         $this->render(V_ADMIN . 'v_admin_users.html.php');

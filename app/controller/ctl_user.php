@@ -6,7 +6,10 @@ class UserController extends ViewController
 {
     private function requireAuth(): void
     {
-        // . . . 
+        if (empty($_SESSION['user_id'])) {
+            header('Location: /auth');
+            exit;
+        }
     }
 
     public function auth(): void
@@ -21,7 +24,7 @@ class UserController extends ViewController
         $this->requireAuth();
 
         // . . .
-        
+
         $this->render(V_CONTACT . 'v_contact_form.html.php');
     }
 

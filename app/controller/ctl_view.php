@@ -14,9 +14,6 @@ class ViewController
 
     public function home(): void
     {
-        $user = new UserModel();
-        var_dump($user->findAll());
-
         $this->render(VIEW . 'v_index.html.php');
     }
 

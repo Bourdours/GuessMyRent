@@ -8,6 +8,8 @@
     </p>
 </footer>
 
+<script src="<?= BASE_URL ?>/static/js/main.js"></script>
+
 </body>
 
 </html>

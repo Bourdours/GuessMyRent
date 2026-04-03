@@ -71,6 +71,172 @@ h3 {
   font-size: clamp(1.1rem, 3vw, 1.6rem);
 }
 
+// ── Header / Nav ─────────────────────────────────────────────
+header {
+  background: $c-navy;
+  height: $header-h;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 0 $r-lg;
+}
+
+.header-inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  font-family: $f-title;
+  font-size: 1.3rem;
+  color: $c-cream;
+  letter-spacing: 0.02em;
+
+  span {
+    color: $c-gold;
+  }
+}
+
+// Burger
+.burger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  padding: 4px;
+
+  span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: $c-cream;
+    border-radius: 2px;
+    transition:
+      transform 0.25s,
+      opacity 0.25s;
+  }
+
+  &.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  &.open span:nth-child(2) {
+    opacity: 0;
+  }
+  &.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+// Mobile nav drawer
+.nav-drawer {
+  position: fixed;
+  top: $header-h;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $c-navy;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  padding: $r-lg 0;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  a {
+    color: $c-cream;
+    padding: 14px $r-xl;
+    font-size: 1rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba($c-white, 0.06);
+    transition:
+      background 0.15s,
+      color 0.15s;
+
+    &:hover,
+    &.active {
+      color: $c-gold;
+      background: rgba($c-gold, 0.07);
+    }
+
+    &.nav-logout {
+      color: $c-red;
+    }
+  }
+}
+
+// Desktop nav
+.nav-desktop {
+  display: none;
+  align-items: center;
+  gap: $r-lg;
+
+  a {
+    color: $c-cream;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 6px 10px;
+    border-radius: $rad-sm;
+    transition:
+      color 0.15s,
+      background 0.15s;
+
+    &:hover {
+      color: $c-gold;
+    }
+
+    &.active {
+      color: $c-gold;
+      background: rgba($c-gold, 0.07);
+    }
+  }
+
+  .btn-nav-cta {
+    background: $c-purple;
+    color: $c-white;
+    padding: 8px 18px;
+    border-radius: $rad-lg;
+    font-family: $f-title;
+
+    &:hover {
+      background: $c-purple-lt;
+      color: $c-white;
+    }
+  }
+}
+
+.nav-admin-badge {
+  background: $c-gold;
+  color: $c-navy;
+  @include uppercase-label(0.7rem, 0.05em);
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+
+@media (min-width: $bp-lg) {
+  header {
+    height: $header-h-md;
+  }
+  .burger {
+    display: none;
+  }
+  .nav-desktop {
+    display: flex;
+  }
+  .nav-drawer {
+    display: none !important;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    HOME PAGE
 ═══════════════════════════════════════════════════════════════ */
