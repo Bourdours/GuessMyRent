@@ -17,3 +17,16 @@
   text-transform: uppercase;
   letter-spacing: $spacing;
 }
+
+// ── Button base ──────────────────────────────────────────────
+@mixin btn-base($padding: 12px 28px, $radius: $rad-lg) {
+  @include flex-center(inline-flex);
+  gap: 8px;
+  font-family: $f-title;
+  font-size: 1rem;
+  padding: $padding;
+  border-radius: $radius;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+}

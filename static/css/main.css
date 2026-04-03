@@ -257,11 +257,56 @@ footer a:hover {
   text-decoration: underline;
 }
 
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: "Fredoka One", cursive;
+  font-size: 1rem;
+  padding: 12px 28px;
+  border-radius: 28px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  background: #692DA6;
+  color: #ffffff;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-primary:hover {
+  background: #AE49F2;
+}
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: "Fredoka One", cursive;
+  font-size: 1rem;
+  padding: 12px 28px;
+  border-radius: 20px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  background: #F2EBDC;
+  color: #1B0140;
+  border: 2px solid rgba(27, 1, 64, 0.15) !important;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-secondary:hover {
+  border-color: #692DA6 !important;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    HOME PAGE
 ═══════════════════════════════════════════════════════════════ */
 .hero {
-  background: linear-gradient(160deg, #1B0140 0%, #461973 60%, #692DA6 100%);
+  background: #1b0140;
+  background: linear-gradient(180deg, rgb(27, 1, 64) 0%, rgb(44, 10, 86) 37%, rgb(51, 14, 95) 52%, rgb(83, 33, 138) 87%, rgb(105, 45, 166) 100%);
   color: #ffffff;
   text-align: center;
   padding: 64px 20px 80px;
@@ -372,6 +417,10 @@ footer a:hover {
   align-items: center;
   justify-content: center;
   margin: 0 auto 12px;
+}
+
+.section {
+  margin-bottom: 56px;
 }
 
 /*# sourceMappingURL=main.css.map */

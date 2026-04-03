@@ -13,6 +13,8 @@ $c-green:     #3B6D11;
 $c-red:       #8C2020;
 $c-amber:     #633806;
 $c-white:     #ffffff;
+$c-gradient: linear-gradient(180deg, rgba(27, 1, 64, 1) 0%, rgba(44, 10, 86, 1) 37%, rgba(51, 14, 95, 1) 52%, rgba(83, 33, 138, 1) 87%, rgba(105, 45, 166, 1) 100%);
+$c-gradient-reverse: linear-gradient(180deg, rgba(105, 45, 166, 1) 0%, rgba(83, 33, 138, 1) 13%, rgba(51, 14, 95, 1) 48%, rgba(44, 10, 86, 1) 63%, rgba(27, 1, 64, 1) 100%);
 
 // ── Typography ───────────────────────────────────────────────
 $f-title: 'Fredoka One', cursive;

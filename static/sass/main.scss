@@ -253,15 +253,49 @@ footer {
   }
 }
 
+// ── Buttons ──────────────────────────────────────────────────
+.btn-primary {
+  @include btn-base(12px 28px, $rad-lg);
+  background: $c-purple;
+  color: $c-white;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+
+  &:hover {
+    background: $c-purple-lt;
+  }
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.btn-secondary {
+  @include btn-base(12px 28px, $rad-md);
+  background: $c-cream;
+  color: $c-navy;
+  border: 2px solid rgba($c-navy, 0.15) !important;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+
+  &:hover {
+    border-color: $c-purple !important;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    HOME PAGE
 ═══════════════════════════════════════════════════════════════ */
 .hero {
+  background: #1b0140;
   background: linear-gradient(
-    160deg,
-    $c-navy 0%,
-    $c-purple-dk 60%,
-    $c-purple 100%
+    180deg,
+    rgba(27, 1, 64, 1) 0%,
+    rgba(44, 10, 86, 1) 37%,
+    rgba(51, 14, 95, 1) 52%,
+    rgba(83, 33, 138, 1) 87%,
+    rgba(105, 45, 166, 1) 100%
   );
   color: $c-white;
   text-align: center;
@@ -375,4 +409,10 @@ footer {
   border-radius: 50%;
   @include flex-center;
   margin: 0 auto 12px;
+}
+
+
+// ── Section spacing ───────────────────────────────────────────
+.section {
+  margin-bottom: 56px;
 }
