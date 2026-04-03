@@ -16,7 +16,7 @@ class UserController extends ViewController
     {
         // . . .
 
-        $this->render(V_AUTH . 'v_auth.html.php');
+        $this->render(V_AUTH . 'v_auth.html.php', ['pageTitle' => 'Connexion']);
     }
 
     public function suggest(): void
@@ -25,7 +25,7 @@ class UserController extends ViewController
 
         // . . .
 
-        $this->render(V_CONTACT . 'v_contact_form.html.php');
+        $this->render(V_CONTACT . 'v_contact_form.html.php', ['pageTitle' => 'Suggérer un bien']);
     }
 
     public function profil(): void
@@ -34,7 +34,7 @@ class UserController extends ViewController
 
         // . . .
 
-        $this->render(V_PROFIL . 'v_profil.html.php');
+        $this->render(V_PROFIL . 'v_profil.html.php', ['pageTitle' => 'Mon profil']);
     }
 
     public function hictory(): void
@@ -43,6 +43,6 @@ class UserController extends ViewController
 
         // . . .
 
-        $this->render(V_PROFIL . 'v_profil_history.html.php');
+        $this->render(V_PROFIL . 'v_profil_history.html.php', ['pageTitle' => 'Historique']);
     }
 }

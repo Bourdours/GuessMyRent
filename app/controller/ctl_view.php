@@ -14,26 +14,26 @@ class ViewController
 
     public function home(): void
     {
-        $this->render(VIEW . 'v_index.html.php');
+        $this->render(VIEW . 'v_index.html.php', ['pageTitle' => 'Accueil']);
     }
 
     public function play(): void
     {
-        $this->render(V_GAME . 'v_game.html.php');
+        $this->render(V_GAME . 'v_game.html.php', ['pageTitle' => 'Jouer']);
     }
 
     public function rules(): void
     {
-        $this->render(V_RULES . 'v_rules.html.php');
+        $this->render(V_RULES . 'v_rules.html.php', ['pageTitle' => 'Règles']);
     }
 
     public function contact(): void
     {
-        $this->render(V_CONTACT . 'v_contact.html.php');
+        $this->render(V_CONTACT . 'v_contact.html.php', ['pageTitle' => 'Contact']);
     }
 
     public function info(): void
     {
-        $this->render(V_INFO . 'v_info.html.php');
+        $this->render(V_INFO . 'v_info.html.php', ['pageTitle' => 'Informations']);
     }
 }

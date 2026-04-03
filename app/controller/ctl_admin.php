@@ -15,7 +15,7 @@ class AdminController extends ViewController
     public function dashboard(): void
     {
         $this->requireAdmin();
-        $this->render(V_ADMIN . 'v_admin_dashboard.html.php');
+        $this->render(V_ADMIN . 'v_admin_dashboard.html.php', ['pageTitle' => 'Dashboard']);
     }
 
 
@@ -23,13 +23,13 @@ class AdminController extends ViewController
     {
         $this->requireAdmin();
         // ...
-        $this->render(V_ADMIN . 'v_admin_estate.html.php');
+        $this->render(V_ADMIN . 'v_admin_estate.html.php', ['pageTitle' => 'Gestion des biens']);
     }
 
     public function users(): void
     {
         $this->requireAdmin();
         // ...
-        $this->render(V_ADMIN . 'v_admin_users.html.php');
+        $this->render(V_ADMIN . 'v_admin_users.html.php', ['pageTitle' => 'Gestion des utilisateurs']);
     }
 }
