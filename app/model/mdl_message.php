@@ -3,7 +3,10 @@ require_once MODEL . "mdl_model.php";
 
 class MessageModel extends Model
 {
-    protected string $tableName = 'MESSAGE';
+    public function __construct()
+    {
+        $tableName = 'MESSAGE';
+    }
 
     // public function findAll(): array
     // {
@@ -44,14 +47,6 @@ class MessageModel extends Model
             ['email' => $email, 'content' => $content, 'id_user' => $userId]
         );
         return (int) self::connect()->lastInsertId();
-    }
-
-    public function delete(int $id): bool
-    {
-        return $this->executeQueryWithBind(
-            'DELETE FROM MESSAGE WHERE Id_message = :id',
-            ['id' => $id]
-        )->rowCount() > 0;
     }
 
     // Supprime tous les messages d'un utilisateur

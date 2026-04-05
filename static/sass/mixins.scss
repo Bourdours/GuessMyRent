@@ -30,3 +30,11 @@
   text-align: center;
   cursor: pointer;
 }
+
+// ── Dark hero section ────────────────────────────────────────
+@mixin hero-dark($padding-v: 40px) {
+  background: $c-navy;
+  color: $c-white;
+  padding: $padding-v $r-lg;
+  text-align: center;
+}

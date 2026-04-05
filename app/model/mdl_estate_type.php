@@ -18,6 +18,14 @@ class TypeModel extends Model
         )->fetch();
     }
 
+    public function findByLabel(string $label): array|false
+    {
+        return $this->executeQueryWithBind(
+            'SELECT * FROM TYPE WHERE LOWER(label) = LOWER(:label)',
+            ['label' => $label]
+        )->fetch();
+    }
+
     public function create(string $label): int
     {
         $this->executeQueryWithBind(

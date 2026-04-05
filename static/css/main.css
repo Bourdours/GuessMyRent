@@ -604,6 +604,232 @@ footer a:hover {
   color: #692DA6;
 }
 
+.contact-hero {
+  background: #1B0140;
+  color: #ffffff;
+  padding: 40px 20px;
+  text-align: center;
+}
+.contact-hero h1 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+.contact-hero p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.contact-body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+.contact-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid rgba(27, 1, 64, 0.1);
+  margin-bottom: 28px;
+}
+.contact-tabs a {
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: rgba(27, 1, 64, 0.5);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.contact-tabs a:hover {
+  color: #692DA6;
+}
+.contact-tabs a.active {
+  color: #692DA6;
+  border-bottom-color: #692DA6;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 560px;
+}
+
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.radio-pill input[type=radio] {
+  display: none;
+}
+.radio-pill label {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(27, 1, 64, 0.2);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.radio-pill input[type=radio]:checked + label {
+  background: #692DA6;
+  border-color: #692DA6;
+  color: #ffffff;
+}
+
+.char-count {
+  font-size: 0.7rem;
+  color: rgba(27, 1, 64, 0.4);
+  text-align: right;
+}
+
+.upload-zone {
+  position: relative;
+  border: 2px dashed rgba(105, 45, 166, 0.35);
+  border-radius: 20px;
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: rgba(174, 73, 242, 0.03);
+}
+.upload-zone:hover {
+  border-color: #692DA6;
+  background: rgba(174, 73, 242, 0.06);
+}
+.upload-zone svg {
+  color: #692DA6;
+  margin: 0 auto;
+}
+.upload-zone p {
+  font-size: 0.85rem;
+  color: rgba(27, 1, 64, 0.5);
+  margin-top: 8px;
+}
+.upload-zone p strong {
+  color: #692DA6;
+}
+.upload-zone p:last-of-type {
+  font-size: 0.7rem;
+}
+.upload-zone input[type=file] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.photo-preview {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+.photo-preview:empty {
+  display: none;
+}
+.photo-preview.count-1 {
+  grid-template-columns: 1fr;
+}
+.photo-preview.count-3 .photo-preview-item:first-child {
+  grid-column: span 2;
+}
+
+.photo-preview-item {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.5px solid rgba(27, 1, 64, 0.09);
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(27, 1, 64, 0.07);
+}
+
+.photo-preview-img {
+  position: relative;
+}
+.photo-preview-img img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: #692DA6;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  font-family: "Nunito", sans-serif;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.photo-remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(27, 1, 64, 0.55);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.1s;
+}
+.photo-remove:hover {
+  background: #8C2020;
+  transform: scale(1.1);
+}
+
+.photo-info {
+  padding: 6px 10px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid rgba(27, 1, 64, 0.06);
+}
+.photo-info .photo-name {
+  font-size: 0.75rem;
+  color: rgba(27, 1, 64, 0.65);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+.photo-info .photo-size {
+  font-size: 0.72rem;
+  color: rgba(27, 1, 64, 0.38);
+  flex-shrink: 0;
+}
+
+#uploadZone[data-count="4"] {
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.moderation-note {
+  background: rgba(99, 56, 6, 0.08);
+  border-left: 3px solid #F2B05E;
+  border-radius: 0 10px 10px 0;
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  color: #633806;
+}
+
 .text-center {
   text-align: center;
 }

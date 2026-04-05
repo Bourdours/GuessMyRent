@@ -3,7 +3,7 @@ require_once CONFIG . "connect.php";
 
 abstract class Model extends DbConnect
 {
-    protected $tableName;
+    protected string $tableName;
 
     // Exécute une requête SQL
     protected function executeQuery(string $sql): PDOStatement
