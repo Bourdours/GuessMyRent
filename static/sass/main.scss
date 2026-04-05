@@ -284,6 +284,82 @@ footer {
   }
 }
 
+.btn-full {
+  width: 100%;
+}
+
+// ── Form Fields ──────────────────────────────────────────────
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-label {
+  @include uppercase-label(0.7rem, 0.06em);
+  color: rgba($c-navy, 0.6);
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  background: $c-cream;
+  border: 1.5px solid rgba($c-navy, 0.2);
+  border-radius: $rad-sm;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  color: $c-navy;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    border-color: $c-purple;
+    background: rgba($c-purple-lt, 0.05);
+  }
+
+  &.error {
+    border-color: $c-red;
+    background: rgba($c-red, 0.05);
+  }
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+// ── Alerts ───────────────────────────────────────────────────
+.alert {
+  padding: 10px 16px;
+  border-radius: $rad-sm;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.alert-error {
+  background: rgba($c-red, 0.1);
+  color: $c-red;
+  border-left: 3px solid $c-red;
+}
+.alert-success {
+  background: rgba($c-green, 0.1);
+  color: $c-green;
+  border-left: 3px solid $c-green;
+}
+.alert-info {
+  background: rgba($c-purple, 0.1);
+  color: $c-purple;
+  border-left: 3px solid $c-purple;
+}
+
+// ── Section spacing ───────────────────────────────────────────
+.section {
+  margin-bottom: 56px;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    HOME PAGE
 ═══════════════════════════════════════════════════════════════ */
@@ -411,8 +487,161 @@ footer {
   margin: 0 auto 12px;
 }
 
+// ═══════════════════════════════════════════════════════════════
+//   AUTH PAGE
+// ═══════════════════════════════════════════════════════════════
+.auth-page {
+  min-height: calc(100vh - #{$header-h});
+  @include flex-center;
+  padding: $r-xl $r-lg;
+  background: $c-gradient;
+}
 
-// ── Section spacing ───────────────────────────────────────────
-.section {
-  margin-bottom: 56px;
+.auth-card {
+  background: $c-white;
+  border-radius: $rad-md;
+  padding: 32px 28px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba($c-navy, 0.3);
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 1.7rem;
+    color: $c-purple;
+    margin-bottom: 4px;
+  }
+  p {
+    font-size: 0.75rem;
+    color: rgba($c-navy, 0.5);
+  }
+}
+
+// Tab switcher
+.tab-switcher {
+  display: flex;
+  background: $c-cream;
+  border-radius: 26px;
+  padding: 4px;
+  margin-bottom: 24px;
+
+  a {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    border-radius: 22px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: rgba($c-navy, 0.6);
+    transition:
+      background 0.2s,
+      color 0.2s;
+
+    &.active {
+      background: $c-white;
+      color: $c-purple;
+      box-shadow: 0 2px 8px rgba($c-navy, 0.1);
+    }
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+// Password strength
+.pwd-strength {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.pwd-bar {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba($c-navy, 0.1);
+  transition: background 0.3s;
+
+  &.weak {
+    background: $c-red;
+  }
+  &.medium {
+    background: $c-gold;
+  }
+  &.strong {
+    background: $c-green;
+  }
+}
+
+.auth-legal {
+  font-size: 0.65rem;
+  color: rgba($c-navy, 0.4);
+  text-align: center;
+  line-height: 1.4;
+
+  a {
+    color: $c-purple;
+  }
+}
+
+// Password reset
+.auth-back-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: rgba($c-navy, 0.6);
+  margin-bottom: 10px;
+  cursor: pointer;
+
+  &:hover {
+    color: $c-purple;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//   UTILITY
+// ═══════════════════════════════════════════════════════════════
+.text-center {
+  text-align: center;
+}
+.mt-sm {
+  margin-top: $r-sm;
+}
+.mt-md {
+  margin-top: $r-md;
+}
+.mt-lg {
+  margin-top: $r-lg;
+}
+.mt-xl {
+  margin-top: $r-xl;
+}
+.mb-md {
+  margin-bottom: $r-md;
+}
+.mb-lg {
+  margin-bottom: $r-lg;
+}
+.mb-xl {
+  margin-bottom: $r-xl;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

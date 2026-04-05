@@ -7,7 +7,7 @@ class AdminController extends ViewController
     private function requireAdmin(): void
     {
         if (empty($_SESSION['user_id']) || empty($_SESSION['is_admin'])) {
-            header('Location: /');
+            header('Location: ' . BASE_URL . '/');
             exit;
         }
     }

@@ -10,7 +10,7 @@ class MessageModel extends Model
     //     return $this->executeQuery(
     //         'SELECT m.*, u.pseudo, u.avatar
     //          FROM MESSAGE m
-    //          JOIN USER_ u ON m.id_user = u.id_user
+    //          JOIN USER u ON m.id_user = u.id_user
     //          ORDER BY m.Id_message DESC'
     //     )->fetchAll();
     // }
@@ -20,7 +20,7 @@ class MessageModel extends Model
         return $this->executeQueryWithBind(
             'SELECT m.*, u.pseudo
              FROM MESSAGE m
-             JOIN USER_ u ON m.id_user = u.id_user
+             JOIN USER u ON m.id_user = u.id_user
              WHERE m.Id_message = :id',
             ['id' => $id]
         )->fetch();

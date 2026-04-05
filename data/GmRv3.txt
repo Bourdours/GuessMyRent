@@ -1,4 +1,4 @@
-CREATE TABLE USER_(
+CREATE TABLE USER(
    id_user INT AUTO_INCREMENT,
    email VARCHAR(50)  NOT NULL,
    password VARCHAR(112)  NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE MESSAGE(
    content VARCHAR(500)  NOT NULL,
    id_user INT NOT NULL,
    PRIMARY KEY(Id_message),
-   FOREIGN KEY(id_user) REFERENCES USER_(id_user)
+   FOREIGN KEY(id_user) REFERENCES USER(id_user)
 );
 
 CREATE TABLE TYPE(
@@ -54,7 +54,7 @@ CREATE TABLE ESTATE(
    PRIMARY KEY(id_estate),
    FOREIGN KEY(id_status) REFERENCES STATUS(id_status),
    FOREIGN KEY(id_type) REFERENCES TYPE(id_type),
-   FOREIGN KEY(id_user) REFERENCES USER_(id_user)
+   FOREIGN KEY(id_user) REFERENCES USER(id_user)
 );
 
 CREATE TABLE GAME(
@@ -65,7 +65,7 @@ CREATE TABLE GAME(
    id_user INT,
    id_estate INT NOT NULL,
    PRIMARY KEY(id_game),
-   FOREIGN KEY(id_user) REFERENCES USER_(id_user),
+   FOREIGN KEY(id_user) REFERENCES USER(id_user),
    FOREIGN KEY(id_estate) REFERENCES ESTATE(id_estate)
 );
 
@@ -77,5 +77,5 @@ CREATE TABLE ESTATE_MODIFICATION(
    id_user INT NOT NULL,
    PRIMARY KEY(id_modification),
    FOREIGN KEY(id_estate) REFERENCES ESTATE(id_estate),
-   FOREIGN KEY(id_user) REFERENCES USER_(id_user)
+   FOREIGN KEY(id_user) REFERENCES USER(id_user)
 );

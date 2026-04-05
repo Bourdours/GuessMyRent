@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @font-face {
   font-family: "Fredoka One";
-  src: url("../fonts/fredoka-v17-latin-regular.woff2") format("woff2");
+  src: url("../fonts/Fredoka-One.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -301,6 +301,84 @@ footer a:hover {
   border-color: #692DA6 !important;
 }
 
+.btn-full {
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(27, 1, 64, 0.6);
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  background: #F2EBDC;
+  border: 1.5px solid rgba(27, 1, 64, 0.2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  color: #1B0140;
+  transition: border-color 0.2s, background 0.2s;
+  width: 100%;
+}
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #692DA6;
+  background: rgba(174, 73, 242, 0.05);
+}
+.form-input.error,
+.form-textarea.error,
+.form-select.error {
+  border-color: #8C2020;
+  background: rgba(140, 32, 32, 0.05);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.alert {
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.alert-error {
+  background: rgba(140, 32, 32, 0.1);
+  color: #8C2020;
+  border-left: 3px solid #8C2020;
+}
+
+.alert-success {
+  background: rgba(59, 109, 17, 0.1);
+  color: #3B6D11;
+  border-left: 3px solid #3B6D11;
+}
+
+.alert-info {
+  background: rgba(105, 45, 166, 0.1);
+  color: #692DA6;
+  border-left: 3px solid #692DA6;
+}
+
+.section {
+  margin-bottom: 56px;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    HOME PAGE
 ═══════════════════════════════════════════════════════════════ */
@@ -419,8 +497,155 @@ footer a:hover {
   margin: 0 auto 12px;
 }
 
-.section {
-  margin-bottom: 56px;
+.auth-page {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background: linear-gradient(180deg, rgb(27, 1, 64) 0%, rgb(44, 10, 86) 37%, rgb(51, 14, 95) 52%, rgb(83, 33, 138) 87%, rgb(105, 45, 166) 100%);
+}
+
+.auth-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px 28px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(27, 1, 64, 0.3);
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.auth-logo h1 {
+  font-size: 1.7rem;
+  color: #692DA6;
+  margin-bottom: 4px;
+}
+.auth-logo p {
+  font-size: 0.75rem;
+  color: rgba(27, 1, 64, 0.5);
+}
+
+.tab-switcher {
+  display: flex;
+  background: #F2EBDC;
+  border-radius: 26px;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+.tab-switcher a {
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  border-radius: 22px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: rgba(27, 1, 64, 0.6);
+  transition: background 0.2s, color 0.2s;
+}
+.tab-switcher a.active {
+  background: #ffffff;
+  color: #692DA6;
+  box-shadow: 0 2px 8px rgba(27, 1, 64, 0.1);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pwd-strength {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.pwd-bar {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(27, 1, 64, 0.1);
+  transition: background 0.3s;
+}
+.pwd-bar.weak {
+  background: #8C2020;
+}
+.pwd-bar.medium {
+  background: #F2B05E;
+}
+.pwd-bar.strong {
+  background: #3B6D11;
+}
+
+.auth-legal {
+  font-size: 0.65rem;
+  color: rgba(27, 1, 64, 0.4);
+  text-align: center;
+  line-height: 1.4;
+}
+.auth-legal a {
+  color: #692DA6;
+}
+
+.auth-back-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: rgba(27, 1, 64, 0.6);
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.auth-back-link:hover {
+  color: #692DA6;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-sm {
+  margin-top: 8px;
+}
+
+.mt-md {
+  margin-top: 12px;
+}
+
+.mt-lg {
+  margin-top: 20px;
+}
+
+.mt-xl {
+  margin-top: 32px;
+}
+
+.mb-md {
+  margin-bottom: 12px;
+}
+
+.mb-lg {
+  margin-bottom: 20px;
+}
+
+.mb-xl {
+  margin-bottom: 32px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /*# sourceMappingURL=main.css.map */
