@@ -1,10 +1,9 @@
-<!-- Hero -->
-<div class="contact-hero">
-  <h1>Contactez-nous</h1>
-  <p>Une question, un problème ou un bien à nous proposer ?</p>
-</div>
-
 <div class="contact-body">
+  <!-- Hero -->
+  <div class="contact-hero">
+    <h1>Contactez-nous</h1>
+    <p>Une question, un problème ou un bien à nous proposer ?</p>
+  </div>
 
   <?php if (!empty($success)): ?>
     <div class="alert alert-success mb-lg" role="status"><?= htmlspecialchars($success) ?></div>
@@ -53,8 +52,7 @@
           maxlength="50"
           autocomplete="email"
           placeholder="exemple@mail.com"
-          value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
-        >
+          value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
       </div>
 
       <div class="form-group">
@@ -66,8 +64,7 @@
           maxlength="500"
           required
           rows="5"
-          placeholder="Décrivez votre demande…"
-        ><?= htmlspecialchars($_POST['content'] ?? '') ?></textarea>
+          placeholder="Décrivez votre demande…"><?= htmlspecialchars($_POST['content'] ?? '') ?></textarea>
         <div class="char-count"><span id="charCount">0</span> / 500</div>
       </div>
 
@@ -120,7 +117,9 @@
       <div class="form-group">
         <label class="form-label">Photos (jusqu'à 4, min 1)</label>
         <div class="upload-zone" id="uploadZone">
-          <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/></svg>
+          <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+          </svg>
           <p>Glissez jusqu'à 4 photos ou <strong>parcourez</strong></p>
           <p>JPG, PNG, WebP — max 5 Mo par photo</p>
           <input type="file" name="photos[]" id="photoInput" accept="image/*" multiple required>

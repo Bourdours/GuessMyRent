@@ -31,10 +31,30 @@
   cursor: pointer;
 }
 
-// ── Dark hero section ────────────────────────────────────────
-@mixin hero-dark($padding-v: 40px) {
-  background: $c-navy;
+// ── Page hero (rules, contact, …) ────────────────────────────
+@mixin page-hero {
+  background: $c-gradient;
   color: $c-white;
-  padding: $padding-v $r-lg;
+  border-radius: $rad-md;
+  padding: 40px 32px;
   text-align: center;
+  margin-bottom: 36px;
+
+  h1 {
+    color: $c-white;
+    margin-bottom: 10px;
+  }
+  p {
+    color: rgba($c-white, 0.8);
+  }
+}
+
+// ── Pill ─────────────────────────────────────────────
+@mixin pill-base {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  @include uppercase-label(0.7rem, 0.04em);
+  padding: 3px 10px;
+  border-radius: 20px;
 }
