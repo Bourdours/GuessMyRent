@@ -89,7 +89,10 @@ class Router
 
             default:
                 http_response_code(404);
+                $pageTitle = '404 — Page introuvable';
+                require V_SKELETON . 'v_header.html.php';
                 require VIEW . 'v_404.html.php';
+                require V_SKELETON . 'v_footer.html.php';
                 break;
         }
     }

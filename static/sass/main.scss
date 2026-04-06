@@ -360,6 +360,18 @@ footer {
   margin-bottom: 56px;
 }
 
+// ── Container ─────────────────────────────────────────────────
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 $r-lg;
+
+  @media (min-width: $bp-lg) {
+    padding: 0 $r-2xl;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    HOME PAGE
 ═══════════════════════════════════════════════════════════════ */
@@ -863,6 +875,57 @@ footer {
   padding: 10px 14px;
   font-size: 0.8rem;
   color: $c-amber;
+}
+
+// ═══════════════════════════════════════════════════════════════
+//   ERROR / INFO PAGES
+// ═══════════════════════════════════════════════════════════════
+.error-page,
+.info-page {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 0 $r-lg;
+  text-align: center;
+}
+
+.error-page {
+  .error-code {
+    font-family: $f-title;
+    font-size: 5rem;
+    color: $c-purple;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    margin-bottom: 12px;
+  }
+  p {
+    color: rgba($c-navy, 0.6);
+    margin-bottom: 28px;
+  }
+}
+
+.info-page {
+  text-align: left;
+  margin-top: 48px;
+
+  h1 {
+    margin-bottom: 24px;
+  }
+  h2 {
+    font-size: 1.2rem;
+    margin: 28px 0 8px;
+  }
+  p {
+    font-size: 0.9rem;
+    color: rgba($c-navy, 0.7);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  a {
+    color: $c-purple;
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════

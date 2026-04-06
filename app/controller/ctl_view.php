@@ -160,6 +160,6 @@ class ViewController
 
     public function info(): void
     {
-        $this->render(V_INFO . 'v_info.html.php', ['pageTitle' => 'Informations']);
+        $this->render(V_INFO . 'v_info.html.php', ['pageTitle' => 'Mentions Légales']);
     }
 }

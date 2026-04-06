@@ -379,6 +379,18 @@ footer a:hover {
   margin-bottom: 56px;
 }
 
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+@media (min-width: 768px) {
+  .container {
+    padding: 0 48px;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    HOME PAGE
 ═══════════════════════════════════════════════════════════════ */
@@ -828,6 +840,50 @@ footer a:hover {
   padding: 10px 14px;
   font-size: 0.8rem;
   color: #633806;
+}
+
+.error-page,
+.info-page {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.error-page .error-code {
+  font-family: "Fredoka One", cursive;
+  font-size: 5rem;
+  color: #692DA6;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.error-page h2 {
+  margin-bottom: 12px;
+}
+.error-page p {
+  color: rgba(27, 1, 64, 0.6);
+  margin-bottom: 28px;
+}
+
+.info-page {
+  text-align: left;
+  margin-top: 48px;
+}
+.info-page h1 {
+  margin-bottom: 24px;
+}
+.info-page h2 {
+  font-size: 1.2rem;
+  margin: 28px 0 8px;
+}
+.info-page p {
+  font-size: 0.9rem;
+  color: rgba(27, 1, 64, 0.7);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.info-page a {
+  color: #692DA6;
 }
 
 .text-center {
