@@ -10,6 +10,12 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 // ── Uppercase label ──────────────────────────────────────────
 @mixin uppercase-label($size: 0.7rem, $spacing: 0.05em) {
   font-size: $size;
@@ -57,4 +63,13 @@
   @include uppercase-label(0.7rem, 0.04em);
   padding: 3px 10px;
   border-radius: 20px;
+}
+
+// ── Table header cell ────────────────────────────────────────
+@mixin table-th-base($bg: rgba($c-navy, 0.03)) {
+  background: $bg;
+  padding: 10px 12px;
+  text-align: left;
+  @include uppercase-label;
+  color: rgba($c-navy, 0.5);
 }

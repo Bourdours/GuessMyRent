@@ -3,12 +3,16 @@ require_once MODEL . "mdl_model.php";
 
 class TypeModel extends Model
 {
-    protected string $tableName = 'TYPE';
 
-    // public function findAll(): array
-    // {
-    //     return $this->executeQuery('SELECT * FROM TYPE ORDER BY label ASC')->fetchAll();
-    // }
+    public function __construct()
+    {
+        $this->tableName = 'TYPE';
+    }
+    
+    public function findAll(): array
+    {
+        return $this->executeQuery('SELECT * FROM TYPE ORDER BY label ASC')->fetchAll();
+    }
 
     public function findById(int $id): array|false
     {

@@ -3,12 +3,16 @@ require_once MODEL . "mdl_model.php";
 
 class StatusModel extends Model
 {
-    protected string $tableName = 'STATUS';
 
-    // public function findAll(): array
-    // {
-    //     return $this->executeQuery('SELECT * FROM STATUS ORDER BY label ASC')->fetchAll();
-    // }
+    public function __construct()
+    {
+        $this->tableName = 'STATUS';
+    }
+    
+    public function findAll(): array
+    {
+        return $this->executeQuery('SELECT * FROM STATUS ORDER BY label ASC')->fetchAll();
+    }
 
     public function findById(int $id): array|false
     {

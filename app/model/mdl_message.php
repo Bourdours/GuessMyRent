@@ -5,18 +5,18 @@ class MessageModel extends Model
 {
     public function __construct()
     {
-        $tableName = 'MESSAGE';
+        $this->tableName = 'MESSAGE';
     }
 
-    // public function findAll(): array
-    // {
-    //     return $this->executeQuery(
-    //         'SELECT m.*, u.pseudo, u.avatar
-    //          FROM MESSAGE m
-    //          JOIN USER u ON m.id_user = u.id_user
-    //          ORDER BY m.Id_message DESC'
-    //     )->fetchAll();
-    // }
+    public function findAll(): array
+    {
+        return $this->executeQuery(
+            'SELECT m.*, u.pseudo, u.avatar
+             FROM MESSAGE m
+             JOIN USER u ON m.id_user = u.id_user
+             ORDER BY m.Id_message DESC'
+        )->fetchAll();
+    }
 
     public function findById(int $id): array|false
     {

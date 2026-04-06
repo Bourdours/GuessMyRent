@@ -12,20 +12,20 @@ class EstateModel extends Model
     
         function __construct()
     {
-        $tableName = 'ESTATE';
+        $this->tableName = 'ESTATE';
 
     }
 
-    // public function findAll(): array
-    // {
-    //     return $this->executeQuery(
-    //         'SELECT e.*, s.label AS status_label, t.label AS type_label
-    //          FROM ESTATE e
-    //          JOIN STATUS s ON e.id_status = s.id_status
-    //          JOIN TYPE t   ON e.id_type   = t.id_type
-    //          ORDER BY e.id_estate DESC'
-    //     )->fetchAll();
-    // }
+    public function findAll(): array
+    {
+        return $this->executeQuery(
+            'SELECT e.*, s.label AS status_label, t.label AS type_label
+             FROM ESTATE e
+             JOIN STATUS s ON e.id_status = s.id_status
+             JOIN TYPE t   ON e.id_type   = t.id_type
+             ORDER BY e.id_estate DESC'
+        )->fetchAll();
+    }
 
     public function findById(int $id): array|false
     {

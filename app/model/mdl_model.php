@@ -3,7 +3,7 @@ require_once CONFIG . "connect.php";
 
 abstract class Model extends DbConnect
 {
-    protected string $tableName;
+    protected $tableName;
 
     // Exécute une requête SQL
     protected function executeQuery(string $sql): PDOStatement
@@ -57,30 +57,24 @@ abstract class Model extends DbConnect
         }
     }
 
-    // retourne un array des propriétés de la classe enfant uniquement
-    protected function getProperties(): array
-    {
-        $childProps = (new ReflectionClass(static::class))->getProperties();
-        $result = [];
-        foreach ($childProps as $prop) {
-            if ($prop->class === static::class) {
-                $prop->setAccessible(true);
-                $result[$prop->getName()] = $prop->isInitialized($this) ? $prop->getValue($this) : null;
-            }
-        }
-        return $result;
-    }
+//     // retourne un array des propriétés de la classe enfant uniquement
+//     protected function getProperties(): array
+//     {
+//         return get_object_vars(($this));
+//     }
 
-    // transforme l'array en string
-    protected function getPropertiesNamesString(): string
-    {
-        return implode(',', array_keys($this->getProperties()));
-    }
+//     // transforme l'array en string
+//     protected function getPropertiesNamesString(): string
+//     {
+//         return implode(',', array_keys($this->getProperties()));
+//     }
 
-    function findAll(): array
-    {
-        $sql = "SELECT {$this->getPropertiesNamesString()} FROM {$this->tableName}";
-        $stmt = $this->executeQuery($sql);
-        return $stmt->fetchAll();        
-    }
+//     // récupère les données d'une table , toute si non décrite dans $attributes
+//     function findAll(array $attributes = []): array
+//     {
+//         $selectedAttributes = (empty($attributes)? '*': implode(', ', $attributes));
+//         $sql = "SELECT {$selectedAttributes} FROM {$this->tableName}";
+//         $stmt = $this->executeQuery($sql);
+//         return $stmt->fetchAll();        
+//     }
 }

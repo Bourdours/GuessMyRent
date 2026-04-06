@@ -3,7 +3,10 @@ require_once MODEL . "mdl_model.php";
 
 class GameModel extends Model
 {
-    protected string $tableName = 'GAME';
+    public function __construct()
+    {
+        $this->tableName = 'GAME';
+    }
 
     /**
      * Calcul du score — section 2.3 du cahier des charges.
@@ -54,6 +57,11 @@ class GameModel extends Model
              ORDER BY g.date_ DESC',
             ['id_user' => $userId]
         )->fetchAll();
+    }
+
+    public function countAll(): int
+    {
+        return (int) $this->executeQuery('SELECT COUNT(*) FROM GAME')->fetchColumn();
     }
 
     // Supprime toutes les parties d'un utilisateur

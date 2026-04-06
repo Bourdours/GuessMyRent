@@ -15,12 +15,12 @@ class UserModel extends Model
         $this->tableName = 'USER';
     }
 
-    // public function findAll(): array
-    // {
-    //     return $this->executeQuery(
-    //         'SELECT id_user, email, pseudo, avatar, is_admin FROM USER'
-    //     )->fetchAll();
-    // }
+    public function findAll(): array
+    {
+        return $this->executeQuery(
+            'SELECT id_user, email, pseudo, avatar, is_admin FROM USER'
+        )->fetchAll();
+    }
 
     public function findById(int $id): array|false
     {
@@ -95,6 +95,8 @@ class UserModel extends Model
 
     public function delete(int $id): void
     {
+        $this->executeQueryWithBind('UPDATE ESTATE SET id_user = NULL WHERE id_user = :id', ['id' => $id]);
+        $this->executeQueryWithBind('UPDATE ESTATE_MODIFICATION SET id_user = NULL WHERE id_user = :id', ['id' => $id]);
         $this->executeQueryWithBind('DELETE FROM USER WHERE id_user = :id', ['id' => $id]);
     }
 }
