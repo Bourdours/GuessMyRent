@@ -15,8 +15,8 @@ require VENDOR . 'autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-/* CONNECTION A LA BD */
-require CONFIG . "connect.php";
+// /* CONNECTION A LA BD */
+// require MODEL . "connect.php";
 
 /* DEFINITION DU ROUTAGE */
 require CONFIG . "router.php";

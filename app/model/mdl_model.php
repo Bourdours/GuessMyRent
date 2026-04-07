@@ -1,5 +1,5 @@
 <?php
-require_once CONFIG . "connect.php";
+require_once MODEL . "connect.php";
 
 abstract class Model extends DbConnect
 {

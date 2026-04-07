@@ -3,13 +3,6 @@ require_once MODEL . "mdl_model.php";
 
 class EstateModel extends Model
 {
-    private int $id_estate;
-    private int $rent;
-    private string $city;
-    private int $postcode;
-    private float $square_meters;
-    private string $image1;
-    
         function __construct()
     {
         $this->tableName = 'ESTATE';

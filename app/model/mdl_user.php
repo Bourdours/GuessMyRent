@@ -3,13 +3,6 @@ require_once MODEL . "mdl_model.php";
 
 class UserModel extends Model
 {
-    private int $id_user;
-    private string $email;
-    private string $password;
-    private string $pseudo;
-    private string $avatar;
-    private bool $is_admin;
-
     function __construct()
     {
         $this->tableName = 'USER';

@@ -3,7 +3,6 @@ require_once MODEL . "mdl_model.php";
 
 class TypeModel extends Model
 {
-
     public function __construct()
     {
         $this->tableName = 'TYPE';

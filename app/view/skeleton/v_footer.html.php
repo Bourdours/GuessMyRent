@@ -8,7 +8,7 @@
     </p>
 </footer>
 
-<script src="<?= BASE_URL ?>/static/js/main.js"></script>
+<script src="<?= BASE_URL ?>/public/js/main.js"></script>
 
 </body>
 
