@@ -6,7 +6,6 @@ Gère le routage de l'application via $_GET["action"]
 
 class Router
 {
-
     private string $page;
 
     public function __construct()
@@ -25,7 +24,6 @@ class Router
 
     public function routing(): void
     {
-        // $this->page affiche l'index view visiteur par défaut
         switch ($this->page) {
             case '/':
                 require CONTROLLER . 'ctl_view.php';
@@ -37,29 +35,29 @@ class Router
                 (new ViewController())->info();
                 break;
 
-            case '/jeu':
-                require CONTROLLER . 'ctl_view.php';
-                (new ViewController())->play();
-                break;
-
             case '/regle':
                 require CONTROLLER . 'ctl_view.php';
                 (new ViewController())->rules();
                 break;
 
+            case '/jeu':
+                require CONTROLLER . 'ctl_game.php';
+                (new GameController())->play();
+                break;
+
             case '/contact':
-                require CONTROLLER . 'ctl_view.php';
-                (new ViewController())->contact();
+                require CONTROLLER . 'ctl_message.php';
+                (new MessageController())->contact();
+                break;
+
+            case '/contact/proposer':
+                require CONTROLLER . 'ctl_estate.php';
+                (new EstateController())->propose();
                 break;
 
             case '/auth':
                 require CONTROLLER . 'ctl_user.php';
                 (new UserController())->auth();
-                break;
-
-            case '/contact/suggest':
-                require CONTROLLER . 'ctl_user.php';
-                (new UserController())->suggest();
                 break;
 
             case '/profil':
@@ -69,22 +67,22 @@ class Router
 
             case '/profil/history':
                 require CONTROLLER . 'ctl_user.php';
-                (new UserController())->hictory();
+                (new UserController())->history();
                 break;
 
             case '/admin':
-                require CONTROLLER . 'ctl_admin.php';
-                (new AdminController())->dashboard();
+                require CONTROLLER . 'ctl_user.php';
+                (new UserController())->dashboard();
                 break;
 
             case '/admin/biens':
-                require CONTROLLER . 'ctl_admin.php';
-                (new AdminController())->estates();
+                require CONTROLLER . 'ctl_estate.php';
+                (new EstateController())->adminList();
                 break;
 
             case '/admin/utilisateurs':
-                require CONTROLLER . 'ctl_admin.php';
-                (new AdminController())->users();
+                require CONTROLLER . 'ctl_user.php';
+                (new UserController())->adminList();
                 break;
 
             default:
