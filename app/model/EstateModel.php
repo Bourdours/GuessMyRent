@@ -1,16 +1,18 @@
 <?php
+
 namespace GmR\model;
+
 use GmR\model\Model;
 
 class EstateModel extends Model
 {
-        function __construct()
+    function __construct()
     {
         $this->tableName = 'ESTATE';
-
+        $this->primaryKey = "id_estate";
     }
 
-    public function findAll(): array
+    public function findJoinedAll(): array
     {
         return $this->executeQuery(
             'SELECT e.*, s.label AS status_label, t.label AS type_label
@@ -21,14 +23,14 @@ class EstateModel extends Model
         )->fetchAll();
     }
 
-    public function findById(int $id): array|false
-    {
-        $query = $this->executeQueryWithBind(
-            'SELECT * FROM ESTATE WHERE id _estate = :id LIMIT 1',
-            ['id' => $id]
-        );
-        return $query->fetch();
-    }
+    // public function findById(int $id): array|false
+    // {
+    //     $query = $this->executeQueryWithBind(
+    //         'SELECT * FROM ESTATE WHERE id _estate = :id LIMIT 1',
+    //         ['id' => $id]
+    //     );
+    //     return $query->fetch();
+    // }
 
     public function findByUser(int $userId): array
     {
@@ -120,7 +122,10 @@ class EstateModel extends Model
     {
         $this->executeQueryWithBind(
             'UPDATE ESTATE SET id_status = :status WHERE id_estate = :id',
-            ['status' => $statusId, 'id' => $id]
+            [
+                'status' => $statusId,
+                'id' => $id
+            ]
         );
     }
 
@@ -139,7 +144,7 @@ class EstateModel extends Model
                 square_meters       = :square_meters,
                 room                = :room,
                 chamber             = :chamber,
-                floor_              = :floor_,
+                floor              = :floor,
                 description         = :description,
                 image1              = :image1,
                 image2              = :image2,
@@ -157,22 +162,22 @@ class EstateModel extends Model
         $this->executeQueryWithBind(
             'INSERT INTO ESTATE
                 (rent, is_charges_included, adress, city, postcode, gps_y, gps_x, square_meters,
-                 room, chamber, floor_, description, image1, image2, image3, image4,
+                 room, chamber, floor, description, image1, image2, image3, image4,
                  id_status, id_type, id_user)
              VALUES
                 (:rent, :is_charges_included, :adress, :city, :postcode, :gps_y, :gps_x, :square_meters,
-                 :room, :chamber, :floor_, :description, :image1, :image2, :image3, :image4,
+                 :room, :chamber, :floor, :description, :image1, :image2, :image3, :image4,
                  :id_status, :id_type, :id_user)',
             $data
         );
         return (int) self::connect()->lastInsertId();
     }
 
-    public function delete(int $id): bool
-    {
-        return $this->executeQueryWithBind(
-            'DELETE FROM ESTATE WHERE id_estate = :id',
-            ['id' => $id]
-        )->rowCount() > 0;
-    }
+    // public function delete(int $id): bool
+    // {
+    //     return $this->executeQueryWithBind(
+    //         'DELETE FROM ESTATE WHERE id_estate = :id',
+    //         ['id' => $id]
+    //     )->rowCount() > 0;
+    // }
 }

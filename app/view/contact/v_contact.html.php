@@ -73,7 +73,7 @@
 
   <?php else: ?>
     <!-- Propose a property form -->
-    <form method="POST" action="<?= BASE_URL ?>/contact?tab=bien" class="contact-form" enctype="multipart/form-data" novalidate>
+    <form method="POST" action="<?= BASE_URL ?>/contact/proposer" class="contact-form" enctype="multipart/form-data" novalidate>
       <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
       <input type="hidden" name="tab" value="bien">
 

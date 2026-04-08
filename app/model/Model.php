@@ -1,5 +1,7 @@
 <?php
+
 namespace GmR\model;
+
 use GmR\model\DbConnect;
 use PDO;
 use PDOStatement;
@@ -57,24 +59,30 @@ abstract class Model extends DbConnect
         }
     }
 
-//     // retourne un array des propriétés de la classe enfant uniquement
-//     protected function getProperties(): array
-//     {
-//         return get_object_vars(($this));
-//     }
+    // récupère les données d'une table , toute si non décrite dans $attributes
+    function findAll(array $attributes = []): array
+    {
+        $selectedAttributes = (empty($attributes) ? '*' : implode(', ', $attributes));
+        $sql = "SELECT {$selectedAttributes} FROM {$this->tableName}";
+        $stmt = $this->executeQuery($sql);
+        return $stmt->fetchAll();
+    }
 
-//     // transforme l'array en string
-//     protected function getPropertiesNamesString(): string
-//     {
-//         return implode(',', array_keys($this->getProperties()));
-//     }
+    protected string $primaryKey;
 
-//     // récupère les données d'une table , toute si non décrite dans $attributes
-//     function findAll(array $attributes = []): array
-//     {
-//         $selectedAttributes = (empty($attributes)? '*': implode(', ', $attributes));
-//         $sql = "SELECT {$selectedAttributes} FROM {$this->tableName}";
-//         $stmt = $this->executeQuery($sql);
-//         return $stmt->fetchAll();        
-//     }
+    public function findById(int $id): array|false
+    {
+        return $this->executeQueryWithBind(
+            "SELECT * FROM {$this->tableName} WHERE {$this->primaryKey} = :id LIMIT 1",
+            ['id' => $id]
+        )->fetch();
+    }
+
+    public function deleteToVoid(int $id): bool
+    {
+        return $this->executeQueryWithBind(
+            "DELETE FROM {$this->tableName} WHERE {$this->primaryKey} = :id",
+            ['id' => $id]
+        )->rowCount() > 0;
+    }
 }

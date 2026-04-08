@@ -1,5 +1,7 @@
 <?php
+
 namespace GmR\model;
+
 use GmR\model\Model;
 
 class GameModel extends Model
@@ -7,6 +9,7 @@ class GameModel extends Model
     public function __construct()
     {
         $this->tableName = 'GAME';
+        $this->primaryKey = "id_game";
     }
 
     /**
@@ -34,18 +37,23 @@ class GameModel extends Model
         $this->executeQueryWithBind(
             'INSERT INTO GAME (guess, game_result, date_, id_estate, id_user)
              VALUES (:guess, :score, NOW(), :id_estate, :id_user)',
-            ['guess' => $guess, 'score' => $score, 'id_estate' => $estateId, 'id_user' => $userId]
+            [
+                'guess' => $guess,
+                'score' => $score,
+                'id_estate' => $estateId,
+                'id_user' => $userId
+            ]
         );
         return (int) self::connect()->lastInsertId();
     }
 
-    public function findById(int $id): array|false
-    {
-        return $this->executeQueryWithBind(
-            'SELECT * FROM GAME WHERE id_game = :id',
-            ['id' => $id]
-        )->fetch();
-    }
+    // public function findById(int $id): array|false
+    // {
+    //     return $this->executeQueryWithBind(
+    //         'SELECT * FROM GAME WHERE id_game = :id',
+    //         ['id' => $id]
+    //     )->fetch();
+    // }
 
     public function findByUser(int $userId): array
     {

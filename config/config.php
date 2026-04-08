@@ -17,7 +17,6 @@ define("V_AUTH", VIEW . "auth/");
 define("V_CONTACT", VIEW . "contact/");
 define("V_GAME", VIEW . "game/");
 define("V_INFO", VIEW . "info/");
-define("V_MENU", VIEW . "menu/");
 define("V_PROFIL", VIEW . "profil/");
 define("V_RULES", VIEW . "rules/");
 define("V_SKELETON", VIEW . "skeleton/");

@@ -147,7 +147,7 @@ class EstateController extends ViewController
 
         $this->render(V_ADMIN . 'v_admin_estate.html.php', [
             'pageTitle'  => 'Gestion des biens - Admin',
-            'estates'    => (new EstateModel())->findAll(),
+            'estates'    => (new EstateModel())->findJoinedAll(),
             'csrf_token' => $_SESSION['csrf_token'],
         ]);
     }

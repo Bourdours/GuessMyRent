@@ -1,5 +1,7 @@
 <?php
+
 namespace GmR\model;
+
 use GmR\model\Model;
 
 class MessageModel extends Model
@@ -7,33 +9,34 @@ class MessageModel extends Model
     public function __construct()
     {
         $this->tableName = 'MESSAGE';
+        $this->primaryKey = "id_message";
     }
 
-    public function findAll(): array
-    {
-        return $this->executeQuery(
-            'SELECT m.*, u.pseudo, u.avatar
-             FROM MESSAGE m
-             JOIN USER u ON m.id_user = u.id_user
-             ORDER BY m.Id_message DESC'
-        )->fetchAll();
-    }
+    // public function findAll(): array
+    // {
+    //     return $this->executeQuery(
+    //         'SELECT m.*, u.pseudo, u.avatar
+    //          FROM MESSAGE m
+    //          JOIN USER u ON m.id_user = u.id_user
+    //          ORDER BY m.id_message DESC'
+    //     )->fetchAll();
+    // }
 
-    public function findById(int $id): array|false
-    {
-        return $this->executeQueryWithBind(
-            'SELECT m.*, u.pseudo
-             FROM MESSAGE m
-             JOIN USER u ON m.id_user = u.id_user
-             WHERE m.Id_message = :id',
-            ['id' => $id]
-        )->fetch();
-    }
+    // public function findById(int $id): array|false
+    // {
+    //     return $this->executeQueryWithBind(
+    //         'SELECT m.*, u.pseudo
+    //          FROM MESSAGE m
+    //          JOIN USER u ON m.id_user = u.id_user
+    //          WHERE m.id_message = :id',
+    //         ['id' => $id]
+    //     )->fetch();
+    // }
 
     public function findByUser(int $userId): array
     {
         return $this->executeQueryWithBind(
-            'SELECT * FROM MESSAGE WHERE id_user = :id_user ORDER BY Id_message DESC',
+            'SELECT * FROM MESSAGE WHERE id_user = :id_user ORDER BY id_message DESC',
             ['id_user' => $userId]
         )->fetchAll();
     }
@@ -45,7 +48,11 @@ class MessageModel extends Model
     ): int {
         $this->executeQueryWithBind(
             'INSERT INTO MESSAGE (email, content, id_user) VALUES (:email, :content, :id_user)',
-            ['email' => $email, 'content' => $content, 'id_user' => $userId]
+            [
+                'email' => $email,
+                'content' => $content,
+                'id_user' => $userId
+            ]
         );
         return (int) self::connect()->lastInsertId();
     }

@@ -10,11 +10,11 @@ CREATE TABLE USER(
 );
 
 CREATE TABLE MESSAGE(
-   Id_message INT AUTO_INCREMENT,
+   id_message INT AUTO_INCREMENT,
    email VARCHAR(50)  NOT NULL,
    content VARCHAR(500)  NOT NULL,
    id_user INT NOT NULL,
-   PRIMARY KEY(Id_message),
+   PRIMARY KEY(id_message),
    FOREIGN KEY(id_user) REFERENCES USER(id_user)
 );
 
@@ -42,7 +42,7 @@ CREATE TABLE ESTATE(
    square_meters DECIMAL(15,2)   NOT NULL,
    room INT,
    chamber INT,
-   floor_ INT,
+   floor INT,
    description VARCHAR(50) ,
    image1 VARCHAR(50)  NOT NULL,
    image2 VARCHAR(50) ,

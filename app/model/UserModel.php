@@ -1,5 +1,7 @@
 <?php
+
 namespace GmR\model;
+
 use GmR\model\Model;
 
 class UserModel extends Model
@@ -7,24 +9,25 @@ class UserModel extends Model
     function __construct()
     {
         $this->tableName = 'USER';
+        $this->primaryKey = "id_user";
     }
 
-    public function findAll(): array
-    {
-        return $this->executeQuery(
-            'SELECT id_user, email, pseudo, avatar, is_admin FROM USER'
-        )->fetchAll();
-    }
+    // public function findJoinedAll(): array
+    // {
+    //     return $this->executeQuery(
+    //         'SELECT id_user, email, pseudo, avatar, is_admin FROM USER'
+    //     )->fetchAll();
+    // }
 
-    public function findById(int $id): array|false
-    {
-        $query = $this->executeQueryWithBind(
-            'SELECT id_user, email, pseudo, avatar, is_admin FROM USER WHERE id_user = :id LIMIT 1',
-            ['id' => $id]
-        );
-        return $query->fetch();
-    }
-    
+    // public function findById(int $id): array|false
+    // {
+    //     $query = $this->executeQueryWithBind(
+    //         'SELECT id_user, email, pseudo, avatar, is_admin FROM USER WHERE id_user = :id LIMIT 1',
+    //         ['id' => $id]
+    //     );
+    //     return $query->fetch();
+    // }
+
     public function findByEmail(string $email): array|false
     {
         $query = $this->executeQueryWithBind(
@@ -32,14 +35,6 @@ class UserModel extends Model
             ['email' => $email]
         );
         return $query->fetch();
-    }
-
-    public function emailExists(string $email): bool
-    {
-        return (int) $this->executeQueryWithBind(
-            'SELECT COUNT(*) FROM USER WHERE email = :email',
-            ['email' => $email]
-        )->fetchColumn() > 0;
     }
 
     public function create(
@@ -67,7 +62,11 @@ class UserModel extends Model
     {
         return $this->executeQueryWithBind(
             'UPDATE USER SET pseudo = :pseudo, avatar = :avatar WHERE id_user = :id',
-            ['pseudo' => $pseudo, 'avatar' => $avatar, 'id' => $id]
+            [
+                'pseudo' => $pseudo,
+                'avatar' => $avatar,
+                'id' => $id
+            ]
         )->rowCount() > 0;
     }
 
@@ -75,7 +74,10 @@ class UserModel extends Model
     {
         return $this->executeQueryWithBind(
             'UPDATE USER SET email = :email WHERE id_user = :id',
-            ['email' => $newEmail, 'id' => $id]
+            [
+                'email' => $newEmail,
+                'id' => $id
+            ]
         )->rowCount() > 0;
     }
 
@@ -83,7 +85,10 @@ class UserModel extends Model
     {
         return $this->executeQueryWithBind(
             'UPDATE USER SET password = :password WHERE id_user = :id',
-            ['password' => $hashedPassword, 'id' => $id]
+            [
+                'password' => $hashedPassword,
+                'id' => $id
+            ]
         )->rowCount() > 0;
     }
 
