@@ -3,8 +3,8 @@ namespace Config;
 use GmR\controller\EstateController;
 use GmR\controller\GameController;
 use GmR\controller\MessageController;
+use GmR\controller\PageController;
 use GmR\controller\UserController;
-use GmR\controller\ViewController; 
 
 class Router
 {
@@ -28,15 +28,15 @@ class Router
     {
         switch ($this->page) {
             case '/':
-                (new ViewController())->home();
+                (new PageController())->home();
                 break;
 
             case '/info':
-                (new ViewController())->info();
+                (new PageController())->info();
                 break;
 
             case '/regle':
-                (new ViewController())->rules();
+                (new PageController())->rules();
                 break;
 
             case '/jeu':

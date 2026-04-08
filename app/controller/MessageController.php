@@ -1,9 +1,9 @@
 <?php
 namespace GmR\controller;
-use GmR\controller\ViewController;
+use GmR\controller\BaseController;
 use GmR\model\MessageModel;
 
-class MessageController extends ViewController
+class MessageController extends BaseController
 {
     // GET : affiche le formulaire de contact
     // POST : envoie un message

@@ -1,11 +1,11 @@
 <?php
 namespace GmR\controller;
-use GmR\controller\ViewController;
+use GmR\controller\BaseController;
 use GmR\model\EstateModel;
 use GmR\model\TypeModel;
 use GmR\model\StatusModel;
 
-class EstateController extends ViewController
+class EstateController extends BaseController
 {
     // GET : affiche le formulaire de proposition
     // POST : soumet un bien

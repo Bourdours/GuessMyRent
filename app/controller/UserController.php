@@ -1,12 +1,12 @@
 <?php
 namespace GmR\controller;
-use GmR\controller\ViewController;
+use GmR\controller\BaseController;
 use GmR\model\UserModel;
 use GmR\model\GameModel;
 use GmR\model\EstateModel;
 use RuntimeException;
 
-class UserController extends ViewController
+class UserController extends BaseController
 {
     public function auth(): void
     {

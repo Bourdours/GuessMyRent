@@ -1,10 +1,10 @@
 <?php
 namespace GmR\controller;
-use GmR\controller\ViewController;
+use GmR\controller\BaseController;
 use GmR\model\GameModel;
 use GmR\model\EstateModel;
 
-class GameController extends ViewController
+class GameController extends BaseController
 {
     public function play(): void
     {
