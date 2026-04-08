@@ -1,8 +1,9 @@
 <?php
-require CONTROLLER . 'ctl_view.php';
-require_once MODEL . 'mdl_estate.php';
-require_once MODEL . 'mdl_estate_type.php';
-require_once MODEL . 'mdl_estate_status.php';
+namespace GmR\controller;
+use GmR\controller\ViewController;
+use GmR\model\EstateModel;
+use GmR\model\TypeModel;
+use GmR\model\StatusModel;
 
 class EstateController extends ViewController
 {
@@ -64,7 +65,7 @@ class EstateController extends ViewController
 
         $imageNames = [null, null, null, null];
         $mimeToExt  = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
-        $finfo      = new finfo(FILEINFO_MIME_TYPE);
+        $finfo      = new \finfo(FILEINFO_MIME_TYPE);
 
         $count = min(count($_FILES['photos']['tmp_name']), 4);
         for ($i = 0; $i < $count; $i++) {

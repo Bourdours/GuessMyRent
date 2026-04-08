@@ -1,5 +1,6 @@
 <?php
-require_once MODEL . "mdl_model.php";
+namespace GmR\model;
+use GmR\model\Model;
 
 class TypeModel extends Model
 {

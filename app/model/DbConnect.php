@@ -1,4 +1,7 @@
 <?php
+namespace GmR\model;
+use PDO;
+use PDOException;
 
 /**
  *  Classe principale de l'objet de connexion PDO

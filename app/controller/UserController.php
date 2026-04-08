@@ -1,8 +1,10 @@
 <?php
-require CONTROLLER . 'ctl_view.php';
-require_once MODEL . 'mdl_user.php';
-require_once MODEL . 'mdl_estate.php';
-require_once MODEL . 'mdl_game.php';
+namespace GmR\controller;
+use GmR\controller\ViewController;
+use GmR\model\UserModel;
+use GmR\model\GameModel;
+use GmR\model\EstateModel;
+use RuntimeException;
 
 class UserController extends ViewController
 {

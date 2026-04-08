@@ -1,7 +1,8 @@
 <?php
-require CONTROLLER . 'ctl_view.php';
-require_once MODEL . 'mdl_game.php';
-require_once MODEL . 'mdl_estate.php';
+namespace GmR\controller;
+use GmR\controller\ViewController;
+use GmR\model\GameModel;
+use GmR\model\EstateModel;
 
 class GameController extends ViewController
 {

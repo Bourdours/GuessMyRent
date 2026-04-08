@@ -1,8 +1,10 @@
 <?php
-/*
-Classe Route
-Gère le routage de l'application via $_GET["action"]
-*/
+namespace Config;
+use GmR\controller\EstateController;
+use GmR\controller\GameController;
+use GmR\controller\MessageController;
+use GmR\controller\UserController;
+use GmR\controller\ViewController; 
 
 class Router
 {
@@ -26,62 +28,50 @@ class Router
     {
         switch ($this->page) {
             case '/':
-                require CONTROLLER . 'ctl_view.php';
                 (new ViewController())->home();
                 break;
 
             case '/info':
-                require CONTROLLER . 'ctl_view.php';
                 (new ViewController())->info();
                 break;
 
             case '/regle':
-                require CONTROLLER . 'ctl_view.php';
                 (new ViewController())->rules();
                 break;
 
             case '/jeu':
-                require CONTROLLER . 'ctl_game.php';
                 (new GameController())->play();
                 break;
 
             case '/contact':
-                require CONTROLLER . 'ctl_message.php';
                 (new MessageController())->contact();
                 break;
 
             case '/contact/proposer':
-                require CONTROLLER . 'ctl_estate.php';
                 (new EstateController())->propose();
                 break;
 
             case '/auth':
-                require CONTROLLER . 'ctl_user.php';
                 (new UserController())->auth();
                 break;
 
             case '/profil':
-                require CONTROLLER . 'ctl_user.php';
                 (new UserController())->profil();
                 break;
 
             case '/profil/history':
-                require CONTROLLER . 'ctl_user.php';
                 (new UserController())->history();
                 break;
 
             case '/admin':
-                require CONTROLLER . 'ctl_user.php';
                 (new UserController())->dashboard();
                 break;
 
             case '/admin/biens':
-                require CONTROLLER . 'ctl_estate.php';
                 (new EstateController())->adminList();
                 break;
 
             case '/admin/utilisateurs':
-                require CONTROLLER . 'ctl_user.php';
                 (new UserController())->adminList();
                 break;
 

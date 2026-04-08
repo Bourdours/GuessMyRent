@@ -7,7 +7,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Kerx08\\GmR\\": "src/"
+            "GmR\\": "app/",
+            "Config\\":"config/"
         }
     },
     "authors": [

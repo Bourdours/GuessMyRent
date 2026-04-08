@@ -1,5 +1,10 @@
 <?php
-require_once MODEL . "connect.php";
+namespace GmR\model;
+use GmR\model\DbConnect;
+use PDO;
+use PDOStatement;
+use Exception;
+use RuntimeException;
 
 abstract class Model extends DbConnect
 {
@@ -20,11 +25,6 @@ abstract class Model extends DbConnect
             );
         }
     }
-    /*
-	protected => Accessible uniquement depuis la classe et ses enfants
-	$sql => La requête SQL à exécuter
-	PDOStatement => Retourne un objet résultat PDO 
-	*/
 
     // Exécute une requête SQL éventuellement paramétrée, avec un binding de valeur
     protected function executeQueryWithBind(

@@ -1,6 +1,7 @@
 <?php
-require CONTROLLER . 'ctl_view.php';
-require_once MODEL . 'mdl_message.php';
+namespace GmR\controller;
+use GmR\controller\ViewController;
+use GmR\model\MessageModel;
 
 class MessageController extends ViewController
 {
