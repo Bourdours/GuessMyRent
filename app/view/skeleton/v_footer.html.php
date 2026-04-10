@@ -8,6 +8,7 @@
     </p>
 </footer>
 
+<script src="https://unpkg.com/@strudel/web@1.0.3"></script>
 <script src="<?= BASE_URL ?>/public/js/main.js"></script>
 
 </body>

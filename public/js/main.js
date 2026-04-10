@@ -73,9 +73,9 @@
 
 /* ── Photo upload (max 4, min 1) ────────────────────────────────── */
 (function () {
-  const input   = document.getElementById("photoInput");
+  const input = document.getElementById("photoInput");
   const preview = document.getElementById("photoPreview");
-  const zone    = document.getElementById("uploadZone");
+  const zone = document.getElementById("uploadZone");
   if (!input || !preview) return;
 
   const MAX = 4;
@@ -110,10 +110,10 @@
       reader.onload = (e) => {
         const item = document.createElement("div");
         item.className = "photo-preview-item";
-        const label = f.name.length > 24 ? f.name.slice(0, 22) + "\u2026" : f.name;
-        const badge = i === 0
-          ? `<span class="photo-badge">Photo principale</span>`
-          : "";
+        const label =
+          f.name.length > 24 ? f.name.slice(0, 22) + "\u2026" : f.name;
+        const badge =
+          i === 0 ? `<span class="photo-badge">Photo principale</span>` : "";
         item.innerHTML = `
           <div class="photo-preview-img">
             <img src="${e.target.result}" alt="${label}">
@@ -150,3 +150,80 @@
     count.textContent = ta.value.length;
   });
 })();
+
+/* ── Strudel player ──────────────────────── */
+initStrudel({
+  prebake() {
+    return Promise.all([
+      samples(
+        {
+          pipeorgan_loud_pedal: [
+            "Aerophones/Edge-blown Aerophones/Pipe Organ/Loud Pedal/Rode_Pedal_C1.wav",
+            "Aerophones/Edge-blown Aerophones/Pipe Organ/Loud Pedal/Rode_Pedal_C2.wav",
+            "Aerophones/Edge-blown Aerophones/Pipe Organ/Loud Pedal/Rode_Pedal_C3.wav",
+            "Aerophones/Edge-blown Aerophones/Pipe Organ/Loud Pedal/Rode_Pedal_A1.wav",
+            "Aerophones/Edge-blown Aerophones/Pipe Organ/Loud Pedal/Rode_Pedal_A2.wav",
+          ],
+          kalimba: [
+            "Idiophones/Plucked Idiophones/Kalimba, Kenya/Mbira6_Normal_MainSpirit_B2_k8_vl3_rr2.wav",
+            "Idiophones/Plucked Idiophones/Kalimba, Kenya/Mbira6_Normal_MainSpirit_B3_k3_vl3_rr2.wav",
+            "Idiophones/Plucked Idiophones/Kalimba, Kenya/Mbira6_Normal_MainSpirit_A4_k1_vl3_rr2.wav",
+            "Idiophones/Plucked Idiophones/Kalimba, Kenya/Mbira6_Normal_MainSpirit_B4_k15_vl3_rr2.wav",
+          ],
+          super64_vib: [
+            "Aerophones/Free Aerophones/Harmonica-Hohner-Super64/Sustains/Vib/Hohner-Super64_Vib_C2.wav",
+            "Aerophones/Free Aerophones/Harmonica-Hohner-Super64/Sustains/Vib/Hohner-Super64_Vib_E2.wav",
+            "Aerophones/Free Aerophones/Harmonica-Hohner-Super64/Sustains/Vib/Hohner-Super64_Vib_G2.wav",
+            "Aerophones/Free Aerophones/Harmonica-Hohner-Super64/Sustains/Vib/Hohner-Super64_Vib_C3.wav",
+            "Aerophones/Free Aerophones/Harmonica-Hohner-Super64/Sustains/Vib/Hohner-Super64_Vib_E3.wav",
+          ],
+          cajon: [
+            "Idiophones/Struck Idiophones/Cajon/Cajon_hit1_mp_rr1.wav",
+            "Idiophones/Struck Idiophones/Cajon/Cajon_hit1_f_rr1.wav",
+            "Idiophones/Struck Idiophones/Cajon/Cajon_hit1_fff_rr1.wav",
+            "Idiophones/Struck Idiophones/Cajon/Cajon_hit2_mp_rr1.wav",
+            "Idiophones/Struck Idiophones/Cajon/Cajon_hit2_f_rr1.wav",
+            "Idiophones/Struck Idiophones/Cajon/Cajon_hit3_mp_rr1.wav",
+            "Idiophones/Struck Idiophones/Cajon/Cajon_hit3_f_rr1.wav",
+          ],
+          cowbell: [
+            "Idiophones/Struck Idiophones/Cowbells/Cowbell1_Hit_v2_rr1_Mid.wav",
+            "Idiophones/Struck Idiophones/Cowbells/Cowbell1_Hit_v3_rr1_Mid.wav",
+            "Idiophones/Struck Idiophones/Cowbells/Cowbell1_Hit_v4_rr1_Mid.wav",
+            "Idiophones/Struck Idiophones/Cowbells/Cowbell1_Normal_v2_rr1_Mid.wav",
+            "Idiophones/Struck Idiophones/Cowbells/Cowbell2_Normal_v2_rr1_Mid.wav",
+          ],
+          clave: [
+            "Idiophones/Struck Idiophones/Claves/Claves1_Hit_v1_rr1_Mid.wav",
+            "Idiophones/Struck Idiophones/Claves/Claves1_Hit_v2_rr1_Mid.wav",
+            "Idiophones/Struck Idiophones/Claves/Claves1_Hit_v3_rr1_Mid.wav",
+            "Idiophones/Struck Idiophones/Claves/Claves2_Hit_v1_rr1_Mid.wav",
+            "Idiophones/Struck Idiophones/Claves/Claves2_Hit_v2_rr1_Mid.wav",
+          ],
+        },
+        "https://raw.githubusercontent.com/sgossner/VCSL/master/",
+      ),
+      samples("github:tidalcycles/Dirt-Samples"),
+    ]);
+  },
+});
+const play = document.getElementById("play");
+play.addEventListener("click", () =>
+  stack(
+    note("d4 d4 d5 a4 ~ ab4 g4 f4 d4 f4 g4")
+      .sound("pipeorgan_loud_pedal").gain(0.1).cutoff(2000).release(0.08),
+
+    note("<[bb3,d4,f4] [c4,e4,g4] [d4,f4,a4] [b3,d4,fs4]>")
+      .sound("kalimba").gain(0.25).cutoff(900).release(0.5),
+
+    note("<bb1 c2 d2 b1>")
+      .sound("super64_vib").gain(0.5).cutoff(500).release(0.2),
+
+    s("cajon ~ cajon ~").n(irand(7)).gain(1),
+
+    s("~ cowbell ~ clave").n(irand(5)).gain(0.9),
+  )
+  .cpm(50)
+  .play(),
+);
+document.getElementById("stop").addEventListener("click", () => hush());
