@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php require_once V_SKELETON . "v_head.html.php" ?>
-<button id="play">play</button>
-<button id="stop">stop</button>
 
+<button class="pill-green" id="play"><i class="fa-solid fa-music"></i></button>
+<button class="pill-red" id="stop"><i class="fa-solid fa-volume-xmark"></i></button>
 
 <body>
 

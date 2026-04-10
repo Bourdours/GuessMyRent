@@ -119,11 +119,25 @@ class UserController extends BaseController
     {
         $this->requireAuth();
 
-        $user = (new UserModel())->findById($_SESSION['user_id']);
+        $user    = (new UserModel())->findById($_SESSION['user_id']);
+        $history = (new GameModel())->findByUser($_SESSION['user_id']);
+
+        $pseudo     = $user['username'] ?? $user['pseudo'] ?? '';
+        $initial    = mb_strtoupper(mb_substr($pseudo, 0, 1));
+        $totalGames = count($history);
+        $totalScore = 0;
+        foreach ($history as $g) { $totalScore += (int)$g['game_result']; }
+        $avgScore   = $totalGames > 0 ? round($totalScore / $totalGames) : 0;
 
         $this->render(V_PROFIL . 'v_profil.html.php', [
-            'pageTitle' => 'Mon profil',
-            'user'      => $user,
+            'pageTitle'  => 'Mon profil',
+            'user'       => $user,
+            'pseudo'     => $pseudo,
+            'history'    => $history,
+            'initial'    => $initial,
+            'totalGames' => $totalGames,
+            'totalScore' => $totalScore,
+            'avgScore'   => $avgScore,
         ]);
     }
 

@@ -12,19 +12,6 @@ class TypeModel extends Model
         $this->primaryKey = "id_type";
     }
 
-    // public function findAll(): array
-    // {
-    //     return $this->executeQuery('SELECT * FROM TYPE ORDER BY label ASC')->fetchAll();
-    // }
-
-    // public function findById(int $id): array|false
-    // {
-    //     return $this->executeQueryWithBind(
-    //         'SELECT * FROM TYPE WHERE id_type = :id',
-    //         ['id' => $id]
-    //     )->fetch();
-    // }
-
     public function findByLabel(string $label): array|false
     {
         return $this->executeQueryWithBind(
@@ -52,13 +39,4 @@ class TypeModel extends Model
             ]
         )->rowCount() > 0;
     }
-
-    // // Échoue si des biens y sont rattachés
-    // public function delete(int $id): bool
-    // {
-    //     return $this->executeQueryWithBind(
-    //         'DELETE FROM TYPE WHERE id_type = :id',
-    //         ['id' => $id]
-    //     )->rowCount() > 0;
-    // }
 }

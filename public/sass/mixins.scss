@@ -65,6 +65,13 @@
   border-radius: 20px;
 }
 
+// ── Page body (rules, contact, …) ───────────────────────────
+@mixin page-body($max-width: 800px) {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $r-xl $r-lg;
+}
+
 // ── Table header cell ────────────────────────────────────────
 @mixin table-th-base($bg: rgba($c-navy, 0.03)) {
   background: $bg;

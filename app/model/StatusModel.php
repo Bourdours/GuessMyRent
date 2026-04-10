@@ -12,19 +12,6 @@ class StatusModel extends Model
         $this->primaryKey = "id_status";
     }
 
-    // public function findAll(): array
-    // {
-    //     return $this->executeQuery('SELECT * FROM STATUS ORDER BY label ASC')->fetchAll();
-    // }
-
-    // public function findById(int $id): array|false
-    // {
-    //     return $this->executeQueryWithBind(
-    //         'SELECT * FROM STATUS WHERE id_status = :id',
-    //         ['id' => $id]
-    //     )->fetch();
-    // }
-
     public function findByLabel(string $label): array|false
     {
         return $this->executeQueryWithBind(
@@ -52,13 +39,4 @@ class StatusModel extends Model
             ]
         )->rowCount() > 0;
     }
-
-    // // Échoue si des biens y sont rattachés
-    // public function delete(int $id): bool
-    // {
-    //     return $this->executeQueryWithBind(
-    //         'DELETE FROM STATUS WHERE id_status = :id',
-    //         ['id' => $id]
-    //     )->rowCount() > 0;
-    // }
 }

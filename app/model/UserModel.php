@@ -12,22 +12,6 @@ class UserModel extends Model
         $this->primaryKey = "id_user";
     }
 
-    // public function findJoinedAll(): array
-    // {
-    //     return $this->executeQuery(
-    //         'SELECT id_user, email, pseudo, avatar, is_admin FROM USER'
-    //     )->fetchAll();
-    // }
-
-    // public function findById(int $id): array|false
-    // {
-    //     $query = $this->executeQueryWithBind(
-    //         'SELECT id_user, email, pseudo, avatar, is_admin FROM USER WHERE id_user = :id LIMIT 1',
-    //         ['id' => $id]
-    //     );
-    //     return $query->fetch();
-    // }
-
     public function findByEmail(string $email): array|false
     {
         $query = $this->executeQueryWithBind(

@@ -719,9 +719,7 @@ footer {
 }
 
 .contact-body {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: $r-xl $r-lg;
+  @include page-body(900px);
 }
 
 .contact-tabs {
@@ -1015,9 +1013,7 @@ footer {
 //   RULES PAGE
 // ═══════════════════════════════════════════════════════════════
 .rules-page {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: $r-xl $r-lg;
+  @include page-body(900px);
   .section {
     p {
       color: rgba($c-navy, 0.7);
@@ -1262,4 +1258,124 @@ footer {
 .admin-self-label {
   font-size: 0.8rem;
   color: rgba($c-navy, 0.4);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//   PROFILE PAGE
+// ═══════════════════════════════════════════════════════════════
+.profile-main {
+  @include page-body(900px);
+}
+.profile-hero {
+  @include page-hero;
+  padding-bottom: 28px;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  background: $c-purple;
+  border-radius: 50%;
+  @include flex-center;
+  font-family: $f-title;
+  font-size: 1.8rem;
+  color: $c-white;
+  margin: 0 auto 12px;
+  border: 3px solid $c-gold;
+}
+
+.profile-hero {
+  h2 {
+    color: $c-white;
+    margin-bottom: 4px;
+  }
+
+  .rank-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba($c-gold, 0.12);
+    border: 1px solid rgba($c-gold, 0.32);
+    color: $c-gold;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-top: 8px;
+  }
+}
+
+.profile-stats {
+  background: $c-cream;
+  border-bottom: 1px solid rgba($c-navy, 0.1);
+  padding: 16px $r-lg;
+}
+
+.profile-stats-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  text-align: center;
+}
+
+.pstat-value {
+  font-family: $f-title;
+  font-size: 1.4rem;
+  color: $c-purple;
+}
+.pstat-label {
+  font-size: 0.65rem;
+  color: rgba($c-navy, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.profile-content {
+  @include page-body(800px);
+}
+
+.profile-section {
+  margin-bottom: 32px;
+  h3 {
+    margin-bottom: 14px;
+    font-size: 1rem;
+  }
+  a {
+    color: var(--c-purple);
+    font-weight: 700;
+  }
+}
+
+// History table
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+
+  th {
+    padding: 8px 12px;
+    text-align: left;
+    @include uppercase-label(0.7rem, 0.05em);
+    color: rgba($c-navy, 0.5);
+    border-bottom: 2px solid rgba($c-navy, 0.1);
+  }
+
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba($c-navy, 0.07);
+  }
+  tbody tr:hover {
+    background: rgba($c-purple-lt, 0.03);
+  }
+}
+
+.profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 $r-lg $r-xl;
+  max-width: 800px;
+  margin: 0 auto;
 }

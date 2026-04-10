@@ -219,7 +219,7 @@ play.addEventListener("click", () =>
     note("<bb1 c2 d2 b1>")
       .sound("super64_vib").gain(0.5).cutoff(500).release(0.2),
 
-    s("cajon ~ cajon ~").n(irand(7)).gain(1),
+    s("clave ~ cajon ~").n(irand(7)).gain(1),
 
     s("~ cowbell ~ clave").n(irand(5)).gain(0.9),
   )

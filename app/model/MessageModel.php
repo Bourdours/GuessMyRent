@@ -12,27 +12,6 @@ class MessageModel extends Model
         $this->primaryKey = "id_message";
     }
 
-    // public function findAll(): array
-    // {
-    //     return $this->executeQuery(
-    //         'SELECT m.*, u.pseudo, u.avatar
-    //          FROM MESSAGE m
-    //          JOIN USER u ON m.id_user = u.id_user
-    //          ORDER BY m.id_message DESC'
-    //     )->fetchAll();
-    // }
-
-    // public function findById(int $id): array|false
-    // {
-    //     return $this->executeQueryWithBind(
-    //         'SELECT m.*, u.pseudo
-    //          FROM MESSAGE m
-    //          JOIN USER u ON m.id_user = u.id_user
-    //          WHERE m.id_message = :id',
-    //         ['id' => $id]
-    //     )->fetch();
-    // }
-
     public function findByUser(int $userId): array
     {
         return $this->executeQueryWithBind(
