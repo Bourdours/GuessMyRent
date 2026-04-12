@@ -38,12 +38,17 @@ class EstateController extends BaseController
 
     private function handlePropose(): array
     {
-        $city         = trim($_POST['city'] ?? '');
-        $postal       = trim($_POST['postal'] ?? '');
-        $neighborhood = trim($_POST['neighborhood'] ?? '');
-        $typeLabel    = $_POST['type'] ?? '';
-        $squareMeters = (float) ($_POST['square_meters'] ?? 0);
-        $rent         = (int) ($_POST['rent'] ?? 0);
+        $city             = trim($_POST['city'] ?? '');
+        $postal           = trim($_POST['postal'] ?? '');
+        $adress           = trim($_POST['adress'] ?? '') ?: null;
+        $typeLabel        = $_POST['type'] ?? '';
+        $squareMeters     = (float) ($_POST['square_meters'] ?? 0);
+        $rent             = (int) round((int) ($_POST['rent'] ?? 0) / 10) * 10;
+        $room             = $_POST['room'] !== '' ? (int) ($_POST['room'] ?? 0) : null;
+        $chamber          = $_POST['chamber'] !== '' ? (int) ($_POST['chamber'] ?? 0) : null;
+        $floor            = $_POST['floor'] !== '' ? (int) ($_POST['floor'] ?? 0) : null;
+        $description      = trim($_POST['description'] ?? '') ?: null;
+        $isChargesIncluded = isset($_POST['is_charges_included']) ? 1 : 0;
 
         if ($city === '' || $postal === '' || $typeLabel === '' || $squareMeters <= 0 || $rent <= 0) {
             return ['error' => 'Veuillez remplir tous les champs obligatoires.'];
@@ -91,17 +96,17 @@ class EstateController extends BaseController
 
         (new EstateModel())->create([
             'rent'                => $rent,
-            'is_charges_included' => 0,
-            'adress'              => $neighborhood,
+            'is_charges_included' => $isChargesIncluded,
+            'adress'              => $adress,
             'city'                => $city,
             'postcode'            => $postal,
             'gps_y'               => null,
             'gps_x'               => null,
             'square_meters'       => (string) $squareMeters,
-            'room'                => null,
-            'chamber'             => null,
-            'floor'               => null,
-            'description'         => null,
+            'room'                => $room,
+            'chamber'             => $chamber,
+            'floor'               => $floor,
+            'description'         => $description,
             'image1'              => $imageNames[0],
             'image2'              => $imageNames[1],
             'image3'              => $imageNames[2],

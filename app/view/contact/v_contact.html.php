@@ -77,41 +77,73 @@
       <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
       <input type="hidden" name="tab" value="bien">
 
+      <!-- Localisation -->
       <div class="form-group">
-        <label class="form-label" for="city">Ville</label>
-        <input type="text" id="city" name="city" class="form-input" required maxlength="100" placeholder="Paris">
+        <label class="form-label" for="city">Ville *</label>
+        <input type="text" id="city" name="city" class="form-input" required maxlength="50" placeholder="Paris">
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="postal">Code postal</label>
-        <input type="text" id="postal" name="postal" class="form-input" required maxlength="10" placeholder="75001">
+        <label class="form-label" for="postal">Code postal *</label>
+        <input type="text" id="postal" name="postal" class="form-input" required maxlength="10" inputmode="numeric" pattern="[0-9]+" data-numeric placeholder="75001">
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="neighborhood">Quartier (optionnel)</label>
-        <input type="text" id="neighborhood" name="neighborhood" class="form-input" maxlength="100" placeholder="Marais">
+        <label class="form-label" for="adress">Adresse / Quartier (optionnel)</label>
+        <input type="text" id="adress" name="adress" class="form-input" maxlength="50" placeholder="12 rue du Marais">
       </div>
 
+      <!-- Type -->
       <div class="form-group">
-        <label class="form-label">Type de bien</label>
+        <label class="form-label">Type de bien *</label>
         <div class="radio-group">
-          <?php foreach (['Appartement', 'Maison', 'Studio', 'Loft', 'Colocation'] as $type): ?>
+          <?php foreach (['appartement', 'maison', 'collocation', 'château', 'péniche', 'loft', 'ferme'] as $type): ?>
+            <?php $label = mb_ucfirst($type); ?>
             <div class="radio-pill">
-              <input type="radio" name="type" id="type_<?= md5($type) ?>" value="<?= htmlspecialchars($type) ?>">
-              <label for="type_<?= md5($type) ?>"><?= htmlspecialchars($type) ?></label>
+              <input type="radio" name="type" id="type_<?= md5($type) ?>" value="<?= htmlspecialchars($type) ?>" required>
+              <label for="type_<?= md5($type) ?>"><?= htmlspecialchars($label) ?></label>
             </div>
           <?php endforeach; ?>
         </div>
       </div>
 
+      <!-- Caractéristiques -->
       <div class="form-group">
-        <label class="form-label" for="square_meters">Surface (m²)</label>
-        <input type="number" id="square_meters" name="square_meters" class="form-input" required min="5" max="999" placeholder="45">
+        <label class="form-label" for="square_meters">Surface (m²) *</label>
+        <input type="number" id="square_meters" name="square_meters" class="form-input" required min="5" max="999" step="0.01" placeholder="45">
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="rent">Loyer mensuel (€)</label>
-        <input type="number" id="rent" name="rent" class="form-input" required min="100" max="99999" placeholder="850">
+        <label class="form-label" for="room">Nombre de pièces (optionnel)</label>
+        <input type="number" id="room" name="room" class="form-input" min="1" max="99" step="1" placeholder="3">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="chamber">Nombre de chambres (optionnel)</label>
+        <input type="number" id="chamber" name="chamber" class="form-input" min="0" max="99" step="1" placeholder="2">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="floor">Étage (optionnel)</label>
+        <input type="number" id="floor" name="floor" class="form-input" min="0" max="200" step="1" placeholder="3">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="description">Description (optionnel)</label>
+        <input type="text" id="description" name="description" class="form-input" maxlength="50" placeholder="Lumineux, bien exposé, calme...">
+      </div>
+
+      <!-- Loyer -->
+      <div class="form-group">
+        <label class="form-label" for="rent">Loyer mensuel (€) *</label>
+        <input type="number" id="rent" name="rent" class="form-input" required min="100" max="99999" step="1" placeholder="854">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          <input type="checkbox" name="is_charges_included" value="1">
+          Charges comprises
+        </label>
       </div>
 
       <div class="form-group">

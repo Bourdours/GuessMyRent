@@ -10,6 +10,9 @@
 
 <script src="https://unpkg.com/@strudel/web@1.0.3"></script>
 <script src="<?= BASE_URL ?>/public/js/main.js"></script>
+<?php if (!empty($pageScript)): ?>
+<script src="<?= htmlspecialchars($pageScript) ?>" defer></script>
+<?php endif; ?>
 
 </body>
 

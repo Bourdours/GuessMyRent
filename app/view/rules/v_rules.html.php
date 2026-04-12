@@ -41,6 +41,8 @@
   <!-- Score table -->
   <section class="section">
     <h2>Calcul du score</h2>
+    <p>Le score est calculé en soustrayant votre écart en % au loyer réel de 100 points. Plus vous êtes précis, plus vous marquez de points !</p>
+    <p class="score-formula"><strong>Score = 100 − écart %</strong> &nbsp;(minimum 0)</p>
     <table class="score-table">
       <thead>
         <tr>
@@ -50,20 +52,28 @@
       </thead>
       <tbody>
         <tr>
-          <td><span class="pill pill-green">Moins de 5 %</span></td>
+          <td><span class="pill pill-green">0 %</span></td>
           <td class="pts">100 pts</td>
         </tr>
         <tr>
-          <td><span class="pill pill-gold">5 % à 10 %</span></td>
+          <td><span class="pill pill-green">5 %</span></td>
+          <td class="pts">95 pts</td>
+        </tr>
+        <tr>
+          <td><span class="pill pill-gold">10 %</span></td>
+          <td class="pts">90 pts</td>
+        </tr>
+        <tr>
+          <td><span class="pill pill-gold">20 %</span></td>
           <td class="pts">80 pts</td>
         </tr>
         <tr>
-          <td><span class="pill pill-amber">10 % à 20 %</span></td>
+          <td><span class="pill pill-amber">50 %</span></td>
           <td class="pts">50 pts</td>
         </tr>
         <tr>
-          <td><span class="pill pill-red">Plus de 20 %</span></td>
-          <td class="pts">20 pts</td>
+          <td><span class="pill pill-red">100 % et plus</span></td>
+          <td class="pts">0 pt</td>
         </tr>
       </tbody>
     </table>

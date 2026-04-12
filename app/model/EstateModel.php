@@ -110,7 +110,7 @@ class EstateModel extends Model
              FROM ESTATE e
              JOIN STATUS s ON e.id_status = s.id_status
              JOIN TYPE   t ON e.id_type   = t.id_type
-             WHERE LOWER(s.label) = 'actif'
+             WHERE LOWER(s.label) = 'jouable'
              $exclude
              ORDER BY RAND()
              LIMIT 1",
