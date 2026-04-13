@@ -55,7 +55,14 @@
   }
 }
 
-// ── Pill ─────────────────────────────────────────────
+// ── Page body (rules, contact, …) ───────────────────────────
+@mixin page-body($max-width: 800px) {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $r-xl $r-lg;
+}
+
+// ── Pill ─────────────────────────────────────────────────────
 @mixin pill-base {
   display: inline-flex;
   align-items: center;
@@ -65,13 +72,6 @@
   border-radius: 20px;
 }
 
-// ── Page body (rules, contact, …) ───────────────────────────
-@mixin page-body($max-width: 800px) {
-  max-width: $max-width;
-  margin: 0 auto;
-  padding: $r-xl $r-lg;
-}
-
 // ── Table header cell ────────────────────────────────────────
 @mixin table-th-base($bg: rgba($c-navy, 0.03)) {
   background: $bg;
@@ -79,4 +79,14 @@
   text-align: left;
   @include uppercase-label;
   color: rgba($c-navy, 0.5);
+}
+
+// ── BackGround Card ──────────────────────────────────────────
+
+@mixin background-card {
+  background: $c-white;
+  border-radius: $rad-md;
+  padding: 24px 16px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba($c-navy, 0.07);
 }

@@ -564,11 +564,7 @@ footer {
 }
 
 .step-card {
-  background: $c-white;
-  border-radius: $rad-md;
-  padding: 24px 16px;
-  text-align: center;
-  box-shadow: 0 2px 12px rgba($c-navy, 0.07);
+  @include background-card;
 
   h3 {
     font-size: 0.95rem;
@@ -1060,6 +1056,10 @@ footer {
     color: $c-purple;
     font-size: 1.1rem;
   }
+}
+.video {
+  width: 100%;
+ @include background-card;
 }
 
 // ═══════════════════════════════════════════════════════════════

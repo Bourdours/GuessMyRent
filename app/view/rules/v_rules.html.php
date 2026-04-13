@@ -4,7 +4,26 @@
     <h1>Règles du jeu</h1>
     <p>Estimez le loyer de biens immobiliers réels et marquez un maximum de points !</p>
   </div>
-
+  <section class="section">
+    <video
+      class="video"
+      autoplay
+      controls
+      width="90%"
+      height="90%"
+      loop
+      muted
+      poster="<?= BASE_URL ?>/public/img/poster.png"
+      preload="auto">
+      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1280x720.mp4" type="video/mp4" />
+      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1280x720.webm" type="video/webm" />
+      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1920x1080.mp4" type="video/mp4" />
+      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1920x1080.webm" type="video/mp4" />
+      <p>
+        Votre navigateur ne supporte pas le format vidéo présent sur ce site.
+      </p>
+    </video>
+  </section>
   <!-- How to play -->
   <section class="section">
     <h2>Comment jouer ?</h2>
