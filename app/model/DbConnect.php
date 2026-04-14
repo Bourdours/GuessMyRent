@@ -1,5 +1,7 @@
 <?php
+
 namespace GmR\model;
+
 use PDO;
 use PDOException;
 
@@ -15,8 +17,8 @@ abstract class DbConnect
         if (self::$pdo === null) {
             try {
                 $dsn = 'mysql:host=' . $_ENV['DB_HOST']
-                     . ';dbname=' . $_ENV['DB_NAME']
-                     . ';charset=utf8mb4';
+                    . ';dbname=' . $_ENV['DB_NAME']
+                    . ';charset=utf8mb4';
 
                 self::$pdo = new PDO($dsn, $_ENV['DB_LOGIN'], $_ENV['DB_PASSWORD'], [
                     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,

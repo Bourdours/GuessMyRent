@@ -1,4 +1,5 @@
 <?php
+
 namespace GmR\controller;
 
 abstract class BaseController

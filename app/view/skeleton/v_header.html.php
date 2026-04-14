@@ -4,15 +4,15 @@
 
 <body>
 
-  <header>
+  <header class="main-header">
     <div class="header-inner">
-      <a href="<?= BASE_URL ?>/" class="header-logo">GuessMy<span>Rent</span></a>
+      <a href="<?= BASE_URL ?>/" class="header-logo" aria-label="GuessMy Rent — Accueil">GuessMy<span aria-hidden="true">Rent</span></a>
 
       <!-- Mobile burger -->
-      <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+      <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navDrawer">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
       </button>
 
       <!-- Desktop nav -->

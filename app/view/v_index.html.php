@@ -7,49 +7,49 @@
     </div>
 </section>
 
-<div class="stats-band">
-    <div class="stats-inner">
+<section class="stats-band" aria-label="Statistiques du jeu">
+    <dl class="stats-inner">
         <div>
-            <div class="stat-value">1 240</div>
-            <div class="stat-label">Biens disponibles</div>
+            <dd class="stat-value"><?= number_format($stats['biens_disponibles'], 0, ',', ' ') ?></dd>
+            <dt class="stat-label">Biens disponibles</dt>
         </div>
         <div>
-            <div class="stat-value">8 500</div>
-            <div class="stat-label">Parties jouées</div>
+            <dd class="stat-value"><?= number_format($stats['parties_jouees'], 0, ',', ' ') ?></dd>
+            <dt class="stat-label">Parties jouées</dt>
         </div>
         <div>
-            <div class="stat-value">94%</div>
-            <div class="stat-label">Joueurs satisfaits</div>
+            <dd class="stat-value"><?= $stats['moyenne_scores'] ?></dd>
+            <dt class="stat-label">Moyenne des scores</dt>
         </div>
         <div>
-            <div class="stat-value">12</div>
-            <div class="stat-label">Villes couvertes</div>
+            <dd class="stat-value"><?= $stats['villes_couvertes'] ?></dd>
+            <dt class="stat-label">Villes couvertes</dt>
         </div>
-    </div>
-</div>
+    </dl>
+</section>
 
 <section class="how-to-play section">
     <h2>Comment jouer ?</h2>
     <div class="steps-grid">
-        <div class="step-card">
-            <div class="step-number">1</div>
+        <article class="step-card">
+            <span class="step-number" aria-hidden="true">1</span>
             <h3>Observez</h3>
             <p>Découvrez la fiche complète d'un bien : photos, surface, quartier, type…</p>
-        </div>
-        <div class="step-card">
-            <div class="step-number">2</div>
+        </article>
+        <article class="step-card">
+            <span class="step-number" aria-hidden="true">2</span>
             <h3>Estimez</h3>
             <p>Utilisez le curseur pour proposer votre estimation du loyer mensuel.</p>
-        </div>
-        <div class="step-card">
-            <div class="step-number">3</div>
+        </article>
+        <article class="step-card">
+            <span class="step-number" aria-hidden="true">3</span>
             <h3>Découvrez</h3>
             <p>Comparez votre estimation au loyer réel et recevez votre score.</p>
-        </div>
-        <div class="step-card">
-            <div class="step-number">4</div>
+        </article>
+        <article class="step-card">
+            <span class="step-number" aria-hidden="true">4</span>
             <h3>Progressez</h3>
             <p>Sauvegardez vos scores, suivez votre progression et montez en niveau.</p>
-        </div>
+        </article>
     </div>
 </section>

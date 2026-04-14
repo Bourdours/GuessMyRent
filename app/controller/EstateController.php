@@ -1,5 +1,7 @@
 <?php
+
 namespace GmR\controller;
+
 use GmR\controller\BaseController;
 use GmR\model\EstateModel;
 use GmR\model\TypeModel;

@@ -1,5 +1,7 @@
 <?php
+
 namespace GmR\controller;
+
 use GmR\controller\BaseController;
 use GmR\model\UserModel;
 use GmR\model\GameModel;
@@ -126,7 +128,9 @@ class UserController extends BaseController
         $initial    = mb_strtoupper(mb_substr($pseudo, 0, 1));
         $totalGames = count($history);
         $totalScore = 0;
-        foreach ($history as $g) { $totalScore += (int)$g['game_result']; }
+        foreach ($history as $g) {
+            $totalScore += (int)$g['game_result'];
+        }
         $avgScore   = $totalGames > 0 ? round($totalScore / $totalGames) : 0;
 
         $this->render(V_PROFIL . 'v_profil.html.php', [
@@ -203,7 +207,8 @@ class UserController extends BaseController
         ]);
     }
 
-    public function adminApi(){
+    public function adminApi()
+    {
         $this->render(V_ADMIN . 'v_admin_api.html.php');
     }
 }

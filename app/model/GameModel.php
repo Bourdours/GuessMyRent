@@ -56,6 +56,14 @@ class GameModel extends Model
         return (int) $this->executeQuery('SELECT COUNT(*) FROM GAME')->fetchColumn();
     }
 
+    public function avgScore(): int
+    {
+        $avg = $this->executeQuery(
+            'SELECT AVG(game_result) FROM GAME WHERE game_result IS NOT NULL'
+        )->fetchColumn();
+        return $avg !== false ? (int) round($avg) : 0;
+    }
+
     // Supprime toutes les parties d'un utilisateur
     public function deleteByUser(int $userId): bool
     {

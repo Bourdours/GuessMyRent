@@ -1,5 +1,7 @@
 <?php
+
 namespace GmR\controller;
+
 use GmR\controller\BaseController;
 use GmR\model\GameModel;
 use GmR\model\EstateModel;
@@ -13,7 +15,9 @@ class GameController extends BaseController
             return;
         }
 
-        $estate = (new EstateModel())->findRandomActive();
+        $estateModel = new EstateModel();
+        $estate      = $estateModel->findRandomActive();
+        $avgRent     = $estateModel->avgRent();
 
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
@@ -21,6 +25,7 @@ class GameController extends BaseController
             'pageTitle'  => 'Jouer',
             'estate'     => $estate ?: null,
             'csrf_token' => $_SESSION['csrf_token'],
+            'avgRent'    => $avgRent,
             'pageScript' => BASE_URL . '/public/js/game.js',
         ]);
     }

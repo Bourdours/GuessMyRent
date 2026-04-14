@@ -109,6 +109,26 @@ class EstateModel extends Model
         )->fetch();
     }
 
+    public function countActive(): int
+    {
+        return (int) $this->executeQueryWithBind(
+            "SELECT COUNT(*) FROM ESTATE e
+             JOIN STATUS s ON e.id_status = s.id_status
+             WHERE LOWER(s.label) = :status",
+            ['status' => 'jouable']
+        )->fetchColumn();
+    }
+
+    public function countCities(): int
+    {
+        return (int) $this->executeQueryWithBind(
+            "SELECT COUNT(DISTINCT e.city) FROM ESTATE e
+             JOIN STATUS s ON e.id_status = s.id_status
+             WHERE LOWER(s.label) = :status",
+            ['status' => 'jouable']
+        )->fetchColumn();
+    }
+
     public function updateStatus(int $id, int $statusId): void
     {
         $this->executeQueryWithBind(
@@ -164,4 +184,15 @@ class EstateModel extends Model
         return (int) self::connect()->lastInsertId();
     }
 
+    public function avgRent(): int
+    {
+        $avg = $this->executeQueryWithBind(
+            "SELECT AVG(e.rent)
+             FROM ESTATE e
+             JOIN STATUS s ON e.id_status = s.id_status
+             WHERE LOWER(s.label) = :status",
+            ['status' => 'jouable']
+        )->fetchColumn();
+        return $avg !== false ? (int) round($avg) : 800;
+    }
 }

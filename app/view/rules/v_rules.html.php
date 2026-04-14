@@ -4,7 +4,8 @@
     <h1>Règles du jeu</h1>
     <p>Estimez le loyer de biens immobiliers réels et marquez un maximum de points !</p>
   </div>
-  <section class="section">
+
+  <section class="section" aria-label="Présentation vidéo">
     <video
       class="video"
       autoplay
@@ -33,28 +34,29 @@
       Après validation, vous découvrez le loyer réel et votre score.
     </p>
 
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-number">1</div>
+    <section class="steps-grid">
+      <article class="step-card">
+        <span class="step-number" aria-hidden="true">1</span>
         <h3>Observez</h3>
         <p>Analysez les photos, la surface, le quartier et les caractéristiques du bien.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">2</div>
+      </article>
+      <article class="step-card">
+        <span class="step-number" aria-hidden="true">2</span>
         <h3>Estimez</h3>
         <p>Glissez le curseur jusqu'à votre estimation (entre 300 € et 5 000 €).</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">3</div>
+      </article>
+      <article class="step-card">
+        <span class="step-number" aria-hidden="true">3</span>
         <h3>Validez</h3>
         <p>Confirmez votre estimation et découvrez le loyer réel du bien.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">4</div>
+      </article>
+      <article class="step-card">
+        <span class="step-number" aria-hidden="true">4</span>
         <h3>Scorez</h3>
         <p>Plus vous êtes précis, plus vous gagnez de points !</p>
-      </div>
-    </div>
+      </article>
+    </section>
+
   </section>
 
   <!-- Score table -->
@@ -98,8 +100,8 @@
     </table>
   </section>
 
-  <div class="text-center">
+  <p class="text-center">
     <a href="<?= BASE_URL ?>/jeu" class="btn-primary">Jouer maintenant</a>
-  </div>
+  </p>
 
 </div>

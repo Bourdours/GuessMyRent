@@ -1,9 +1,9 @@
-<div class="auth-page">
-  <div class="auth-card">
+<section class="auth-page">
+  <article class="auth-card">
 
     <!-- Logo -->
     <div class="auth-logo">
-      <h1>GuessMyRent</h1>
+      <h1>GuessMy<span>Rent</span></h1>
       <p>Le jeu d'estimation de loyers</p>
     </div>
 
@@ -29,8 +29,7 @@
           class="form-input"
           required
           autocomplete="email"
-          placeholder="exemple@mail.com"
-        >
+          placeholder="exemple@mail.com">
       </div>
 
       <div class="form-group">
@@ -42,13 +41,12 @@
           class="form-input"
           required
           autocomplete="current-password"
-          placeholder="••••••••"
-        >
+          placeholder="••••••••">
       </div>
 
-      <div class="text-center">
+      <p class="text-center">
         <a href="<?= BASE_URL ?>/auth?action=reset" class="auth-back-link">Mot de passe oublié ?</a>
-      </div>
+      </p>
 
       <button type="submit" class="btn-primary btn-full">Se connecter</button>
     </form>
@@ -57,5 +55,5 @@
       En vous connectant, vous acceptez nos <a href="<?= BASE_URL ?>/info">CGU</a> et notre <a href="<?= BASE_URL ?>/info">politique de confidentialité</a>.
     </p>
 
-  </div>
-</div>
+  </article>
+</section>

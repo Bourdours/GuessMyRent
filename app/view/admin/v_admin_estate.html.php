@@ -2,29 +2,30 @@
 
   <!-- Sidebar -->
   <aside class="admin-sidebar">
-    <div class="admin-sidebar-section">
+    <nav class="admin-sidebar-section" aria-label="Menu Admin">
       <a href="<?= BASE_URL ?>/admin">Dashboard</a>
-      <div class="section-label">Contenu</div>
+    </nav>
+    <nav class="admin-sidebar-section" aria-label="Contenu">
+      <p class="section-label">Contenu</p>
       <a href="<?= BASE_URL ?>/admin/biens" class="active">Biens</a>
       <a href="<?= BASE_URL ?>/admin/api">Biens de l'api</a>
-
-    </div>
-    <div class="admin-sidebar-section">
-      <div class="section-label">Utilisateurs</div>
+    </nav>
+    <nav class="admin-sidebar-section" aria-label="Utilisateurs">
+      <p class="section-label">Utilisateurs</p>
       <a href="<?= BASE_URL ?>/admin/utilisateurs">Utilisateurs</a>
-    </div>
-    <div class="admin-sidebar-section">
-      <div class="section-label">Navigation</div>
+    </nav>
+    <nav class="admin-sidebar-section" aria-label="Navigation retour">
+      <p class="section-label">Navigation</p>
       <a href="<?= BASE_URL ?>/">← Retour au site</a>
-    </div>
+    </nav>
   </aside>
 
   <!-- Main -->
-  <div class="admin-main">
+  <section class="admin-main">
 
-    <div class="admin-header-bar">
-      <h2>Gestion des biens</h2>
-    </div>
+    <header class="admin-header-bar">
+      <h1>Gestion des biens</h1>
+    </header>
 
     <?php if (!empty($success)): ?>
       <div class="alert alert-success mb-md" role="status"><?= htmlspecialchars($success) ?></div>
@@ -33,15 +34,13 @@
       <div class="alert alert-error mb-md" role="alert"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
 
-    <div class="admin-table-wrap">
-      <div class="admin-table-header">
-        <h3>Tous les biens <span class="pill pill-purple"><?= count($estates ?? []) ?></span></h3>
-      </div>
+    <section class="admin-table-wrap">
+      <header class="admin-table-header">
+        <h2>Tous les biens <span class="pill pill-purple"><?= count($estates ?? []) ?></span></h2>
+      </header>
 
       <?php if (empty($estates)): ?>
-        <div class="admin-empty-state">
-          Aucun bien enregistré.
-        </div>
+        <p class="admin-empty-state">Aucun bien enregistré.</p>
       <?php else: ?>
         <div class="table-overflow">
           <table class="admin-table">
@@ -116,7 +115,7 @@
           </table>
         </div>
       <?php endif; ?>
-    </div>
+    </section>
 
-  </div>
+  </section>
 </div>

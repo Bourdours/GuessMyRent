@@ -50,6 +50,9 @@ textarea,
 select {
   font-family: $f-body;
 }
+fieldset {
+  border: none;
+}
 main {
   flex: 1;
 }
@@ -72,7 +75,7 @@ h3 {
 }
 
 // ── Header / Nav ─────────────────────────────────────────────
-header {
+.main-header {
   background: $c-navy;
   height: $header-h;
   position: sticky;
@@ -651,6 +654,10 @@ footer {
   text-align: center;
   margin-bottom: 24px;
 
+  span {
+    color: $c-gold;
+  }
+
   h1 {
     font-size: 1.7rem;
     color: $c-purple;
@@ -1176,7 +1183,7 @@ footer {
   flex-wrap: wrap;
   gap: 12px;
 
-  h2 {
+  h1 {
     margin-bottom: 0;
   }
 }
@@ -1238,7 +1245,7 @@ footer {
   flex-wrap: wrap;
   gap: 10px;
 
-  h3 {
+  h2 {
     font-size: 1rem;
     margin: 0;
   }
@@ -1624,12 +1631,9 @@ footer {
   border-top: 1px solid rgba($c-navy, 0.08);
   padding-top: $r-md;
   margin-top: $r-sm;
-
-  p {
-    font-size: 0.875rem;
-    color: rgba($c-navy, 0.65);
-    line-height: 1.6;
-  }
+  font-size: 0.875rem;
+  color: rgba($c-navy, 0.65);
+  line-height: 1.6;
 }
 
 // ── Guess zone ──────────────────────────────────────────────────

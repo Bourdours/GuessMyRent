@@ -1,11 +1,25 @@
 <?php
+
 namespace GmR\controller;
+
+use GmR\model\EstateModel;
+use GmR\model\GameModel;
 
 class PageController extends BaseController
 {
     public function home(): void
     {
-        $this->render(VIEW . 'v_index.html.php', ['pageTitle' => 'Accueil']);
+        $estateModel = new EstateModel();
+        $gameModel   = new GameModel();
+
+        $stats = [
+            'biens_disponibles' => $estateModel->countActive(),
+            'parties_jouees'    => $gameModel->countAll(),
+            'moyenne_scores'    => $gameModel->avgScore(),
+            'villes_couvertes'  => $estateModel->countCities(),
+        ];
+
+        $this->render(VIEW . 'v_index.html.php', ['pageTitle' => 'Accueil', 'stats' => $stats]);
     }
 
     public function rules(): void

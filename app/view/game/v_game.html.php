@@ -1,4 +1,4 @@
-<div class="game-page">
+<section class="game-page">
 
   <?php if (!$estate): ?>
 
@@ -6,9 +6,9 @@
       <div class="alert alert-info">
         Aucun bien disponible pour le moment. Revenez bientôt !
       </div>
-      <div class="mt-lg">
+      <p class="mt-lg">
         <a href="<?= BASE_URL ?>/" class="btn-secondary">Retour à l'accueil</a>
-      </div>
+      </p>
     </div>
 
   <?php else: ?>
@@ -25,14 +25,14 @@
     <div class="game-layout container">
 
       <!-- Colonne : galerie -->
-      <div class="game-col-photo">
+      <figure class="game-col-photo">
 
         <div class="game-main-photo" onclick="openLightbox(document.getElementById('mainPhoto').src)">
           <img
             id="mainPhoto"
             src="<?= BASE_URL ?>/public/img/estates/<?= htmlspecialchars($images[0]) ?>"
             alt="Photo principale du bien">
-          <span class="game-photo-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+          <span class="game-photo-zoom" aria-hidden="true"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
         </div>
 
         <?php if (count($images) > 1): ?>
@@ -49,58 +49,56 @@
           </div>
         <?php endif; ?>
 
-      </div>
+      </figure>
 
       <!-- Colonne : infos + devinette -->
       <div class="game-col-side">
 
         <!-- Infos du bien -->
-        <div class="game-info">
+        <article class="game-info">
           <div class="game-info-header">
             <span class="pill pill-purple"><?= htmlspecialchars($estate['type_label']) ?></span>
             <span class="game-city"><?= htmlspecialchars($estate['city']) ?> (<?= htmlspecialchars(str_pad($estate['postcode'], 5, '0', STR_PAD_LEFT)) ?>)</span>
           </div>
 
-          <div class="game-specs">
-            <div class="game-spec">
-              <span class="game-spec-icon"><i class="fa-solid fa-ruler-combined"></i></span>
+          <ul class="game-specs">
+            <li class="game-spec">
+              <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-ruler-combined"></i></span>
               <span><?= htmlspecialchars($estate['square_meters']) ?> m²</span>
-            </div>
+            </li>
             <?php if (!empty($estate['room'])): ?>
-              <div class="game-spec">
-                <span class="game-spec-icon"><i class="fa-solid fa-door-open"></i></span>
+              <li class="game-spec">
+                <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-door-open"></i></span>
                 <span><?= (int)$estate['room'] ?> pièce<?= $estate['room'] > 1 ? 's' : '' ?></span>
-              </div>
+              </li>
             <?php endif; ?>
             <?php if (!empty($estate['chamber'])): ?>
-              <div class="game-spec">
-                <span class="game-spec-icon"><i class="fa-solid fa-bed"></i></span>
+              <li class="game-spec">
+                <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-bed"></i></span>
                 <span><?= (int)$estate['chamber'] ?> chambre<?= $estate['chamber'] > 1 ? 's' : '' ?></span>
-              </div>
+              </li>
             <?php endif; ?>
             <?php if (!empty($estate['floor']) && $estate['floor'] !== '0'): ?>
-              <div class="game-spec">
-                <span class="game-spec-icon"><i class="fa-solid fa-building"></i></span>
+              <li class="game-spec">
+                <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-building"></i></span>
                 <span>Étage <?= htmlspecialchars($estate['floor']) ?></span>
-              </div>
+              </li>
             <?php endif; ?>
             <?php if (!empty($estate['is_charges_included'])): ?>
-              <div class="game-spec">
-                <span class="game-spec-icon"><i class="fa-solid fa-circle-check"></i></span>
+              <li class="game-spec">
+                <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-circle-check"></i></span>
                 <span>Charges comprises</span>
-              </div>
+              </li>
             <?php endif; ?>
-          </div>
+          </ul>
 
           <?php if (!empty($estate['description'])): ?>
-            <div class="game-description">
-              <p><?= nl2br(htmlspecialchars($estate['description'])) ?></p>
-            </div>
+            <p class="game-description"><?= nl2br(htmlspecialchars($estate['description'])) ?></p>
           <?php endif; ?>
-        </div>
+        </article>
 
         <!-- Zone de devinette -->
-        <div class="game-guess-zone">
+        <section class="game-guess-zone">
           <h2>Votre estimation</h2>
           <p class="game-guess-hint">Glissez le curseur pour proposer votre loyer mensuel.</p>
 
@@ -109,7 +107,7 @@
             <input type="hidden" name="estate_id" value="<?= (int)$estate['id_estate'] ?>">
 
             <div class="guess-display">
-              <span id="guessValue">800</span> €<span class="guess-unit">/mois</span>
+              <span id="guessValue"><?= $avgRent ?></span> €<span class="guess-unit">/mois</span>
             </div>
 
             <div class="guess-slider-wrap">
@@ -121,7 +119,7 @@
                 min="300"
                 max="2500"
                 step="10"
-                value="800"
+                value="<?= $avgRent ?>"
                 class="guess-slider"
                 aria-label="Estimation du loyer mensuel">
               <span class="slider-bound">2 500 €</span>
@@ -131,19 +129,18 @@
               Valider mon estimation
             </button>
           </form>
-        </div>
+        </section>
 
       </div>
 
     </div>
 
     <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-      <button class="lightbox-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()" aria-hidden="true">
+      <button class="lightbox-close" aria-label="Fermer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
       <img id="lightboxImg" src="" alt="Photo agrandie">
     </div>
 
   <?php endif; ?>
 
-</div>
-
+</section>

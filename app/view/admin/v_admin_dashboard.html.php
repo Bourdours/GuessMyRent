@@ -2,61 +2,71 @@
 
   <!-- Sidebar -->
   <aside class="admin-sidebar">
-    <div class="admin-sidebar-section">
+    <nav class="admin-sidebar-section" aria-label="Menu Admin">
       <a href="<?= BASE_URL ?>/admin" class="active">Dashboard</a>
-      <div class="section-label">Contenu</div>
+    </nav>
+    <nav class="admin-sidebar-section" aria-label="Contenu">
+      <p class="section-label">Contenu</p>
       <a href="<?= BASE_URL ?>/admin/biens">Biens</a>
       <a href="<?= BASE_URL ?>/admin/api">Biens de l'api</a>
-    </div>
-    <div class="admin-sidebar-section">
-      <div class="section-label">Utilisateurs</div>
+    </nav>
+    <nav class="admin-sidebar-section" aria-label="Utilisateurs">
+      <p class="section-label">Utilisateurs</p>
       <a href="<?= BASE_URL ?>/admin/utilisateurs">Utilisateurs</a>
-    </div>
-    <div class="admin-sidebar-section">
-      <div class="section-label">Navigation</div>
+    </nav>
+    <nav class="admin-sidebar-section" aria-label="Navigation retour">
+      <p class="section-label">Navigation</p>
       <a href="<?= BASE_URL ?>/">← Retour au site</a>
-    </div>
+    </nav>
   </aside>
 
   <!-- Main -->
-  <div class="admin-main">
+  <section class="admin-main">
 
-    <div class="admin-header-bar">
-      <h2>Dashboard</h2>
+    <header class="admin-header-bar">
+      <h1>Dashboard</h1>
       <span class="pill pill-purple">Admin</span>
-    </div>
+    </header>
 
     <!-- KPIs -->
-    <div class="kpi-grid">
-      <div class="kpi-card">
-        <div class="kpi-label">Biens actifs</div>
-        <div class="kpi-value kpi-purple"><?= (int)($stats['active_estates'] ?? 0) ?></div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Biens en attente</div>
-        <div class="kpi-value kpi-amber"><?= (int)($stats['pending_estates'] ?? 0) ?></div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Utilisateurs</div>
-        <div class="kpi-value"><?= (int)($stats['total_users'] ?? 0) ?></div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Parties jouées</div>
-        <div class="kpi-value kpi-green"><?= (int)($stats['total_games'] ?? 0) ?></div>
-      </div>
-    </div>
+    <section class="kpi-grid" aria-label="Indicateurs clés">
+      <article class="kpi-card">
+        <dl>
+          <dt class="kpi-label">Biens actifs</dt>
+          <dd class="kpi-value kpi-purple"><?= (int)($stats['active_estates'] ?? 0) ?></dd>
+        </dl>
+      </article>
+      <article class="kpi-card">
+        <dl>
+          <dt class="kpi-label">Biens en attente</dt>
+          <dd class="kpi-value kpi-amber"><?= (int)($stats['pending_estates'] ?? 0) ?></dd>
+        </dl>
+      </article>
+      <article class="kpi-card">
+        <dl>
+          <dt class="kpi-label">Utilisateurs</dt>
+          <dd class="kpi-value"><?= (int)($stats['total_users'] ?? 0) ?></dd>
+        </dl>
+      </article>
+      <article class="kpi-card">
+        <dl>
+          <dt class="kpi-label">Parties jouées</dt>
+          <dd class="kpi-value kpi-green"><?= (int)($stats['total_games'] ?? 0) ?></dd>
+        </dl>
+      </article>
+    </section>
 
     <!-- Quick actions -->
-    <div class="admin-table-wrap">
-      <div class="admin-table-header">
-        <h3>Accès rapides</h3>
-      </div>
-      <div class="admin-table-btn-group">
+    <section class="admin-table-wrap">
+      <header class="admin-table-header">
+        <h2>Accès rapides</h2>
+      </header>
+      <nav class="admin-table-btn-group" aria-label="Accès rapides">
         <a href="<?= BASE_URL ?>/admin/biens" class="btn-primary">Gérer les biens</a>
         <a href="<?= BASE_URL ?>/admin/utilisateurs" class="btn-secondary">Gérer les utilisateurs</a>
         <a href="<?= BASE_URL ?>/admin/api" class="btn-secondary">Ajouter des biens depuis l'api</a>
-      </div>
-    </div>
+      </nav>
+    </section>
 
-  </div>
+  </section>
 </div>

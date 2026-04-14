@@ -1,4 +1,4 @@
-<div class="contact-body">
+<section class="contact-body">
   <!-- Hero -->
   <div class="contact-hero">
     <h1>Contactez-nous</h1>
@@ -28,8 +28,8 @@
       <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
       <input type="hidden" name="tab" value="message">
 
-      <div class="form-group">
-        <label class="form-label">Objet</label>
+      <fieldset class="form-group">
+        <legend class="form-label">Objet</legend>
         <div class="radio-group">
           <?php foreach (['Question générale', 'Signaler un bug', 'Signaler un bien incorrect', 'Autre'] as $objet): ?>
             <div class="radio-pill">
@@ -39,7 +39,7 @@
             </div>
           <?php endforeach; ?>
         </div>
-      </div>
+      </fieldset>
 
       <div class="form-group">
         <label class="form-label" for="email">Votre e-mail</label>
@@ -94,8 +94,8 @@
       </div>
 
       <!-- Type -->
-      <div class="form-group">
-        <label class="form-label">Type de bien *</label>
+      <fieldset class="form-group">
+        <legend class="form-label">Type de bien *</legend>
         <div class="radio-group">
           <?php foreach (['appartement', 'maison', 'collocation', 'château', 'péniche', 'loft', 'ferme'] as $type): ?>
             <?php $label = mb_ucfirst($type); ?>
@@ -105,7 +105,7 @@
             </div>
           <?php endforeach; ?>
         </div>
-      </div>
+      </fieldset>
 
       <!-- Caractéristiques -->
       <div class="form-group">
@@ -146,8 +146,8 @@
         </label>
       </div>
 
-      <div class="form-group">
-        <label class="form-label">Photos (jusqu'à 4, min 1)</label>
+      <fieldset class="form-group">
+        <legend class="form-label">Photos (jusqu'à 4, min 1)</legend>
         <div class="upload-zone" id="uploadZone">
           <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
@@ -157,14 +157,14 @@
           <input type="file" name="photos[]" id="photoInput" accept="image/*" multiple required>
         </div>
         <div class="photo-preview" id="photoPreview"></div>
-      </div>
+      </fieldset>
 
-      <div class="moderation-note">
+      <p class="moderation-note">
         Votre proposition sera examinée par notre équipe avant publication. Les biens incorrects ou incomplets seront refusés.
-      </div>
+      </p>
 
       <button type="submit" class="btn-primary">Soumettre le bien</button>
     </form>
   <?php endif; ?>
 
-</div>
+</section>

@@ -1,9 +1,9 @@
-<div class="auth-page">
-  <div class="auth-card">
+<section class="auth-page">
+  <article class="auth-card">
 
     <!-- Logo -->
     <div class="auth-logo">
-      <h1>GuessMyRent</h1>
+      <h1>GuessMy<span>Rent</span></h1>
       <p>Créez votre compte gratuitement</p>
     </div>
 
@@ -30,8 +30,7 @@
           required
           maxlength="50"
           autocomplete="username"
-          placeholder="Votre Pseudo"
-        >
+          placeholder="Votre Pseudo">
       </div>
 
       <div class="form-group">
@@ -44,8 +43,7 @@
           required
           maxlength="50"
           autocomplete="email"
-          placeholder="exemple@mail.com"
-        >
+          placeholder="exemple@mail.com">
       </div>
 
       <div class="form-group">
@@ -58,8 +56,7 @@
           required
           minlength="8"
           autocomplete="new-password"
-          placeholder="••••••••"
-        >
+          placeholder="••••••••">
         <div class="pwd-strength" aria-label="Force du mot de passe">
           <div class="pwd-bar" id="pwdBar1"></div>
           <div class="pwd-bar" id="pwdBar2"></div>
@@ -74,5 +71,5 @@
       En créant un compte, vous acceptez nos <a href="<?= BASE_URL ?>/info">CGU</a> et notre <a href="<?= BASE_URL ?>/info">politique de confidentialité</a>.
     </p>
 
-  </div>
-</div>
+  </article>
+</section>

@@ -1,37 +1,37 @@
-<div class="profile-main">
+<section class="profile-main">
     <!-- Profile hero -->
     <div class="profile-hero">
         <div class="avatar"><?= htmlspecialchars($initial) ?></div>
         <h2><?= htmlspecialchars($pseudo) ?></h2>
-        <div class="rank-label">⭐ Joueur</div>
+        <p class="rank-label">⭐ Joueur</p>
     </div>
 
     <!-- Stats band -->
-    <div class="profile-stats">
-        <div class="profile-stats-inner">
+    <section class="profile-stats" aria-label="Statistiques du joueur">
+        <dl class="profile-stats-inner">
             <div>
-                <div class="pstat-value"><?= $totalGames ?></div>
-                <div class="pstat-label">Parties</div>
+                <dd class="pstat-value"><?= $totalGames ?></dd>
+                <dt class="pstat-label">Parties</dt>
             </div>
             <div>
-                <div class="pstat-value"><?= $avgScore ?></div>
-                <div class="pstat-label">Score moyen</div>
+                <dd class="pstat-value"><?= $avgScore ?></dd>
+                <dt class="pstat-label">Score moyen</dt>
             </div>
             <div>
-                <div class="pstat-value"><?= $totalScore ?></div>
-                <div class="pstat-label">Total pts</div>
+                <dd class="pstat-value"><?= $totalScore ?></dd>
+                <dt class="pstat-label">Total pts</dt>
             </div>
             <div>
-                <div class="pstat-value">—</div>
-                <div class="pstat-label">Classement</div>
+                <dd class="pstat-value">—</dd>
+                <dt class="pstat-label">Classement</dt>
             </div>
-        </div>
-    </div>
+        </dl>
+    </section>
 
     <!-- History -->
     <div class="profile-content">
-        <div class="profile-section">
-            <h3>Historique des parties</h3>
+        <section class="profile-section">
+            <h3>Historique</h3>
 
             <?php if (empty($history)): ?>
                 <div class="alert alert-info">
@@ -75,12 +75,12 @@
                     </table>
                 </div>
             <?php endif; ?>
-        </div>
+        </section>
     </div>
 
     <!-- Bottom actions -->
-    <div class="profile-actions">
+    <p class="profile-actions">
         <a href="<?= BASE_URL ?>/auth?action=logout" class="btn-danger">Déconnexion</a>
-    </div>
+    </p>
 
-</div>
+</section>
