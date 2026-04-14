@@ -3,6 +3,69 @@
    Burger menu
    ============================================================ */
 
+/* ── Musique de fond (global) ────────────────────────────── */
+(function () {
+  const audio = document.getElementById("bgMusic");
+  const btn = document.getElementById("musicBtn");
+  if (!audio || !btn) return;
+
+  const PLAYING_KEY = "musicPlaying";
+  const wantsPlay = sessionStorage.getItem(PLAYING_KEY) === "true";
+
+  function showOn() {
+    btn.classList.remove("music-btn--off");
+    btn.setAttribute("aria-label", "Couper la musique");
+  }
+
+  function showOff() {
+    btn.classList.add("music-btn--off");
+    btn.setAttribute("aria-label", "Activer la musique");
+  }
+
+  function setPlaying(playing) {
+    if (playing) {
+      audio
+        .play()
+        .then(() => {
+          showOn();
+          sessionStorage.setItem(PLAYING_KEY, "true");
+        })
+        .catch(() => {
+          showOff();
+        });
+    } else {
+      audio.pause();
+      showOff();
+      sessionStorage.setItem(PLAYING_KEY, "false");
+    }
+  }
+
+  if (wantsPlay) {
+    setPlaying(true);
+  }
+
+  btn.addEventListener("click", () => {
+    setPlaying(audio.paused);
+  });
+
+  // Ancrage au-dessus du footer
+  const footer = document.querySelector("footer");
+  const BASE_BOTTOM = 32;
+
+  function updateMusicBtnBottom() {
+    if (!footer) return;
+    const footerTop = footer.getBoundingClientRect().top;
+    const viewH = window.innerHeight;
+    btn.style.bottom =
+      footerTop < viewH
+        ? viewH - footerTop + BASE_BOTTOM + "px"
+        : BASE_BOTTOM + "px";
+  }
+
+  window.addEventListener("scroll", updateMusicBtnBottom, { passive: true });
+  updateMusicBtnBottom();
+})();
+
 /* ── Burger menu ─────────────────────────────────────────── */
 (function () {
   const burger = document.getElementById("burgerBtn");
@@ -150,4 +213,3 @@
     count.textContent = ta.value.length;
   });
 })();
-

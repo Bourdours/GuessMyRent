@@ -61,6 +61,7 @@ class GameController extends BaseController
             'score'      => $score,
             'gap'        => round($gap, 1),
             'csrf_token' => $_SESSION['csrf_token'],
+            'pageScript' => BASE_URL . '/public/js/game.js',
         ]);
     }
 }

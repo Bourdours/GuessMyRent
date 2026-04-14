@@ -1,21 +1,24 @@
-const range = document.getElementById('guessRange');
-const display = document.getElementById('guessValue');
+(function () {
+  const range = document.getElementById('guessRange');
+  const display = document.getElementById('guessValue');
+  if (!range || !display) return;
 
-function formatValue(v) {
-  return parseInt(v).toLocaleString('fr-FR');
-}
+  function formatValue(v) {
+    return parseInt(v).toLocaleString('fr-FR');
+  }
 
-function updateSlider() {
-  const min = +range.min,
-    max = +range.max,
-    val = +range.value;
-  const pct = ((val - min) / (max - min) * 100).toFixed(1) + '%';
-  range.style.setProperty('--pct', pct);
-  display.textContent = formatValue(val);
-}
+  function updateSlider() {
+    const min = +range.min,
+      max = +range.max,
+      val = +range.value;
+    const pct = ((val - min) / (max - min) * 100).toFixed(1) + '%';
+    range.style.setProperty('--pct', pct);
+    display.textContent = formatValue(val);
+  }
 
-range.addEventListener('input', updateSlider);
-updateSlider();
+  range.addEventListener('input', updateSlider);
+  updateSlider();
+})();
 
 function switchPhoto(btn, src) {
   document.getElementById('mainPhoto').src = src;

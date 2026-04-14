@@ -314,6 +314,54 @@ footer {
   }
 }
 
+// ── Bouton musique flottant ──────────────────────────────────
+.music-btn {
+  @include flex-center;
+  position: fixed;
+  bottom: $r-xl;
+  right: $r-xl;
+  z-index: 900;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: $c-purple;
+  color: $c-white;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 16px rgba($c-navy, 0.3);
+  transition:
+    background 0.2s,
+    transform 0.15s;
+
+  &:hover {
+    background: $c-purple-dk;
+    transform: scale(1.08);
+  }
+
+  &--off {
+    background: rgba($c-navy, 0.35);
+
+    i::before {
+      content: "\f6a9";
+    }
+
+    i {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -2px;
+        right: -2px;
+        height: 2px;
+        background: $c-white;
+        transform: rotate(-45deg);
+        border-radius: 2px;
+      }
+    }
+  }
+}
+
 // ── Form Fields ──────────────────────────────────────────────
 .form-group {
   display: flex;
@@ -893,9 +941,7 @@ footer {
   background: rgba($c-navy, 0.55);
   backdrop-filter: blur(4px);
   color: $c-white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
   transition:
     background 0.15s,
     transform 0.1s;
@@ -991,7 +1037,7 @@ footer {
     color: rgba($c-navy, 0.7);
     line-height: 1.7;
     margin-bottom: 12px;
-    iframe{
+    iframe {
       margin-top: 12px;
     }
   }
@@ -1054,7 +1100,7 @@ footer {
 }
 .video {
   width: 100%;
- @include background-card;
+  @include background-card;
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -1379,7 +1425,7 @@ footer {
 //   GAME PAGE
 // ═══════════════════════════════════════════════════════════════
 .game-page {
-  @include page-body(95%);
+  @include page-body(100%);
 }
 
 .game-empty {
@@ -1443,9 +1489,7 @@ footer {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
   font-size: 0.9rem;
   opacity: 0;
   transition: opacity 0.2s;
@@ -1458,9 +1502,7 @@ footer {
   inset: 0;
   z-index: 1000;
   background: rgba($c-navy, 0.92);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
   padding: $r-lg;
   opacity: 0;
   pointer-events: none;
@@ -1489,9 +1531,7 @@ footer {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
   font-size: 1.1rem;
   transition: background 0.15s;
 
