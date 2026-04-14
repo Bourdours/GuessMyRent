@@ -496,7 +496,6 @@ footer a:hover {
 }
 
 .hero {
-  background: #1b0140;
   background: linear-gradient(180deg, rgb(27, 1, 64) 0%, rgb(44, 10, 86) 37%, rgb(51, 14, 95) 52%, rgb(83, 33, 138) 87%, rgb(105, 45, 166) 100%);
   color: #ffffff;
   text-align: center;
@@ -982,6 +981,9 @@ footer a:hover {
   color: rgba(27, 1, 64, 0.7);
   line-height: 1.7;
   margin-bottom: 12px;
+}
+.info-page p iframe {
+  margin-top: 12px;
 }
 .info-page a {
   color: #692DA6;

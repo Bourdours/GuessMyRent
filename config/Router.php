@@ -1,5 +1,7 @@
 <?php
+
 namespace Config;
+
 use GmR\controller\EstateController;
 use GmR\controller\GameController;
 use GmR\controller\MessageController;
@@ -73,6 +75,10 @@ class Router
 
             case '/admin/utilisateurs':
                 (new UserController())->adminList();
+                break;
+
+            case '/admin/api':
+                (new UserController())->adminApi();
                 break;
 
             default:

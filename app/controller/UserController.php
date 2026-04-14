@@ -202,4 +202,8 @@ class UserController extends BaseController
             'stats'     => $stats,
         ]);
     }
+
+    public function adminApi(){
+        $this->render(V_ADMIN . 'v_admin_api.html.php');
+    }
 }

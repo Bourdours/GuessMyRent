@@ -3,9 +3,10 @@
   <!-- Sidebar -->
   <aside class="admin-sidebar">
     <div class="admin-sidebar-section">
-      <div class="section-label">Contenu</div>
       <a href="<?= BASE_URL ?>/admin" class="active">Dashboard</a>
+      <div class="section-label">Contenu</div>
       <a href="<?= BASE_URL ?>/admin/biens">Biens</a>
+      <a href="<?= BASE_URL ?>/admin/api">Biens de l'api</a>
     </div>
     <div class="admin-sidebar-section">
       <div class="section-label">Utilisateurs</div>
@@ -53,6 +54,7 @@
       <div class="admin-table-btn-group">
         <a href="<?= BASE_URL ?>/admin/biens" class="btn-primary">Gérer les biens</a>
         <a href="<?= BASE_URL ?>/admin/utilisateurs" class="btn-secondary">Gérer les utilisateurs</a>
+        <a href="<?= BASE_URL ?>/admin/api" class="btn-secondary">Ajouter des biens depuis l'api</a>
       </div>
     </div>
 

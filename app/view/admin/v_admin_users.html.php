@@ -3,9 +3,11 @@
   <!-- Sidebar -->
   <aside class="admin-sidebar">
     <div class="admin-sidebar-section">
-      <div class="section-label">Contenu</div>
       <a href="<?= BASE_URL ?>/admin">Dashboard</a>
+      <div class="section-label">Contenu</div>
       <a href="<?= BASE_URL ?>/admin/biens">Biens</a>
+      <a href="<?= BASE_URL ?>/admin/api">Biens de l'api</a>
+
     </div>
     <div class="admin-sidebar-section">
       <div class="section-label">Utilisateurs</div>
@@ -68,10 +70,10 @@
                   <td>
                     <?php if ((int)$u['id_user'] !== (int)$_SESSION['user_id']): ?>
                       <form method="POST" action="<?= BASE_URL ?>/admin/utilisateurs" class="form-inline"
-                            onsubmit="return confirm('Supprimer définitivement cet utilisateur ?')">
+                        onsubmit="return confirm('Supprimer définitivement cet utilisateur ?')">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-                        <input type="hidden" name="user_id"   value="<?= (int)$u['id_user'] ?>">
-                        <input type="hidden" name="action"    value="delete">
+                        <input type="hidden" name="user_id" value="<?= (int)$u['id_user'] ?>">
+                        <input type="hidden" name="action" value="delete">
                         <button type="submit" class="btn-danger">Supprimer</button>
                       </form>
                     <?php else: ?>

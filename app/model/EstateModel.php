@@ -23,15 +23,6 @@ class EstateModel extends Model
         )->fetchAll();
     }
 
-    // public function findById(int $id): array|false
-    // {
-    //     $query = $this->executeQueryWithBind(
-    //         'SELECT * FROM ESTATE WHERE id _estate = :id LIMIT 1',
-    //         ['id' => $id]
-    //     );
-    //     return $query->fetch();
-    // }
-
     public function findByUser(int $userId): array
     {
         return $this->executeQueryWithBind(
@@ -173,11 +164,4 @@ class EstateModel extends Model
         return (int) self::connect()->lastInsertId();
     }
 
-    // public function delete(int $id): bool
-    // {
-    //     return $this->executeQueryWithBind(
-    //         'DELETE FROM ESTATE WHERE id_estate = :id',
-    //         ['id' => $id]
-    //     )->rowCount() > 0;
-    // }
 }

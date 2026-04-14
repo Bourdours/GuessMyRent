@@ -3,9 +3,11 @@
   <!-- Sidebar -->
   <aside class="admin-sidebar">
     <div class="admin-sidebar-section">
-      <div class="section-label">Contenu</div>
       <a href="<?= BASE_URL ?>/admin">Dashboard</a>
+      <div class="section-label">Contenu</div>
       <a href="<?= BASE_URL ?>/admin/biens" class="active">Biens</a>
+      <a href="<?= BASE_URL ?>/admin/api">Biens de l'api</a>
+
     </div>
     <div class="admin-sidebar-section">
       <div class="section-label">Utilisateurs</div>
@@ -79,31 +81,31 @@
                     <?php if ((int)$e['id_status'] !== 2): ?>
                       <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-                        <input type="hidden" name="estate_id"  value="<?= (int)$e['id_estate'] ?>">
-                        <input type="hidden" name="action"     value="activate">
+                        <input type="hidden" name="estate_id" value="<?= (int)$e['id_estate'] ?>">
+                        <input type="hidden" name="action" value="activate">
                         <button type="submit" class="btn-primary btn-sm">Activer</button>
                       </form>
                     <?php else: ?>
                       <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-                        <input type="hidden" name="estate_id"  value="<?= (int)$e['id_estate'] ?>">
-                        <input type="hidden" name="action"     value="deactivate">
+                        <input type="hidden" name="estate_id" value="<?= (int)$e['id_estate'] ?>">
+                        <input type="hidden" name="action" value="deactivate">
                         <button type="submit" class="btn-danger btn-sm">Désactiver</button>
                       </form>
                     <?php endif; ?>
                     <?php if ((int)$e['id_status'] !== 3): ?>
                       <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-                        <input type="hidden" name="estate_id"  value="<?= (int)$e['id_estate'] ?>">
-                        <input type="hidden" name="action"     value="archive">
+                        <input type="hidden" name="estate_id" value="<?= (int)$e['id_estate'] ?>">
+                        <input type="hidden" name="action" value="archive">
                         <button type="submit" class="btn-secondary btn-sm">Archiver</button>
                       </form>
                     <?php endif; ?>
                     <?php if ((int)$e['id_status'] !== 4): ?>
                       <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-                        <input type="hidden" name="estate_id"  value="<?= (int)$e['id_estate'] ?>">
-                        <input type="hidden" name="action"     value="correction">
+                        <input type="hidden" name="estate_id" value="<?= (int)$e['id_estate'] ?>">
+                        <input type="hidden" name="action" value="correction">
                         <button type="submit" class="btn-secondary btn-sm">Correction</button>
                       </form>
                     <?php endif; ?>
