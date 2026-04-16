@@ -63,10 +63,10 @@
                             ?>
                                 <tr>
                                     <td><?= htmlspecialchars(date('d/m/Y', strtotime($game['date']))) ?></td>
-                                    <td><?= htmlspecialchars($game['city']) ?></td>
-                                    <td><?= htmlspecialchars($game['square_meters']) ?> m²</td>
+                                    <td><?= $game['city'] ? htmlspecialchars($game['city']) : '<em>Bien supprimé</em>' ?></td>
+                                    <td><?= $game['square_meters'] ? htmlspecialchars($game['square_meters']) . ' m²' : '—' ?></td>
                                     <td><?= number_format((int)$game['guess'], 0, ',', ' ') ?> €</td>
-                                    <td><?= number_format((int)$game['rent'], 0, ',', ' ') ?> €</td>
+                                    <td><?= $game['rent'] ? number_format((int)$game['rent'], 0, ',', ' ') . ' €' : '—' ?></td>
                                     <td><span class="pill <?= $pillCls ?>"><?= number_format($gap, 1) ?> %</span></td>
                                     <td><strong><?= (int)$game['game_result'] ?> pts</strong></td>
                                 </tr>

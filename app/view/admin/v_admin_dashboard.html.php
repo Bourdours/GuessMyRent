@@ -1,24 +1,6 @@
 <div class="admin-layout">
 
-  <!-- Sidebar -->
-  <aside class="admin-sidebar">
-    <nav class="admin-sidebar-section" aria-label="Menu Admin">
-      <a href="<?= BASE_URL ?>/admin" class="active">Dashboard</a>
-    </nav>
-    <nav class="admin-sidebar-section" aria-label="Contenu">
-      <p class="section-label">Contenu</p>
-      <a href="<?= BASE_URL ?>/admin/biens">Biens</a>
-      <a href="<?= BASE_URL ?>/admin/api">Biens de l'api</a>
-    </nav>
-    <nav class="admin-sidebar-section" aria-label="Utilisateurs">
-      <p class="section-label">Utilisateurs</p>
-      <a href="<?= BASE_URL ?>/admin/utilisateurs">Utilisateurs</a>
-    </nav>
-    <nav class="admin-sidebar-section" aria-label="Navigation retour">
-      <p class="section-label">Navigation</p>
-      <a href="<?= BASE_URL ?>/">← Retour au site</a>
-    </nav>
-  </aside>
+  <?php require __DIR__ . '/v_admin_sidebar.html.php'; ?>
 
   <!-- Main -->
   <section class="admin-main">
@@ -62,9 +44,10 @@
         <h2>Accès rapides</h2>
       </header>
       <nav class="admin-table-btn-group" aria-label="Accès rapides">
-        <a href="<?= BASE_URL ?>/admin/biens" class="btn-primary">Gérer les biens</a>
-        <a href="<?= BASE_URL ?>/admin/utilisateurs" class="btn-secondary">Gérer les utilisateurs</a>
+        <a href="<?= BASE_URL ?>/admin/biens/en-attente" class="btn-primary">Gérer les biens en attente</a>
         <a href="<?= BASE_URL ?>/admin/api" class="btn-secondary">Ajouter des biens depuis l'api</a>
+        <a href="<?= BASE_URL ?>/admin/biens" class="btn-secondary">Gérer les biens</a>
+        <a href="<?= BASE_URL ?>/admin/utilisateurs" class="btn-secondary">Gérer les utilisateurs</a>
       </nav>
     </section>
 

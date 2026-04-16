@@ -19,7 +19,7 @@ class GameController extends BaseController
         $estate      = $estateModel->findRandomActive();
         $avgRent     = $estateModel->avgRent();
 
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        $this->refreshCsrf();
 
         $this->render(V_GAME . 'v_game.html.php', [
             'pageTitle'  => 'Jouer',
@@ -30,12 +30,37 @@ class GameController extends BaseController
         ]);
     }
 
+    public function adminList(): void
+    {
+        $this->requireAdmin();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCsrf();
+
+            $action = $_POST['action'] ?? '';
+            $gameId = (int) ($_POST['game_id'] ?? 0);
+
+            if ($action === 'delete' && $gameId > 0) {
+                (new GameModel())->deleteToVoid($gameId);
+            }
+
+            header('Location: ' . BASE_URL . '/admin/parties');
+            exit;
+        }
+
+        $this->refreshCsrf();
+
+        $this->render(V_ADMIN . 'v_admin_games.html.php', [
+            'pageTitle'  => 'Gestion des parties - Admin',
+            'games'      => (new GameModel())->findJoinedAll(),
+            'csrf_token' => $_SESSION['csrf_token'],
+            'pageScript' => BASE_URL . '/public/js/admin.js',
+        ]);
+    }
+
     private function handleGuess(): void
     {
-        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
-            http_response_code(403);
-            die('Requête invalide.');
-        }
+        $this->validateCsrf();
 
         $guess    = (int) ($_POST['guess'] ?? 0);
         $estateId = (int) ($_POST['estate_id'] ?? 0);
@@ -57,7 +82,7 @@ class GameController extends BaseController
         $userId = $_SESSION['user_id'] ?? null;
         (new GameModel())->create($guess, $score, $estateId, $userId);
 
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        $this->refreshCsrf();
 
         $this->render(V_GAME . 'v_game_result.html.php', [
             'pageTitle'  => 'Résultat',

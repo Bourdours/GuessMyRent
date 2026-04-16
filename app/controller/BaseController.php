@@ -20,6 +20,19 @@ abstract class BaseController
         }
     }
 
+    protected function validateCsrf(): void
+    {
+        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
+            http_response_code(403);
+            die('Requête invalide.');
+        }
+    }
+
+    protected function refreshCsrf(): void
+    {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
     protected function render(string $view, array $data = []): void
     {
         extract($data);

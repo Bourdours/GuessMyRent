@@ -486,15 +486,15 @@ footer a:hover {
   color: #8C2020;
 }
 
+.pill-purple {
+  background: rgba(105, 45, 166, 0.12);
+  color: #692DA6;
+}
+
 .pill-gold {
   background: rgba(242, 176, 94, 0.15);
   color: #633806;
   border: 1px solid rgba(242, 176, 94, 0.3);
-}
-
-.pill-purple {
-  background: rgba(105, 45, 166, 0.12);
-  color: #692DA6;
 }
 
 .text-center {
@@ -1224,6 +1224,7 @@ footer a:hover {
 }
 
 .admin-table-wrap {
+  margin-top: 16px;
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 0 2px 10px rgba(27, 1, 64, 0.06);
@@ -1304,6 +1305,242 @@ footer a:hover {
 .admin-self-label {
   font-size: 0.8rem;
   color: rgba(27, 1, 64, 0.4);
+}
+
+.estate-table tbody tr,
+.depose-table tbody tr {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.estate-table tbody tr:hover,
+.depose-table tbody tr:hover {
+  background: rgba(105, 45, 166, 0.06);
+}
+.estate-table tbody tr.selected,
+.depose-table tbody tr.selected {
+  background: rgba(105, 45, 166, 0.1);
+  outline: 2px solid #692DA6;
+  outline-offset: -2px;
+}
+
+.depose-detail-grid,
+.edit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.depose-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.depose-field-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(27, 1, 64, 0.5);
+}
+
+.depose-field-value {
+  font-size: 0.95rem;
+  color: #1B0140;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.depose-description {
+  grid-column: 1/-1;
+}
+
+.depose-images-section h3,
+.api-images-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: #1B0140;
+}
+
+.depose-images-section {
+  padding: 0 1.5rem 1.25rem;
+}
+
+.depose-img-grid,
+.api-img-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.depose-img-card {
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.depose-img-card img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+
+.depose-img-placeholder {
+  aspect-ratio: 4/3;
+  background: #f3f4f6;
+  border: 1px dashed #d1d5db;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.depose-actions {
+  padding: 1rem 1.5rem 1.5rem;
+  display: flex;
+  gap: 1rem;
+  border-top: 1px solid rgba(27, 1, 64, 0.08);
+  flex-wrap: wrap;
+}
+
+.edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.edit-field label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(27, 1, 64, 0.5);
+}
+
+.edit-field-full {
+  grid-column: 1/-1;
+}
+
+.api-fetch-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.api-fetch-bar button {
+  margin: 16px;
+}
+
+.api-status {
+  font-size: 0.875rem;
+  color: rgba(27, 1, 64, 0.5);
+  margin: 0;
+}
+
+.api-select-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.api-select {
+  flex: 1;
+  max-width: 560px;
+  margin: 8px;
+}
+
+.api-mapping-table td {
+  vertical-align: middle;
+}
+.api-mapping-table .field-label {
+  font-weight: 600;
+  white-space: nowrap;
+  color: #1B0140;
+  width: 120px;
+}
+.api-mapping-table .api-raw {
+  font-style: italic;
+  color: rgba(27, 1, 64, 0.5);
+  font-size: 0.875rem;
+  max-width: 240px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.field-with-unit {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.field-with-unit span {
+  font-size: 0.9rem;
+  color: rgba(27, 1, 64, 0.5);
+  white-space: nowrap;
+}
+.field-with-unit .form-input {
+  flex: 1;
+}
+
+.api-images-section {
+  margin: 1.5rem;
+}
+
+.api-img-card {
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.api-img-card img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+.api-img-card {
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.api-img-card.excluded {
+  opacity: 0.35;
+  border-color: #e5e7eb;
+}
+
+.api-img-card-footer {
+  padding: 0.45rem 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #ffffff;
+  font-size: 0.8rem;
+  color: #1B0140;
+  border-top: 1px solid #d1d5db;
+}
+.api-img-card-footer input[type=checkbox] {
+  cursor: pointer;
+  accent-color: #692DA6;
+}
+.api-img-card-footer label {
+  cursor: pointer;
+  user-select: none;
+}
+
+.api-img-placeholder {
+  aspect-ratio: 4/3;
+  background: #f3f4f6;
+  border: 1px dashed #d1d5db;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.api-actions {
+  margin-top: 1.5rem;
 }
 
 .profile-main {

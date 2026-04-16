@@ -7,18 +7,13 @@ use GmR\model\MessageModel;
 
 class MessageController extends BaseController
 {
-    // GET : affiche le formulaire de contact
-    // POST : envoie un message
+
     public function contact(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
-                http_response_code(403);
-                die('Requête invalide.');
-            }
-
+            $this->validateCsrf();
             $result = $this->handleContact();
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+            $this->refreshCsrf();
             $this->render(V_CONTACT . 'v_contact.html.php', array_merge(
                 ['pageTitle' => 'Contact', 'csrf_token' => $_SESSION['csrf_token'], 'activeTab' => 'message'],
                 $result
@@ -27,11 +22,39 @@ class MessageController extends BaseController
         }
 
         $activeTab = $_GET['tab'] ?? 'message';
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        $this->refreshCsrf();
         $this->render(V_CONTACT . 'v_contact.html.php', [
             'pageTitle'  => 'Contact',
             'csrf_token' => $_SESSION['csrf_token'],
             'activeTab'  => $activeTab,
+        ]);
+    }
+
+    public function adminMessage(): void
+    {
+        $this->requireAdmin();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCsrf();
+
+            $action = $_POST['action'] ?? '';
+            $messageId = (int) ($_POST['message_id'] ?? 0);
+
+            if ($action === 'delete' && $messageId > 0) {
+                (new MessageModel())->deleteByUser($messageId);
+            }
+
+            header('Location: ' . BASE_URL . '/admin/messagerie');
+            exit;
+        }
+
+        $this->refreshCsrf();
+
+        $this->render(V_ADMIN . 'v_admin_message.html.php', [
+            'pageTitle' => 'Gestion des messages - Admin',
+            'message' => (new MessageModel())->findAll(['id_message', 'email', 'content', 'id_user']),
+            'csrf_token' => $_SESSION['csrf_token'],
+            'pageScript' => BASE_URL . '/public/js/admin.js',
         ]);
     }
 

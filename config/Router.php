@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use GmR\controller\ApiController;
 use GmR\controller\EstateController;
 use GmR\controller\GameController;
 use GmR\controller\MessageController;
@@ -73,12 +74,24 @@ class Router
                 (new EstateController())->adminList();
                 break;
 
+            case '/admin/biens/en-attente':
+                (new EstateController())->adminSent();
+                break;
+
+            case '/admin/parties':
+                (new GameController())->adminList();
+                break;
+
             case '/admin/utilisateurs':
                 (new UserController())->adminList();
                 break;
 
             case '/admin/api':
-                (new UserController())->adminApi();
+                (new ApiController())->adminApi();
+                break;
+
+            case '/admin/messagerie':
+                (new MessageController())->adminMessage();
                 break;
 
             default:

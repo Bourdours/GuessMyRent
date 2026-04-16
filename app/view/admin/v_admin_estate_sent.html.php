@@ -6,7 +6,7 @@
   <section class="admin-main">
 
     <header class="admin-header-bar">
-      <h1>Gestion des biens</h1>
+      <h1>Biens déposés — en attente de validation</h1>
     </header>
 
     <?php require V_SKELETON . 'v_alerts.html.php'; ?>
@@ -14,14 +14,14 @@
     <!-- Étape 1 : sélectionner un bien -->
     <section class="admin-table-wrap">
       <header class="admin-table-header">
-        <h2>Étape 1 — Sélectionner un bien <span class="pill pill-purple"><?= count($estates ?? []) ?></span></h2>
+        <h2>Étape 1 — Sélectionner un bien <span class="pill pill-amber"><?= count($estates ?? []) ?></span></h2>
       </header>
 
       <?php if (empty($estates)): ?>
-        <p class="admin-empty-state">Aucun bien enregistré.</p>
+        <p class="admin-empty-state">Aucun bien en attente de validation.</p>
       <?php else: ?>
         <div class="table-overflow">
-          <table class="admin-table estate-table">
+          <table class="admin-table depose-table">
             <thead>
               <tr>
                 <th>ID</th>
@@ -29,8 +29,6 @@
                 <th>Surface</th>
                 <th>Loyer</th>
                 <th>Type</th>
-                <th>Statut</th>
-                <th>Action rapide</th>
               </tr>
             </thead>
             <tbody>
@@ -41,51 +39,6 @@
                   <td><?= htmlspecialchars($e['square_meters']) ?> m²</td>
                   <td><?= number_format((int)$e['rent'], 0, ',', ' ') ?> €</td>
                   <td><?= htmlspecialchars($e['type_label']) ?></td>
-                  <td>
-                    <?php if ((int)$e['id_status'] === 1): ?>
-                      <span class="pill pill-amber">Déposé</span>
-                    <?php elseif ((int)$e['id_status'] === 2): ?>
-                      <span class="pill pill-green">Jouable</span>
-                    <?php elseif ((int)$e['id_status'] === 3): ?>
-                      <span class="pill pill-gold">Archivé</span>
-                    <?php elseif ((int)$e['id_status'] === 4): ?>
-                      <span class="pill pill-purple">Correction</span>
-                    <?php else: ?>
-                      <span class="pill pill-gold">Inactif</span>
-                    <?php endif; ?>
-                  </td>
-                  <td class="td-actions" onclick="event.stopPropagation()">
-                    <?php if ((int)$e['id_status'] !== 2): ?>
-                      <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline">
-                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-                        <input type="hidden" name="estate_id" value="<?= (int)$e['id_estate'] ?>">
-                        <input type="hidden" name="action" value="activate">
-                        <button type="submit" class="btn-primary btn-sm">Activer</button>
-                      </form>
-                    <?php else: ?>
-                      <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline">
-                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-                        <input type="hidden" name="estate_id" value="<?= (int)$e['id_estate'] ?>">
-                        <input type="hidden" name="action" value="deactivate">
-                        <button type="submit" class="btn-danger btn-sm">Désactiver</button>
-                      </form>
-                    <?php endif; ?>
-                    <?php if ((int)$e['id_status'] !== 3): ?>
-                      <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline">
-                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-                        <input type="hidden" name="estate_id" value="<?= (int)$e['id_estate'] ?>">
-                        <input type="hidden" name="action" value="archive">
-                        <button type="submit" class="btn-secondary btn-sm">Archiver</button>
-                      </form>
-                    <?php endif; ?>
-                    <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline"
-                          onsubmit="return confirm('Supprimer définitivement ce bien ?')">
-                      <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-                      <input type="hidden" name="estate_id" value="<?= (int)$e['id_estate'] ?>">
-                      <input type="hidden" name="action" value="delete">
-                      <button type="submit" class="btn-danger btn-sm">Supprimer</button>
-                    </form>
-                  </td>
                 </tr>
               <?php endforeach; ?>
             </tbody>
@@ -104,10 +57,6 @@
         <div class="depose-field">
           <span class="depose-field-label">Type</span>
           <span class="depose-field-value" id="det-type">—</span>
-        </div>
-        <div class="depose-field">
-          <span class="depose-field-label">Statut actuel</span>
-          <span class="depose-field-value" id="det-status">—</span>
         </div>
         <div class="depose-field">
           <span class="depose-field-label">Loyer</span>
@@ -157,36 +106,25 @@
       </div>
 
       <div class="depose-actions">
-        <!-- Activer : visible si statut !== Jouable (2) -->
-        <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline" id="form-activate" style="display:none;">
+        <form method="POST" action="<?= BASE_URL ?>/admin/biens/en-attente" class="form-inline">
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-          <input type="hidden" name="estate_id" id="act-id-activate" value="">
+          <input type="hidden" name="estate_id" id="act-estate-id" value="">
           <input type="hidden" name="action" value="activate">
           <button type="submit" class="btn-primary">Activer</button>
         </form>
-        <!-- Désactiver : visible si statut === Jouable (2) -->
-        <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline" id="form-deactivate" style="display:none;">
+        <div>
+          <button type="button" class="btn-secondary" onclick="openEditForm()">Corriger</button>
+        </div>
+        <form method="POST" action="<?= BASE_URL ?>/admin/biens/en-attente" class="form-inline">
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-          <input type="hidden" name="estate_id" id="act-id-deactivate" value="">
-          <input type="hidden" name="action" value="deactivate">
-          <button type="submit" class="btn-danger">Désactiver</button>
-        </form>
-        <!-- Archiver : visible si statut !== Archivé (3) -->
-        <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline" id="form-archive" style="display:none;">
-          <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-          <input type="hidden" name="estate_id" id="act-id-archive" value="">
+          <input type="hidden" name="estate_id" id="act-estate-id-archive" value="">
           <input type="hidden" name="action" value="archive">
           <button type="submit" class="btn-secondary">Archiver</button>
         </form>
-        <!-- Correction : ouvre le formulaire d'édition (Étape 3) -->
-        <div id="form-correction" style="display:none;">
-          <button type="button" class="btn-secondary" onclick="openEditForm()">Correction</button>
-        </div>
-        <!-- Supprimer : toujours visible -->
-        <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline" id="form-delete"
-              onsubmit="return confirm('Supprimer définitivement ce bien ?')" style="display:none;">
+        <form method="POST" action="<?= BASE_URL ?>/admin/biens/en-attente" class="form-inline"
+              onsubmit="return confirm('Supprimer définitivement ce bien ?')">
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
-          <input type="hidden" name="estate_id" id="act-id-delete" value="">
+          <input type="hidden" name="estate_id" id="act-estate-id-delete" value="">
           <input type="hidden" name="action" value="delete">
           <button type="submit" class="btn-danger">Supprimer</button>
         </form>
@@ -200,22 +138,19 @@
         <h2>Étape 3 — Modifier le bien</h2>
       </header>
 
-      <form method="POST" action="<?= BASE_URL ?>/admin/biens" enctype="multipart/form-data">
+      <form method="POST" action="<?= BASE_URL ?>/admin/biens/en-attente" enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
         <input type="hidden" name="action" value="update">
         <input type="hidden" name="estate_id" id="edit-estate-id" value="">
         <input type="hidden" name="id_status" id="edit-id-status" value="">
-        <!-- Valeurs courantes (vidées par JS si suppression) -->
         <input type="hidden" name="image1" id="edit-img1" value="">
         <input type="hidden" name="image2" id="edit-img2" value="">
         <input type="hidden" name="image3" id="edit-img3" value="">
         <input type="hidden" name="image4" id="edit-img4" value="">
-        <!-- Valeurs originales (pour suppression du fichier côté serveur) -->
         <input type="hidden" name="old_image1" id="edit-old-img1" value="">
         <input type="hidden" name="old_image2" id="edit-old-img2" value="">
         <input type="hidden" name="old_image3" id="edit-old-img3" value="">
         <input type="hidden" name="old_image4" id="edit-old-img4" value="">
-        <!-- Fichiers de remplacement -->
         <input type="file" name="new_image1" id="edit-new-img1" accept="image/jpeg,image/png,image/webp" style="display:none">
         <input type="file" name="new_image2" id="edit-new-img2" accept="image/jpeg,image/png,image/webp" style="display:none">
         <input type="file" name="new_image3" id="edit-new-img3" accept="image/jpeg,image/png,image/webp" style="display:none">
@@ -290,7 +225,7 @@
 </div>
 
 <div id="admin-data" hidden
-  data-page="estate-list"
+  data-page="estate-sent"
   data-estates="<?= htmlspecialchars(json_encode(array_values($estates ?? []), JSON_HEX_TAG)) ?>"
   data-base-url="<?= htmlspecialchars(BASE_URL) ?>"
 ></div>

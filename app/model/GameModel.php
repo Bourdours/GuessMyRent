@@ -44,7 +44,7 @@ class GameModel extends Model
             'SELECT g.id_game, g.guess, g.game_result, g.date,
                     e.city, e.square_meters, e.rent, e.image1
              FROM GAME g
-             JOIN ESTATE e ON g.id_estate = e.id_estate
+             LEFT JOIN ESTATE e ON g.id_estate = e.id_estate
              WHERE g.id_user = :id_user
              ORDER BY g.date DESC',
             ['id_user' => $userId]
@@ -62,6 +62,18 @@ class GameModel extends Model
             'SELECT AVG(game_result) FROM GAME WHERE game_result IS NOT NULL'
         )->fetchColumn();
         return $avg !== false ? (int) round($avg) : 0;
+    }
+
+    public function findJoinedAll(): array
+    {
+        return $this->executeQuery(
+            'SELECT g.id_game, g.guess, g.game_result, g.date,
+                    u.pseudo, e.city
+             FROM GAME g
+             LEFT JOIN USER u    ON g.id_user    = u.id_user
+             LEFT JOIN ESTATE e  ON g.id_estate  = e.id_estate
+             ORDER BY g.date DESC'
+        )->fetchAll();
     }
 
     // Supprime toutes les parties d'un utilisateur

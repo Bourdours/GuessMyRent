@@ -5,12 +5,7 @@
     <p>Une question, un problème ou un bien à nous proposer ?</p>
   </div>
 
-  <?php if (!empty($success)): ?>
-    <div class="alert alert-success mb-lg" role="status"><?= htmlspecialchars($success) ?></div>
-  <?php endif; ?>
-  <?php if (!empty($error)): ?>
-    <div class="alert alert-error mb-lg" role="alert"><?= htmlspecialchars($error) ?></div>
-  <?php endif; ?>
+  <?php $alertMargin = 'mb-lg'; require V_SKELETON . 'v_alerts.html.php'; ?>
 
   <!-- Tabs -->
   <div class="contact-tabs" role="tablist">

@@ -76,8 +76,37 @@ class UserModel extends Model
         )->rowCount() > 0;
     }
 
+    public function adminUpdate(int $id, string $email, string $pseudo, ?string $avatar, bool $isAdmin, ?string $hashedPassword): bool
+    {
+        if ($hashedPassword !== null) {
+            return $this->executeQueryWithBind(
+                'UPDATE USER SET email = :email, pseudo = :pseudo, avatar = :avatar, is_admin = :is_admin, password = :password WHERE id_user = :id',
+                [
+                    'email'    => $email,
+                    'pseudo'   => $pseudo,
+                    'avatar'   => $avatar,
+                    'is_admin' => (int) $isAdmin,
+                    'password' => $hashedPassword,
+                    'id'       => $id,
+                ]
+            )->rowCount() > 0;
+        }
+
+        return $this->executeQueryWithBind(
+            'UPDATE USER SET email = :email, pseudo = :pseudo, avatar = :avatar, is_admin = :is_admin WHERE id_user = :id',
+            [
+                'email'    => $email,
+                'pseudo'   => $pseudo,
+                'avatar'   => $avatar,
+                'is_admin' => (int) $isAdmin,
+                'id'       => $id,
+            ]
+        )->rowCount() > 0;
+    }
+
     public function delete(int $id): void
     {
+        $this->executeQueryWithBind('UPDATE GAME SET id_user = NULL WHERE id_user = :id', ['id' => $id]);
         $this->executeQueryWithBind('UPDATE ESTATE SET id_user = NULL WHERE id_user = :id', ['id' => $id]);
         $this->executeQueryWithBind('UPDATE ESTATE_MODIFICATION SET id_user = NULL WHERE id_user = :id', ['id' => $id]);
         $this->executeQueryWithBind('DELETE FROM USER WHERE id_user = :id', ['id' => $id]);

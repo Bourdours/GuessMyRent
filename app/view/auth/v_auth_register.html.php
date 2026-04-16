@@ -13,9 +13,7 @@
       <a href="<?= BASE_URL ?>/auth?action=register" class="active" role="tab" aria-selected="true">Inscription</a>
     </div>
 
-    <?php if (!empty($error)): ?>
-      <div class="alert alert-error mb-md" role="alert"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
+    <?php require V_SKELETON . 'v_alerts.html.php'; ?>
 
     <form method="POST" action="<?= BASE_URL ?>/auth?action=register" class="auth-form" novalidate>
       <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">

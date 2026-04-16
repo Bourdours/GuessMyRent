@@ -20,10 +20,7 @@ class UserController extends BaseController
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
-                http_response_code(403);
-                die('Requête invalide.');
-            }
+            $this->validateCsrf();
             if ($action === 'register') {
                 $this->handleRegister();
             } else {
@@ -32,7 +29,7 @@ class UserController extends BaseController
             return;
         }
 
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        $this->refreshCsrf();
 
         if ($action === 'register') {
             $this->render(V_AUTH . 'v_auth_register.html.php', ['csrf_token' => $_SESSION['csrf_token'], 'pageTitle' => 'Inscription']);
@@ -50,7 +47,7 @@ class UserController extends BaseController
         $user     = $model->findByEmail($email);
 
         if (!$user || !password_verify($password, $user['password'])) {
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+            $this->refreshCsrf();
             $this->render(V_AUTH . 'v_auth.html.php', [
                 'csrf_token' => $_SESSION['csrf_token'],
                 'error'      => 'Email ou mot de passe incorrect.',
@@ -75,7 +72,7 @@ class UserController extends BaseController
         $pseudo   = trim($_POST['pseudo'] ?? '');
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 8 || $pseudo === '') {
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+            $this->refreshCsrf();
             $this->render(V_AUTH . 'v_auth_register.html.php', [
                 'csrf_token' => $_SESSION['csrf_token'],
                 'error'      => 'Données invalides. Email valide, pseudo et mot de passe (8 caractères min.) requis.',
@@ -91,7 +88,7 @@ class UserController extends BaseController
         try {
             $userId = $model->create($email, $hashed, $pseudo);
         } catch (RuntimeException) {
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+            $this->refreshCsrf();
             $this->render(V_AUTH . 'v_auth_register.html.php', [
                 'csrf_token' => $_SESSION['csrf_token'],
                 'error'      => 'Cet email est déjà utilisé.',
@@ -163,14 +160,22 @@ class UserController extends BaseController
         $this->requireAdmin();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
-                http_response_code(403);
-                die('Requête invalide.');
-            }
+            $this->validateCsrf();
 
             $action = $_POST['action'] ?? '';
             $userId = (int) ($_POST['user_id'] ?? 0);
             $model  = new UserModel();
+
+            if ($action === 'update' && $userId > 0) {
+                $email   = trim($_POST['email']   ?? '');
+                $pseudo  = trim($_POST['pseudo']  ?? '');
+                $avatar  = trim($_POST['avatar']  ?? '') ?: null;
+                $isAdmin = (bool) ($_POST['is_admin'] ?? false);
+                $newPwd  = $_POST['new_password'] ?? '';
+
+                $hashed = ($newPwd !== '') ? password_hash($newPwd, PASSWORD_DEFAULT) : null;
+                $model->adminUpdate($userId, $email, $pseudo, $avatar, $isAdmin, $hashed);
+            }
 
             // Empêche l'admin de se supprimer lui-même
             if ($action === 'delete' && $userId !== (int) $_SESSION['user_id']) {
@@ -181,12 +186,13 @@ class UserController extends BaseController
             exit;
         }
 
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        $this->refreshCsrf();
 
         $this->render(V_ADMIN . 'v_admin_users.html.php', [
             'pageTitle'  => 'Gestion des utilisateurs - Admin',
             'users'      => (new UserModel())->findAll(),
             'csrf_token' => $_SESSION['csrf_token'],
+            'pageScript' => BASE_URL . '/public/js/admin.js',
         ]);
     }
 
@@ -207,8 +213,4 @@ class UserController extends BaseController
         ]);
     }
 
-    public function adminApi()
-    {
-        $this->render(V_ADMIN . 'v_admin_api.html.php');
-    }
 }
