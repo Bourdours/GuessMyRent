@@ -35,6 +35,13 @@ abstract class BaseController
 
     protected function refreshCsrf(): void
     {
+        if (empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+    }
+
+    protected function regenerateCsrf(): void
+    {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     }
 
