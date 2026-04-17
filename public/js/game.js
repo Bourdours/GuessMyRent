@@ -18,6 +18,15 @@
 
   range.addEventListener('input', updateSlider);
   updateSlider();
+
+  function step(delta) {
+    const val = Math.min(+range.max, Math.max(+range.min, +range.value + delta));
+    range.value = val;
+    updateSlider();
+  }
+
+  document.getElementById('guessMinus').addEventListener('click', () => step(-10));
+  document.getElementById('guessPlus').addEventListener('click',  () => step(+10));
 })();
 
 function switchPhoto(btn, src) {

@@ -484,7 +484,7 @@ function selectUser(id) {
   setVal('uedit-email',   item.email   || '');
   setVal('uedit-avatar',  item.avatar  || '');
   setVal('uedit-password', '');
-  document.getElementById('uedit-role').value = item.is_admin ? '1' : '0';
+  document.getElementById('uedit-role').value = '0';
 
   const edit = document.getElementById('userEdit');
   edit.style.display = '';
@@ -536,7 +536,9 @@ function selectMessage(id) {
 
   setText('mdet-id',      item.id_message);
   setText('mdet-email',   item.email || 'Anonyme');
+  setText('mdet-objet',   item.objet || '—');
   setText('mdet-content', item.content || '—');
+  setText('mdet-user',    item.pseudo || 'Anonyme');
 
   document.getElementById('mact-id-delete').value = id;
 

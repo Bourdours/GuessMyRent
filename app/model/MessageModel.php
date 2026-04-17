@@ -12,6 +12,17 @@ class MessageModel extends Model
         $this->primaryKey = "id_message";
     }
 
+    public function findAllWithUser(): array
+    {
+        return $this->executeQueryWithBind(
+            'SELECT m.id_message, m.email, m.objet, m.content, m.id_user, u.pseudo
+             FROM MESSAGE m
+             LEFT JOIN USER u ON u.id_user = m.id_user
+             ORDER BY m.id_message DESC',
+            []
+        )->fetchAll();
+    }
+
     public function findByUser(int $userId): array
     {
         return $this->executeQueryWithBind(
@@ -23,12 +34,14 @@ class MessageModel extends Model
     public function create(
         string $email,
         string $content,
-        ?int $userId = null
+        ?int $userId = null,
+        ?string $objet = null
     ): int {
         $this->executeQueryWithBind(
-            'INSERT INTO MESSAGE (email, content, id_user) VALUES (:email, :content, :id_user)',
+            'INSERT INTO MESSAGE (email, objet, content, id_user) VALUES (:email, :objet, :content, :id_user)',
             [
-                'email' => $email,
+                'email'   => $email,
+                'objet'   => $objet,
                 'content' => $content,
                 'id_user' => $userId
             ]

@@ -42,9 +42,14 @@ class GameModel extends Model
     {
         return $this->executeQueryWithBind(
             'SELECT g.id_game, g.guess, g.game_result, g.date,
-                    e.city, e.square_meters, e.rent, e.image1
+                    e.id_estate, e.city, e.square_meters, e.rent,
+                    e.adress, e.postcode, e.description,
+                    e.room, e.chamber, e.floor, e.is_charges_included,
+                    e.image1, e.image2, e.image3, e.image4,
+                    t.label AS type_label
              FROM GAME g
              LEFT JOIN ESTATE e ON g.id_estate = e.id_estate
+             LEFT JOIN TYPE   t ON e.id_type   = t.id_type
              WHERE g.id_user = :id_user
              ORDER BY g.date DESC',
             ['id_user' => $userId]

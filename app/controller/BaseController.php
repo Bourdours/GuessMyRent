@@ -4,10 +4,15 @@ namespace GmR\controller;
 
 abstract class BaseController
 {
-    protected function requireAuth(): void
+    protected function requireAuth(?string $flashMessage = null): void
     {
         if (empty($_SESSION['user_id'])) {
-            header('Location: ' . BASE_URL . '/auth');
+            if ($flashMessage !== null) {
+                $_SESSION['flash_error'] = $flashMessage;
+                header('Location: ' . BASE_URL . '/auth?action=register');
+            } else {
+                header('Location: ' . BASE_URL . '/auth');
+            }
             exit;
         }
     }

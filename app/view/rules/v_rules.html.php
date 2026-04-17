@@ -5,7 +5,7 @@
     <p>Estimez le loyer de biens immobiliers réels et marquez un maximum de points !</p>
   </div>
 
-  <section class="section" aria-label="Présentation vidéo">
+  <section aria-label="Présentation vidéo">
     <video
       class="video"
       autoplay
@@ -26,7 +26,7 @@
     </video>
   </section>
   <!-- How to play -->
-  <section class="section">
+  <section>
     <h2>Comment jouer ?</h2>
     <p>
       Observez la fiche complète d'un bien immobilier (photos, surface, localisation, type de logement)
@@ -60,7 +60,7 @@
   </section>
 
   <!-- Score table -->
-  <section class="section">
+  <section>
     <h2>Calcul du score</h2>
     <p>Le score est calculé en soustrayant votre écart en % au loyer réel de 100 points. Plus vous êtes précis, plus vous marquez de points !</p>
     <p class="score-formula"><strong>Score = 100 − écart %</strong> &nbsp;(minimum 0)</p>

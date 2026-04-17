@@ -443,10 +443,6 @@ footer a:hover {
   border-left: 3px solid #692DA6;
 }
 
-.section {
-  margin-bottom: 56px;
-}
-
 .container {
   width: 100%;
   max-width: 1280px;
@@ -998,6 +994,10 @@ footer a:hover {
   padding: 0 20px;
   text-align: center;
 }
+.error-page section,
+.info-page section {
+  margin: 24px 0;
+}
 
 .error-page .error-code {
   font-family: "Fredoka One", cursive;
@@ -1043,9 +1043,12 @@ footer a:hover {
   margin: 0 auto;
   padding: 32px 20px;
 }
-.rules-page .section p {
+.rules-page section {
+  margin: 24px 0;
+}
+.rules-page section p {
   color: rgba(27, 1, 64, 0.7);
-  margin-bottom: 24px;
+  margin-bottom: 8px;
   line-height: 1.7;
 }
 
@@ -1354,6 +1357,13 @@ footer a:hover {
 
 .depose-description {
   grid-column: 1/-1;
+}
+
+.pdet-description-box {
+  max-height: 5.6em;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  scrollbar-width: thin;
 }
 
 .depose-images-section h3,
@@ -1693,8 +1703,6 @@ footer a:hover {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding-top: 32px;
-  padding-bottom: 32px;
 }
 
 .game-col-photo {
@@ -1897,6 +1905,14 @@ footer a:hover {
   color: rgba(27, 1, 64, 0.55);
   margin-bottom: 32px;
 }
+.game-guess-hint span {
+  display: none;
+}
+@media (min-width: 768px) {
+  .game-guess-hint span {
+    display: inline;
+  }
+}
 
 .game-form {
   display: flex;
@@ -1909,6 +1925,31 @@ footer a:hover {
   font-size: 3rem;
   color: #692DA6;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.guess-step-btn {
+  background: none;
+  border: 2px solid #692DA6;
+  color: #692DA6;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+  margin: 0 8px;
+}
+.guess-step-btn:hover {
+  background: #692DA6;
+  color: #fff;
 }
 
 .guess-unit {
@@ -1921,6 +1962,7 @@ footer a:hover {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin: 16px 0;
 }
 
 .slider-bound {

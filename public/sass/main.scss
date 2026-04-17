@@ -420,11 +420,6 @@ footer {
 .alert-success { @include alert-variant($c-green); }
 .alert-info    { @include alert-variant($c-purple); }
 
-// ── Section spacing ───────────────────────────────────────────
-.section {
-  margin-bottom: 56px;
-}
-
 // ── Container ─────────────────────────────────────────────────
 .container {
   width: 100%;
@@ -983,6 +978,9 @@ footer {
   margin: 80px auto;
   padding: 0 $r-lg;
   text-align: center;
+  section {
+    margin: 24px 0;
+  }
 }
 
 .error-page {
@@ -1033,10 +1031,11 @@ footer {
 // ═══════════════════════════════════════════════════════════════
 .rules-page {
   @include page-body(900px);
-  .section {
+  section {
+    margin: 24px 0;
     p {
       color: rgba($c-navy, 0.7);
-      margin-bottom: 24px;
+      margin-bottom: 8px;
       line-height: 1.7;
     }
   }
@@ -1331,6 +1330,13 @@ footer {
 
 .depose-description {
   grid-column: 1 / -1;
+}
+
+.pdet-description-box {
+  max-height: calc(1.4em * 4);
+  overflow-y: auto;
+  white-space: pre-wrap;
+  scrollbar-width: thin;
 }
 
 .depose-images-section,
@@ -1632,8 +1638,6 @@ footer {
   display: flex;
   flex-direction: column;
   gap: $r-xl;
-  padding-top: $r-xl;
-  padding-bottom: $r-xl;
 }
 
 // ── Bloc photo ──────────────────────────────────────────────────
@@ -1843,6 +1847,14 @@ footer {
   font-size: 0.85rem;
   color: rgba($c-navy, 0.55);
   margin-bottom: $r-xl;
+
+  span {
+    display: none;
+
+    @media (min-width: $bp-lg) {
+      display: inline;
+    }
+  }
 }
 
 .game-form {
@@ -1856,6 +1868,32 @@ footer {
   font-size: 3rem;
   color: $c-purple;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $r-sm;
+}
+
+.guess-step-btn {
+  background: none;
+  border: 2px solid $c-purple;
+  color: $c-purple;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+  margin: 0 8px;
+
+  &:hover {
+    background: $c-purple;
+    color: #fff;
+  }
 }
 
 .guess-unit {
@@ -1868,6 +1906,7 @@ footer {
   display: flex;
   align-items: center;
   gap: $r-sm;
+  margin: 16px 0;
 }
 
 .slider-bound {

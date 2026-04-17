@@ -11,7 +11,7 @@ class EstateController extends BaseController
 {
     public function propose(): void
     {
-        $this->requireAuth();
+        $this->requireAuth('Vous devez être inscrit et connecté pour proposer un bien.');
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->validateCsrf();

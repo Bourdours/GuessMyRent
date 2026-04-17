@@ -31,12 +31,23 @@ class UserController extends BaseController
 
         $this->refreshCsrf();
 
+        $flash = $_SESSION['flash_error'] ?? null;
+        unset($_SESSION['flash_error']);
+
         if ($action === 'register') {
-            $this->render(V_AUTH . 'v_auth_register.html.php', ['csrf_token' => $_SESSION['csrf_token'], 'pageTitle' => 'Inscription']);
+            $this->render(V_AUTH . 'v_auth_register.html.php', array_filter([
+                'csrf_token' => $_SESSION['csrf_token'],
+                'pageTitle'  => 'Inscription',
+                'error'      => $flash,
+            ]));
             return;
         }
 
-        $this->render(V_AUTH . 'v_auth.html.php', ['csrf_token' => $_SESSION['csrf_token'], 'pageTitle' => 'Connexion']);
+        $this->render(V_AUTH . 'v_auth.html.php', array_filter([
+            'csrf_token' => $_SESSION['csrf_token'],
+            'pageTitle'  => 'Connexion',
+            'error'      => $flash,
+        ]));
     }
 
     private function handleLogin(): void
@@ -139,6 +150,8 @@ class UserController extends BaseController
             'totalGames' => $totalGames,
             'totalScore' => $totalScore,
             'avgScore'   => $avgScore,
+            'baseUrl'    => BASE_URL,
+            'pageScript' => BASE_URL . '/public/js/profil.js',
         ]);
     }
 

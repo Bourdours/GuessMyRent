@@ -41,7 +41,7 @@ class MessageController extends BaseController
             $messageId = (int) ($_POST['message_id'] ?? 0);
 
             if ($action === 'delete' && $messageId > 0) {
-                (new MessageModel())->deleteByUser($messageId);
+                (new MessageModel())->deleteToVoid($messageId);
             }
 
             header('Location: ' . BASE_URL . '/admin/messagerie');
@@ -52,7 +52,7 @@ class MessageController extends BaseController
 
         $this->render(V_ADMIN . 'v_admin_message.html.php', [
             'pageTitle' => 'Gestion des messages - Admin',
-            'message' => (new MessageModel())->findAll(['id_message', 'email', 'content', 'id_user']),
+            'message' => (new MessageModel())->findAllWithUser(),
             'csrf_token' => $_SESSION['csrf_token'],
             'pageScript' => BASE_URL . '/public/js/admin.js',
         ]);
@@ -62,12 +62,14 @@ class MessageController extends BaseController
     {
         $email   = trim($_POST['email'] ?? '');
         $content = trim($_POST['content'] ?? '');
+        $allowed = ['Question générale', 'Signaler un bug', 'Signaler un bien incorrect', 'Autre'];
+        $objet   = in_array($_POST['objet'] ?? '', $allowed, true) ? $_POST['objet'] : null;
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $content === '') {
             return ['error' => 'Un email valide et un message sont requis.'];
         }
 
-        (new MessageModel())->create($email, $content, $_SESSION['user_id'] ?? null);
+        (new MessageModel())->create($email, $content, $_SESSION['user_id'] ?? null, $objet);
 
         return ['success' => 'Votre message a bien été envoyé.'];
     }

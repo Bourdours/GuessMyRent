@@ -100,14 +100,17 @@
         <!-- Zone de devinette -->
         <section class="game-guess-zone">
           <h2>Votre estimation</h2>
-          <p class="game-guess-hint">Glissez le curseur pour proposer votre loyer mensuel.</p>
+          <p class="game-guess-hint">Glissez le curseur où utiliser les boutons +/- pour proposer votre loyer mensuel.<span><br>
+              Vous pouvez utiliser les flèches du clavier une fois un premier clique réalisé sur la barre.</span></p>
 
           <form method="POST" action="<?= BASE_URL ?>/jeu" class="game-form">
             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
             <input type="hidden" name="estate_id" value="<?= (int)$estate['id_estate'] ?>">
 
             <div class="guess-display">
+              <button type="button" class="guess-step-btn" id="guessMinus" aria-label="Diminuer de 10"><i class="fa-solid fa-minus"></i></button>
               <span id="guessValue"><?= $avgRent ?></span> €<span class="guess-unit">/mois</span>
+              <button type="button" class="guess-step-btn" id="guessPlus" aria-label="Augmenter de 10"><i class="fa-solid fa-plus"></i></button>
             </div>
 
             <div class="guess-slider-wrap">
@@ -117,12 +120,12 @@
                 id="guessRange"
                 name="guess"
                 min="300"
-                max="2500"
+                max="5000"
                 step="10"
                 value="<?= $avgRent ?>"
                 class="guess-slider"
                 aria-label="Estimation du loyer mensuel">
-              <span class="slider-bound">2 500 €</span>
+              <span class="slider-bound">5 000 €</span>
             </div>
 
             <button type="submit" class="btn-primary btn-full game-submit">

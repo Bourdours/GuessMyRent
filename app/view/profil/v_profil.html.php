@@ -61,7 +61,7 @@
                                     default   => 'pill-red',
                                 };
                             ?>
-                                <tr>
+                                <tr onclick="selectProfilGame(<?= (int)$game['id_game'] ?>)" data-id="<?= (int)$game['id_game'] ?>" style="cursor:pointer;">
                                     <td><?= htmlspecialchars(date('d/m/Y', strtotime($game['date']))) ?></td>
                                     <td><?= $game['city'] ? htmlspecialchars($game['city']) : '<em>Bien supprimé</em>' ?></td>
                                     <td><?= $game['square_meters'] ? htmlspecialchars($game['square_meters']) . ' m²' : '—' ?></td>
@@ -78,9 +78,76 @@
         </section>
     </div>
 
+    <!-- Détail du bien sélectionné -->
+    <div class="profile-content" id="profilEstateDetail" style="display:none;">
+        <section class="profile-section">
+            <header style="display:flex; justify-content:space-between; align-items:center;">
+                <h3>Détail du bien</h3>
+                <button type="button" onclick="closeProfilDetail()" class="btn-secondary btn-sm">Fermer</button>
+            </header>
+
+            <div class="depose-detail-grid">
+                <div class="depose-field">
+                    <span class="depose-field-label">Type</span>
+                    <span class="depose-field-value" id="pdet-type">—</span>
+                </div>
+                <div class="depose-field">
+                    <span class="depose-field-label">Loyer</span>
+                    <span class="depose-field-value" id="pdet-rent">—</span>
+                </div>
+                <div class="depose-field">
+                    <span class="depose-field-label">Charges</span>
+                    <span class="depose-field-value" id="pdet-charges">—</span>
+                </div>
+                <div class="depose-field">
+                    <span class="depose-field-label">Surface</span>
+                    <span class="depose-field-value" id="pdet-m2">—</span>
+                </div>
+                <div class="depose-field">
+                    <span class="depose-field-label">Pièces</span>
+                    <span class="depose-field-value" id="pdet-room">—</span>
+                </div>
+                <div class="depose-field">
+                    <span class="depose-field-label">Chambres</span>
+                    <span class="depose-field-value" id="pdet-chamber">—</span>
+                </div>
+                <div class="depose-field">
+                    <span class="depose-field-label">Étage</span>
+                    <span class="depose-field-value" id="pdet-floor">—</span>
+                </div>
+                <div class="depose-field">
+                    <span class="depose-field-label">Adresse</span>
+                    <span class="depose-field-value" id="pdet-adress">—</span>
+                </div>
+                <div class="depose-field">
+                    <span class="depose-field-label">Ville</span>
+                    <span class="depose-field-value" id="pdet-city">—</span>
+                </div>
+                <div class="depose-field">
+                    <span class="depose-field-label">Description</span>
+                    <span class="depose-field-value pdet-description-box" id="pdet-description">—</span>
+                </div>
+                <div class="depose-field">
+                    <span class="depose-field-label">Votre estimation</span>
+                    <span class="depose-field-value" id="pdet-guess">—</span>
+                </div>
+                <div class="depose-field">
+                    <span class="depose-field-label">Score</span>
+                    <span class="depose-field-value" id="pdet-score">—</span>
+                </div>
+            </div>
+
+            <div id="pdet-img-grid" class="depose-img-grid" style="margin-top:1rem;"></div>
+        </section>
+    </div>
+
     <!-- Bottom actions -->
     <p class="profile-actions">
         <a href="<?= BASE_URL ?>/auth?action=logout" class="btn-danger">Déconnexion</a>
     </p>
 
 </section>
+
+<div id="profil-data" hidden
+    data-history="<?= htmlspecialchars(json_encode(array_values($history ?? []), JSON_HEX_TAG)) ?>"
+    data-base-url="<?= htmlspecialchars($baseUrl) ?>"></div>
