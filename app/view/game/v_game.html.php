@@ -1,12 +1,31 @@
 <section class="game-page">
   <h1 class="visually-hidden">Page de jeu du site GuessMyRent</h1>
 
-  <?php if (!$estate): ?>
+  <?php if ($guestBlocked ?? false): ?>
 
     <div class="game-empty container">
-      <div class="alert alert-info">
-        Aucun bien disponible pour le moment. Revenez bientôt !
+      <div class="alert alert-warning">
+        <strong>Vous avez atteint la limite d'une partie sans inscription.</strong><br>
+        Créez un compte <strong>gratuitement</strong> pour jouer sans limite — le seul plafond, c'est le nombre de biens disponibles !
       </div>
+      <p class="mt-lg flex-row">
+        <a href="<?= BASE_URL ?>/auth?action=register" class="btn-primary">Créer un compte</a>
+        <a href="<?= BASE_URL ?>/auth?action=login" class="btn-secondary">Se connecter</a>
+      </p>
+    </div>
+
+  <?php elseif (!$estate): ?>
+
+    <div class="game-empty container">
+      <?php if (!empty($_SESSION['user_id'])): ?>
+        <div class="alert alert-info">
+          Vous avez déjà joué sur tous les biens disponibles. Revenez bientôt pour de nouveaux biens !
+        </div>
+      <?php else: ?>
+        <div class="alert alert-info">
+          Aucun bien disponible pour le moment. Revenez bientôt !
+        </div>
+      <?php endif; ?>
       <p class="mt-lg">
         <a href="<?= BASE_URL ?>/" class="btn-secondary">Retour à l'accueil</a>
       </p>
@@ -57,45 +76,45 @@
         <!-- Infos du bien -->
         <article class="game-info">
           <h2 class="visually-hidden">Informations du bien</h2>
-            <div class="game-info-header">
-              <span class="pill pill-purple"><?= htmlspecialchars($estate['type_label']) ?></span>
-              <span class="game-city"><?= htmlspecialchars($estate['city']) ?> (<?= htmlspecialchars(str_pad($estate['postcode'], 5, '0', STR_PAD_LEFT)) ?>)</span>
-            </div>
+          <div class="game-info-header">
+            <span class="pill pill-purple"><?= htmlspecialchars($estate['type_label']) ?></span>
+            <span class="game-city"><?= htmlspecialchars($estate['city']) ?> (<?= htmlspecialchars(str_pad($estate['postcode'], 5, '0', STR_PAD_LEFT)) ?>)</span>
+          </div>
 
-            <ul class="game-specs">
+          <ul class="game-specs">
+            <li class="game-spec">
+              <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-ruler-combined"></i></span>
+              <span><?= htmlspecialchars($estate['square_meters']) ?> m²</span>
+            </li>
+            <?php if (!empty($estate['room'])): ?>
               <li class="game-spec">
-                <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-ruler-combined"></i></span>
-                <span><?= htmlspecialchars($estate['square_meters']) ?> m²</span>
+                <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-door-open"></i></span>
+                <span><?= (int)$estate['room'] ?> pièce<?= $estate['room'] > 1 ? 's' : '' ?></span>
               </li>
-              <?php if (!empty($estate['room'])): ?>
-                <li class="game-spec">
-                  <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-door-open"></i></span>
-                  <span><?= (int)$estate['room'] ?> pièce<?= $estate['room'] > 1 ? 's' : '' ?></span>
-                </li>
-              <?php endif; ?>
-              <?php if (!empty($estate['chamber'])): ?>
-                <li class="game-spec">
-                  <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-bed"></i></span>
-                  <span><?= (int)$estate['chamber'] ?> chambre<?= $estate['chamber'] > 1 ? 's' : '' ?></span>
-                </li>
-              <?php endif; ?>
-              <?php if (!empty($estate['floor']) && $estate['floor'] !== '0'): ?>
-                <li class="game-spec">
-                  <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-building"></i></span>
-                  <span>Étage <?= htmlspecialchars($estate['floor']) ?></span>
-                </li>
-              <?php endif; ?>
-              <?php if (!empty($estate['is_charges_included'])): ?>
-                <li class="game-spec">
-                  <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-circle-check"></i></span>
-                  <span>Charges comprises</span>
-                </li>
-              <?php endif; ?>
-            </ul>
-
-            <?php if (!empty($estate['description'])): ?>
-              <p class="game-description"><?= nl2br(htmlspecialchars($estate['description'])) ?></p>
             <?php endif; ?>
+            <?php if (!empty($estate['chamber'])): ?>
+              <li class="game-spec">
+                <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-bed"></i></span>
+                <span><?= (int)$estate['chamber'] ?> chambre<?= $estate['chamber'] > 1 ? 's' : '' ?></span>
+              </li>
+            <?php endif; ?>
+            <?php if (!empty($estate['floor']) && $estate['floor'] !== '0'): ?>
+              <li class="game-spec">
+                <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-building"></i></span>
+                <span>Étage <?= htmlspecialchars($estate['floor']) ?></span>
+              </li>
+            <?php endif; ?>
+            <?php if (!empty($estate['is_charges_included'])): ?>
+              <li class="game-spec">
+                <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-circle-check"></i></span>
+                <span>Charges comprises</span>
+              </li>
+            <?php endif; ?>
+          </ul>
+
+          <?php if (!empty($estate['description'])): ?>
+            <p class="game-description"><?= nl2br(htmlspecialchars($estate['description'])) ?></p>
+          <?php endif; ?>
         </article>
 
         <!-- Zone de devinette -->

@@ -15,18 +15,38 @@ class GameController extends BaseController
             return;
         }
 
+        $userId = $_SESSION['user_id'] ?? null;
+
+        // Visiteurs non inscrits : limiter à 1 partie
+        if (!$userId && ($_SESSION['guest_games_count'] ?? 0) >= 1) {
+            $this->refreshCsrf();
+            $this->render(V_GAME . 'v_game.html.php', [
+                'pageTitle'    => 'Jouer',
+                'estate'       => null,
+                'csrf_token'   => $_SESSION['csrf_token'],
+                'avgRent'      => 0,
+                'pageScript'   => BASE_URL . '/public/js/game.js',
+                'guestBlocked' => true,
+            ]);
+            return;
+        }
+
         $estateModel = new EstateModel();
-        $estate      = $estateModel->findRandomActive();
-        $avgRent     = $estateModel->avgRent();
+
+        // Exclure les biens déjà joués par l'utilisateur connecté
+        $excludeIds = $userId ? (new GameModel())->findPlayedEstateIdsByUser($userId) : [];
+        $estate     = $estateModel->findRandomActive($excludeIds);
+        $avgRent    = $estateModel->avgRent();
 
         $this->refreshCsrf();
 
         $this->render(V_GAME . 'v_game.html.php', [
-            'pageTitle'  => 'Jouer',
-            'estate'     => $estate ?: null,
-            'csrf_token' => $_SESSION['csrf_token'],
-            'avgRent'    => $avgRent,
-            'pageScript' => BASE_URL . '/public/js/game.js',
+            'pageTitle'    => 'Jouer',
+            'estate'       => $estate ?: null,
+            'csrf_token'   => $_SESSION['csrf_token'],
+            'avgRent'      => $avgRent,
+            'pageScript'   => BASE_URL . '/public/js/game.js',
+            'guestBlocked' => false,
         ]);
     }
 
@@ -82,16 +102,22 @@ class GameController extends BaseController
         $userId = $_SESSION['user_id'] ?? null;
         (new GameModel())->create($guess, $score, $estateId, $userId);
 
+        // Incrémenter le compteur de parties pour les visiteurs non inscrits
+        if (!$userId) {
+            $_SESSION['guest_games_count'] = ($_SESSION['guest_games_count'] ?? 0) + 1;
+        }
+
         $this->refreshCsrf();
 
         $this->render(V_GAME . 'v_game_result.html.php', [
-            'pageTitle'  => 'Résultat',
-            'estate'     => $estate,
-            'guess'      => $guess,
-            'score'      => $score,
-            'gap'        => round($gap, 1),
-            'csrf_token' => $_SESSION['csrf_token'],
-            'pageScript' => BASE_URL . '/public/js/game.js',
+            'pageTitle'       => 'Résultat',
+            'estate'          => $estate,
+            'guess'           => $guess,
+            'score'           => $score,
+            'gap'             => round($gap, 1),
+            'csrf_token'      => $_SESSION['csrf_token'],
+            'pageScript'      => BASE_URL . '/public/js/game.js',
+            'isGuestLimited'  => !$userId,
         ]);
     }
 }

@@ -452,6 +452,17 @@ footer a:hover {
   border-left: 3px solid #692DA6;
 }
 
+.alert-warning {
+  background: rgba(99, 56, 6, 0.1);
+  color: #633806;
+  border-left: 3px solid #633806;
+}
+
+.alert-full {
+  width: 100%;
+  text-align: center;
+}
+
 .container {
   width: 100%;
   max-width: 1280px;
@@ -532,6 +543,12 @@ footer a:hover {
 
 .mb-xl {
   margin-bottom: 32px;
+}
+
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .visually-hidden {

@@ -81,6 +81,14 @@ class GameModel extends Model
         )->fetchAll();
     }
 
+    public function findPlayedEstateIdsByUser(int $userId): array
+    {
+        return $this->executeQueryWithBind(
+            'SELECT DISTINCT id_estate FROM GAME WHERE id_user = :id_user',
+            ['id_user' => $userId]
+        )->fetchAll(\PDO::FETCH_COLUMN) ?: [];
+    }
+
     // Supprime toutes les parties d'un utilisateur
     public function deleteByUser(int $userId): bool
     {

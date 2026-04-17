@@ -428,6 +428,12 @@ footer {
 .alert-error   { @include alert-variant($c-red); }
 .alert-success { @include alert-variant($c-green); }
 .alert-info    { @include alert-variant($c-purple); }
+.alert-warning { @include alert-variant($c-amber); }
+
+.alert-full {
+  width: 100%;
+  text-align: center;
+}
 
 // ── Container ─────────────────────────────────────────────────
 .container {
@@ -481,6 +487,11 @@ footer {
 }
 .mb-xl {
   margin-bottom: $r-xl;
+}
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $r-md;
 }
 
 .visually-hidden {

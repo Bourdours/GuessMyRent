@@ -64,10 +64,18 @@ $scoreMsg = match (true) {
 
   <!-- Actions -->
   <div class="game-result-actions container">
-    <a href="<?= BASE_URL ?>/jeu" class="btn-primary">Jouer encore</a>
-    <?php if (empty($_SESSION['user_id'])): ?>
-      <a href="<?= BASE_URL ?>/auth?action=register" class="btn-secondary">Créer un compte pour sauvegarder</a>
+    <?php if ($isGuestLimited ?? false): ?>
+      <div class="alert alert-warning alert-full">
+        <strong>C'était votre partie gratuite !</strong><br>
+        Inscrivez-vous <strong>gratuitement</strong> pour jouer sans limite et <strong>enregistrer toutes vos parties</strong> — le seul plafond, c'est le nombre de biens disponibles, et votre progression vous attend dans votre profil.
+      </div>
+      <a href="<?= BASE_URL ?>/auth?action=register" class="btn-primary">Créer un compte</a>
+      <a href="<?= BASE_URL ?>/auth?action=login" class="btn-secondary">Se connecter</a>
     <?php else: ?>
+      <div class="alert alert-info alert-full">
+        <strong>Partie enregistrée !</strong> Retrouvez vos statistiques dans votre profil.
+      </div>
+      <a href="<?= BASE_URL ?>/jeu" class="btn-primary">Jouer encore</a>
       <a href="<?= BASE_URL ?>/profil" class="btn-secondary">Voir mon profil</a>
     <?php endif; ?>
   </div>
