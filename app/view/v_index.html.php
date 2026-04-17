@@ -11,20 +11,20 @@
 <section class="stats-band" aria-label="Statistiques du jeu">
     <dl class="stats-inner">
         <div>
-            <dd class="stat-value"><?= number_format($stats['biens_disponibles'], 0, ',', ' ') ?></dd>
             <dt class="stat-label">Biens disponibles</dt>
+            <dd class="stat-value"><?= number_format($stats['biens_disponibles'], 0, ',', ' ') ?></dd>
         </div>
         <div>
-            <dd class="stat-value"><?= number_format($stats['parties_jouees'], 0, ',', ' ') ?></dd>
             <dt class="stat-label">Parties jouées</dt>
+            <dd class="stat-value"><?= number_format($stats['parties_jouees'], 0, ',', ' ') ?></dd>
         </div>
         <div>
-            <dd class="stat-value"><?= $stats['moyenne_scores'] ?></dd>
             <dt class="stat-label">Moyenne des scores</dt>
+            <dd class="stat-value"><?= $stats['moyenne_scores'] ?></dd>
         </div>
         <div>
-            <dd class="stat-value"><?= $stats['villes_couvertes'] ?></dd>
             <dt class="stat-label">Villes couvertes</dt>
+            <dd class="stat-value"><?= $stats['villes_couvertes'] ?></dd>
         </div>
     </dl>
 </section>

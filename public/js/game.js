@@ -36,13 +36,17 @@ function switchPhoto(btn, src) {
 }
 
 function openLightbox(src) {
+  const lb = document.getElementById('lightbox');
   document.getElementById('lightboxImg').src = src;
-  document.getElementById('lightbox').classList.add('open');
+  lb.classList.add('open');
+  lb.removeAttribute('aria-hidden');
   document.body.style.overflow = 'hidden';
 }
 
 function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
+  const lb = document.getElementById('lightbox');
+  lb.classList.remove('open');
+  lb.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
 }
 

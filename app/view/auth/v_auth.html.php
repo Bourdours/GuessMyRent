@@ -1,4 +1,5 @@
 <section class="auth-page">
+  <h2 class="visually-hidden">Page d'authentification</h2>
   <article class="auth-card">
 
     <!-- Logo -->
@@ -8,9 +9,9 @@
     </div>
 
     <!-- Tab switcher -->
-    <div class="tab-switcher" role="tablist">
-      <a href="<?= BASE_URL ?>/auth" class="active" role="tab" aria-selected="true">Connexion</a>
-      <a href="<?= BASE_URL ?>/auth?action=register" role="tab" aria-selected="false">Inscription</a>
+    <div class="tab-switcher">
+      <a href="<?= BASE_URL ?>/auth" class="active">Connexion</a>
+      <a href="<?= BASE_URL ?>/auth?action=register">Inscription</a>
     </div>
 
     <?php require V_SKELETON . 'v_alerts.html.php'; ?>

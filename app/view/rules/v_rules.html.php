@@ -10,8 +10,6 @@
       class="video"
       autoplay
       controls
-      width="90%"
-      height="90%"
       loop
       muted
       poster="<?= BASE_URL ?>/public/img/poster.png"
@@ -19,7 +17,7 @@
       <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1280x720.mp4" type="video/mp4" />
       <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1280x720.webm" type="video/webm" />
       <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1920x1080.mp4" type="video/mp4" />
-      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1920x1080.webm" type="video/mp4" />
+      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1920x1080.webm" type="video/webm" />
       <p>
         Votre navigateur ne supporte pas le format vidéo présent sur ce site.
       </p>
@@ -35,6 +33,7 @@
     </p>
 
     <section class="steps-grid">
+      <h2 class="visually-hidden">Étapes du jeu</h2>
       <article class="step-card">
         <span class="step-number" aria-hidden="true">1</span>
         <h3>Observez</h3>

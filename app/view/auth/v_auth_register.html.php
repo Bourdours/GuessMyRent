@@ -8,9 +8,9 @@
     </div>
 
     <!-- Tab switcher -->
-    <div class="tab-switcher" role="tablist">
-      <a href="<?= BASE_URL ?>/auth" role="tab" aria-selected="false">Connexion</a>
-      <a href="<?= BASE_URL ?>/auth?action=register" class="active" role="tab" aria-selected="true">Inscription</a>
+    <div class="tab-switcher">
+      <a href="<?= BASE_URL ?>/auth">Connexion</a>
+      <a href="<?= BASE_URL ?>/auth?action=register" class="active">Inscription</a>
     </div>
 
     <?php require V_SKELETON . 'v_alerts.html.php'; ?>
@@ -45,7 +45,7 @@
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="password">Mot de passe <small>(8 caractères min.)</small></label>
+        <label class="form-label" for="pwdInput">Mot de passe <small>(8 caractères min.)</small></label>
         <input
           type="password"
           id="pwdInput"
@@ -55,7 +55,7 @@
           minlength="8"
           autocomplete="new-password"
           placeholder="••••••••">
-        <div class="pwd-strength" aria-label="Force du mot de passe">
+        <div class="pwd-strength" role="group" aria-label="Force du mot de passe">
           <div class="pwd-bar" id="pwdBar1"></div>
           <div class="pwd-bar" id="pwdBar2"></div>
           <div class="pwd-bar" id="pwdBar3"></div>

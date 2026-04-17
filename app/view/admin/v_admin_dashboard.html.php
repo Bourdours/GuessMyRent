@@ -48,6 +48,8 @@
         <a href="<?= BASE_URL ?>/admin/api" class="btn-secondary">Ajouter des biens depuis l'api</a>
         <a href="<?= BASE_URL ?>/admin/biens" class="btn-secondary">Gérer les biens</a>
         <a href="<?= BASE_URL ?>/admin/utilisateurs" class="btn-secondary">Gérer les utilisateurs</a>
+        <a href="<?= BASE_URL ?>/admin/parties" class="btn-secondary">Gérer les parties</a>
+        <a href="<?= BASE_URL ?>/admin/messagerie" class="btn-secondary">Gérer la messagerie</a>
       </nav>
     </section>
 

@@ -8,11 +8,11 @@
   <?php $alertMargin = 'mb-lg'; require V_SKELETON . 'v_alerts.html.php'; ?>
 
   <!-- Tabs -->
-  <div class="contact-tabs" role="tablist">
-    <a href="<?= BASE_URL ?>/contact?tab=message" class="<?= $activeTab === 'message' ? 'active' : '' ?>" role="tab">
+  <div class="contact-tabs">
+    <a href="<?= BASE_URL ?>/contact?tab=message" class="<?= $activeTab === 'message' ? 'active' : '' ?>">
       Nous écrire
     </a>
-    <a href="<?= BASE_URL ?>/contact?tab=bien" class="<?= $activeTab === 'bien' ? 'active' : '' ?>" role="tab">
+    <a href="<?= BASE_URL ?>/contact?tab=bien" class="<?= $activeTab === 'bien' ? 'active' : '' ?>">
       Proposer un bien
     </a>
   </div>

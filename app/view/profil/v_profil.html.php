@@ -10,20 +10,20 @@
     <section class="profile-stats" aria-label="Statistiques du joueur">
         <dl class="profile-stats-inner">
             <div>
-                <dd class="pstat-value"><?= $totalGames ?></dd>
                 <dt class="pstat-label">Parties</dt>
+                <dd class="pstat-value"><?= $totalGames ?></dd>
             </div>
             <div>
-                <dd class="pstat-value"><?= $avgScore ?></dd>
                 <dt class="pstat-label">Score moyen</dt>
+                <dd class="pstat-value"><?= $avgScore ?></dd>
             </div>
             <div>
-                <dd class="pstat-value"><?= $totalScore ?></dd>
                 <dt class="pstat-label">Total pts</dt>
+                <dd class="pstat-value"><?= $totalScore ?></dd>
             </div>
             <div>
-                <dd class="pstat-value">—</dd>
                 <dt class="pstat-label">Classement</dt>
+                <dd class="pstat-value">—</dd>
             </div>
         </dl>
     </section>
