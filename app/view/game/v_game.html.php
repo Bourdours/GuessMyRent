@@ -142,7 +142,7 @@
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()" aria-hidden="true" aria-modal="true" role="dialog">
       <button class="lightbox-close" aria-label="Fermer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-      <img id="lightboxImg" alt="Photo agrandie">
+      <img id="lightboxImg" src="#" alt="Photo agrandie">
     </div>
 
   <?php endif; ?>

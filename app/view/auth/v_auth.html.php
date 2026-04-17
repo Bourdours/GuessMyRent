@@ -1,10 +1,10 @@
 <section class="auth-page">
-  <h2 class="visually-hidden">Page d'authentification</h2>
+  <h1 class="visually-hidden">Connexion</h1>
   <article class="auth-card">
 
     <!-- Logo -->
     <div class="auth-logo">
-      <h1>GuessMy<span>Rent</span></h1>
+      <h2>GuessMy<span>Rent</span></h2>
       <p>Le jeu d'estimation de loyers</p>
     </div>
 

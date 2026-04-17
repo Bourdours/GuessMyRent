@@ -14,10 +14,10 @@
       muted
       poster="<?= BASE_URL ?>/public/img/poster.png"
       preload="auto">
-      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1280x720.mp4" type="video/mp4" />
-      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1280x720.webm" type="video/webm" />
-      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1920x1080.mp4" type="video/mp4" />
-      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1920x1080.webm" type="video/webm" />
+      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1280x720.mp4" type="video/mp4">
+      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1280x720.webm" type="video/webm">
+      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1920x1080.mp4" type="video/mp4">
+      <source src="<?= BASE_URL ?>/public/vid/Renting_Real_Estate_1920x1080.webm" type="video/webm">
       <p>
         Votre navigateur ne supporte pas le format vidéo présent sur ce site.
       </p>

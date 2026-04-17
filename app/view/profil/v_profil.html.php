@@ -1,4 +1,5 @@
 <section class="profile-main">
+    <h1 class="visually-hidden">Page profil de l'utilisateur</h1>
     <!-- Profile hero -->
     <div class="profile-hero">
         <div class="avatar"><?= htmlspecialchars($initial) ?></div>

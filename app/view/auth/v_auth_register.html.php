@@ -1,9 +1,10 @@
 <section class="auth-page">
+  <h1 class="visually-hidden">Inscription</h1>
   <article class="auth-card">
 
     <!-- Logo -->
     <div class="auth-logo">
-      <h1>GuessMy<span>Rent</span></h1>
+      <h2>GuessMy<span>Rent</span></h2>
       <p>Créez votre compte gratuitement</p>
     </div>
 
