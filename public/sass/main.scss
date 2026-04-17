@@ -1609,6 +1609,17 @@ footer {
 }
 
 // History table
+.history-scroll {
+  max-height: 430px;
+  overflow-y: auto;
+
+  thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+}
+
 .history-table {
   width: 100%;
   border-collapse: collapse;

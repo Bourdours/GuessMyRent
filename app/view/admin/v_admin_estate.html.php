@@ -20,7 +20,7 @@
       <?php if (empty($estates)): ?>
         <p class="admin-empty-state">Aucun bien enregistré.</p>
       <?php else: ?>
-        <div class="table-overflow">
+        <div class="table-overflow<?= count($estates) > 10 ? ' history-scroll' : '' ?>">
           <table class="admin-table estate-table">
             <thead>
               <tr>

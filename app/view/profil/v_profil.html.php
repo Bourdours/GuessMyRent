@@ -39,7 +39,7 @@
                     Aucune partie enregistrée. <a href="<?= BASE_URL ?>/jeu">&nbsp;Jouer maintenant →</a>
                 </div>
             <?php else: ?>
-                <div class="table-overflow">
+                <div class="table-overflow <?= count($history) > 10 ? ' history-scroll' : '' ?>">
                     <table class="history-table">
                         <thead>
                             <tr>
