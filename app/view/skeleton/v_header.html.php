@@ -6,7 +6,7 @@
 
   <header class="main-header">
     <div class="header-inner">
-      <a href="<?= BASE_URL ?>/" class="header-logo" aria-label="GuessMy Rent — Accueil">GuessMy<span aria-hidden="true">Rent</span></a>
+      <a href="<?= BASE_URL ?>/" class="header-logo" aria-label="GuessMy Rent — Accueil"><img src="<?= BASE_URL ?>/public/img/favicon.png" alt="Logo du site" aria-hidden="true" class="header-logo-img"><span>GuessMy<span aria-hidden="true" class="logo-rent">Rent</span></span></a>
 
       <!-- Mobile burger -->
       <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navDrawer">

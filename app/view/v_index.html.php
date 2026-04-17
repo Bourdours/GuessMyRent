@@ -1,5 +1,6 @@
 <section class="hero">
-    <h1>GuessMy<span>Rent</span></h1>
+    <img src="<?= BASE_URL ?>/public/img/favicon.png" alt="Logo du site" aria-hidden="true" class="hero-logo-img">
+    <h1>GuessMy<span aria-hidden="true" class="logo-rent">Rent</span></h1>
     <p>Observez la fiche d'un bien immobilier et devinez son loyer mensuel. Saurez-vous estimer comme un expert ?</p>
     <div class="hero-actions">
         <a href="<?= BASE_URL ?>/jeu" class="btn-primary">Jouer maintenant</a>

@@ -126,9 +126,18 @@ h3 {
   font-size: 1.3rem;
   color: #F2EBDC;
   letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-.header-logo span {
+.header-logo .logo-rent {
   color: #F2B05E;
+}
+
+.header-logo-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 
 .burger {
@@ -549,6 +558,13 @@ footer a:hover {
 }
 .hero h1 span {
   color: #F2B05E;
+}
+.hero .hero-logo-img {
+  display: block;
+  width: 320px;
+  height: 320px;
+  object-fit: contain;
+  margin: 0 auto 24px;
 }
 .hero p {
   font-size: 1.1rem;

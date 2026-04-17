@@ -100,10 +100,19 @@ h3 {
   font-size: 1.3rem;
   color: $c-cream;
   letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
-  span {
+  .logo-rent {
     color: $c-gold;
   }
+}
+
+.header-logo-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 
 // Burger
@@ -501,6 +510,14 @@ footer {
     span {
       color: $c-gold;
     }
+  }
+
+  .hero-logo-img {
+    display: block;
+    width: 320px;
+    height: 320px;
+    object-fit: contain;
+    margin: 0 auto 24px;
   }
 
   p {

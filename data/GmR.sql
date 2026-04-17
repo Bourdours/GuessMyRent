@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : jeu. 16 avr. 2026 à 09:10
+-- Généré le : ven. 17 avr. 2026 à 11:57
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -100,6 +100,7 @@ CREATE TABLE `GAME` (
 CREATE TABLE `MESSAGE` (
   `id_message` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `objet` varchar(50) DEFAULT NULL,
   `content` varchar(500) NOT NULL,
   `id_user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -171,7 +172,7 @@ CREATE TABLE `USER` (
 --
 
 INSERT INTO `USER` (`id_user`, `email`, `password`, `pseudo`, `avatar`, `is_admin`) VALUES
-(1, 'admin@admin.fr', '$2y$10$TZG1SzNKT.3aEHM7rpfxwOH5bpKdRmkTCThr62AMDn.YaNB5Q/Jum', 'Admin', NULL, 1);
+(1, 'admin@admin.fr', '$2y$10$TZG1SzNKT.3aEHM7rpfxwOH5bpKdRmkTCThr62AMDn.YaNB5Q/Jum', 'Admin', NULL, 1),
 
 --
 -- Index pour les tables déchargées
@@ -244,13 +245,13 @@ ALTER TABLE `USER`
 -- AUTO_INCREMENT pour la table `API_ESTATE`
 --
 ALTER TABLE `API_ESTATE`
-  MODIFY `id_api` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_api` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `ESTATE`
 --
 ALTER TABLE `ESTATE`
-  MODIFY `id_estate` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_estate` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT pour la table `ESTATE_MODIFICATION`
@@ -262,13 +263,13 @@ ALTER TABLE `ESTATE_MODIFICATION`
 -- AUTO_INCREMENT pour la table `GAME`
 --
 ALTER TABLE `GAME`
-  MODIFY `id_game` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_game` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT pour la table `MESSAGE`
 --
 ALTER TABLE `MESSAGE`
-  MODIFY `id_message` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_message` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `STATUS`
@@ -286,7 +287,7 @@ ALTER TABLE `TYPE`
 -- AUTO_INCREMENT pour la table `USER`
 --
 ALTER TABLE `USER`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Contraintes pour les tables déchargées
