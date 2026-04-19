@@ -13,7 +13,7 @@ class ApiEstateModel extends Model
         $this->primaryKey = 'id_api';
     }
 
-    // Retourne tous les api_external_id déjà importés
+    /** Return all api_external_id values already imported */
     public function findAllExternalIds(): array
     {
         return $this->executeQuery(
@@ -21,6 +21,7 @@ class ApiEstateModel extends Model
         )->fetchAll(PDO::FETCH_COLUMN);
     }
 
+    /** Check whether an external API estate ID has already been imported */
     public function isImported(int $externalId): bool
     {
         return (int) $this->executeQueryWithBind(
@@ -29,6 +30,7 @@ class ApiEstateModel extends Model
         )->fetchColumn() > 0;
     }
 
+    /** Record the link between an external API ID and a local estate ID */
     public function create(int $externalId, int $estateId): void
     {
         $this->executeQueryWithBind(

@@ -1,30 +1,44 @@
-// ============================================================
+// ═══════════════════════════════════════════════════════════════
 //   GUESS MY RENT — Variables
-// ============================================================
+// ═══════════════════════════════════════════════════════════════
 
 // ── Colors ──────────────────────────────────────────────────
-$c-navy:      #1B0140;
+$c-navy: #1b0140;
 $c-purple-dk: #461973;
-$c-purple:    #692DA6;
-$c-purple-lt: #AE49F2;
-$c-gold:      #F2B05E;
-$c-cream:     #F2EBDC;
-$c-green:     #3B6D11;
-$c-red:       #8C2020;
-$c-amber:     #633806;
-$c-white:     #ffffff;
-$c-gradient: linear-gradient(180deg, rgba(27, 1, 64, 1) 0%, rgba(44, 10, 86, 1) 37%, rgba(51, 14, 95, 1) 52%, rgba(83, 33, 138, 1) 87%, rgba(105, 45, 166, 1) 100%);
-$c-gradient-reverse: linear-gradient(180deg, rgba(105, 45, 166, 1) 0%, rgba(83, 33, 138, 1) 13%, rgba(51, 14, 95, 1) 48%, rgba(44, 10, 86, 1) 63%, rgba(27, 1, 64, 1) 100%);
+$c-purple: #692da6;
+$c-purple-lt: #ae49f2;
+$c-gold: #f2b05e;
+$c-cream: #f2ebdc;
+$c-green: #3b6d11;
+$c-red: #8c2020;
+$c-amber: #633806;
+$c-white: #ffffff;
+$c-gradient: linear-gradient(
+  180deg,
+  rgba(27, 1, 64, 1) 0%,
+  rgba(44, 10, 86, 1) 37%,
+  rgba(51, 14, 95, 1) 52%,
+  rgba(83, 33, 138, 1) 87%,
+  rgba(105, 45, 166, 1) 100%
+);
+$c-gradient-reverse: linear-gradient(
+  180deg,
+  rgba(105, 45, 166, 1) 0%,
+  rgba(83, 33, 138, 1) 13%,
+  rgba(51, 14, 95, 1) 48%,
+  rgba(44, 10, 86, 1) 63%,
+  rgba(27, 1, 64, 1) 100%
+);
 
 // ── Typography ───────────────────────────────────────────────
-$f-title: 'Fredoka One', cursive;
-$f-body:  'Nunito', sans-serif;
+$f-title: "Fredoka One", cursive;
+$f-body: "Nunito", sans-serif;
 
 // ── Spacing ──────────────────────────────────────────────────
-$r-sm:  8px;
-$r-md:  12px;
-$r-lg:  20px;
-$r-xl:  32px;
+$r-sm: 8px;
+$r-md: 12px;
+$r-lg: 20px;
+$r-xl: 32px;
 $r-2xl: 48px;
 
 // ── Border Radius ─────────────────────────────────────────────
@@ -33,10 +47,10 @@ $rad-md: 20px;
 $rad-lg: 28px;
 
 // ── Header Heights ───────────────────────────────────────────
-$header-h:    56px;
+$header-h: 56px;
 $header-h-md: 60px;
 
 // ── Breakpoints ──────────────────────────────────────────────
-$bp-sm:  480px;
-$bp-md:  600px;
-$bp-lg:  768px;
+$bp-sm: 480px;
+$bp-md: 600px;
+$bp-lg: 768px;

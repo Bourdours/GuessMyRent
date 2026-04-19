@@ -9,6 +9,7 @@ use GmR\model\StatusModel;
 
 class EstateController extends BaseController
 {
+    /** Display the estate proposal form and process authenticated submissions */
     public function propose(): void
     {
         $this->requireAuth('Vous devez être inscrit et connecté pour proposer un bien.');
@@ -32,6 +33,7 @@ class EstateController extends BaseController
         ]);
     }
 
+    /** Validate the proposal form, upload images, and insert the estate; returns success or error array */
     private function handlePropose(): array
     {
         $city             = trim($_POST['city'] ?? '');
@@ -115,6 +117,7 @@ class EstateController extends BaseController
         return ['success' => 'Votre proposition a bien été soumise et sera examinée par notre équipe.'];
     }
 
+    /** Admin: review pending estates (status "déposé") and handle update / activate / archive / delete */
     public function adminSent(): void
     {
         $this->requireAdmin();
@@ -190,7 +193,7 @@ class EstateController extends BaseController
         ]);
     }
 
-    // Gestion admin des biens (liste + changement de statut)
+    /** Admin management of estates (list + status change) */
     public function adminList(): void
     {
         $this->requireAdmin();
@@ -267,6 +270,7 @@ class EstateController extends BaseController
         ]);
     }
 
+    /** Handle up to 4 image slots: replace, delete, or keep each file; returns image1..4 array */
     private function processImageSlots(): array
     {
         $imgDir    = IMG . 'estates/';

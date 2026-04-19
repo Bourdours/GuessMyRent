@@ -2,7 +2,7 @@
 
   <?php require __DIR__ . '/v_admin_sidebar.html.php'; ?>
 
-  <!-- Main -->
+  <!-- Main content -->
   <section class="admin-main">
 
     <header class="admin-header-bar">
@@ -11,12 +11,13 @@
 
     <?php require V_SKELETON . 'v_alerts.html.php'; ?>
 
-    <!-- Étape 1 : sélectionner un bien -->
+    <!-- Step 1: select an estate -->
     <section class="admin-table-wrap">
       <header class="admin-table-header">
         <h2>Étape 1 — Sélectionner un bien <span class="pill pill-amber"><?= count($estates ?? []) ?></span></h2>
       </header>
 
+      <!-- Empty state -->
       <?php if (empty($estates)): ?>
         <p class="admin-empty-state">Aucun bien en attente de validation.</p>
       <?php else: ?>
@@ -47,7 +48,7 @@
       <?php endif; ?>
     </section>
 
-    <!-- Étape 2 : vérifier et décider -->
+    <!-- Step 2: review and decide -->
     <section class="admin-table-wrap" id="estateDetail" style="display:none;">
       <header class="admin-table-header">
         <h2>Étape 2 — Vérifier et décider</h2>
@@ -122,7 +123,7 @@
           <button type="submit" class="btn-secondary">Archiver</button>
         </form>
         <form method="POST" action="<?= BASE_URL ?>/admin/biens/en-attente" class="form-inline"
-              onsubmit="return confirm('Supprimer définitivement ce bien ?')">
+          onsubmit="return confirm('Supprimer définitivement ce bien ?')">
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
           <input type="hidden" name="estate_id" id="act-estate-id-delete" value="">
           <input type="hidden" name="action" value="delete">
@@ -132,7 +133,7 @@
 
     </section>
 
-    <!-- Étape 3 : modifier le bien -->
+    <!-- Step 3: edit the estate -->
     <section class="admin-table-wrap" id="estateEdit" style="display:none;">
       <header class="admin-table-header">
         <h2>Étape 3 — Modifier le bien</h2>
@@ -224,8 +225,8 @@
   </section>
 </div>
 
+<!-- Data store: passes PHP data to admin.js via data-* attributes -->
 <div id="admin-data" hidden
   data-page="estate-sent"
   data-estates="<?= htmlspecialchars(json_encode(array_values($estates ?? []), JSON_HEX_TAG)) ?>"
-  data-base-url="<?= htmlspecialchars(BASE_URL) ?>"
-></div>
+  data-base-url="<?= htmlspecialchars(BASE_URL) ?>"></div>

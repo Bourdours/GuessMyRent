@@ -10,6 +10,7 @@ use RuntimeException;
 
 class UserController extends BaseController
 {
+    /** Handle login, registration, and logout routes */
     public function auth(): void
     {
         $action = $_GET['action'] ?? 'login';
@@ -50,6 +51,7 @@ class UserController extends BaseController
         ]));
     }
 
+    /** Verify credentials and start the authenticated session */
     private function handleLogin(): void
     {
         $email    = trim($_POST['email'] ?? '');
@@ -76,6 +78,7 @@ class UserController extends BaseController
         exit;
     }
 
+    /** Validate registration data, hash the password, create the user, and start a session */
     private function handleRegister(): void
     {
         $email    = trim($_POST['email'] ?? '');
@@ -117,6 +120,7 @@ class UserController extends BaseController
         exit;
     }
 
+    /** Clear the session and redirect to the home page */
     private function handleLogout(): void
     {
         $_SESSION = [];
@@ -125,6 +129,7 @@ class UserController extends BaseController
         exit;
     }
 
+    /** Render the user profile with game history, stats, and leaderboard */
     public function profil(): void
     {
         $this->requireAuth();
@@ -145,8 +150,8 @@ class UserController extends BaseController
         $userRank    = $totalGames > 0 ? $gameModel->getUserRank($_SESSION['user_id']) : null;
         $leaderboard = $gameModel->leaderboard(10);
 
-        $flash_success = $_SESSION['flash_success'] ?? null;
-        $flash_error   = $_SESSION['flash_error']   ?? null;
+        $success = $_SESSION['flash_success'] ?? null;
+        $error   = $_SESSION['flash_error']   ?? null;
         unset($_SESSION['flash_success'], $_SESSION['flash_error']);
 
         $this->render(V_PROFIL . 'v_profil.html.php', [
@@ -162,12 +167,13 @@ class UserController extends BaseController
             'leaderboard'   => $leaderboard,
             'baseUrl'       => BASE_URL,
             'csrf_token'    => $_SESSION['csrf_token'],
-            'flash_success' => $flash_success,
-            'flash_error'   => $flash_error,
+            'success' => $success,
+            'error'   => $error,
             'pageScript'    => BASE_URL . '/public/js/profil.js',
         ]);
     }
 
+    /** Update pseudo, email, and optionally password for the logged-in user */
     public function editAccount(): void
     {
         $this->requireAuth();
@@ -219,6 +225,7 @@ class UserController extends BaseController
         exit;
     }
 
+    /** Delete the logged-in user's account and destroy the session */
     public function deleteAccount(): void
     {
         $this->requireAuth();
@@ -240,6 +247,7 @@ class UserController extends BaseController
         exit;
     }
 
+    /** Render the full game history page for the logged-in user */
     public function history(): void
     {
         $this->requireAuth();
@@ -252,7 +260,7 @@ class UserController extends BaseController
         ]);
     }
 
-    // Gestion admin des utilisateurs (liste + suppression)
+    /** Admin management of users (list + deletion) */
     public function adminList(): void
     {
         $this->requireAdmin();
@@ -275,7 +283,7 @@ class UserController extends BaseController
                 $model->adminUpdate($userId, $email, $pseudo, $avatar, $isAdmin, $hashed);
             }
 
-            // Empêche l'admin de se supprimer lui-même
+            // Prevent admin from deleting their own account
             if ($action === 'delete' && $userId !== (int) $_SESSION['user_id']) {
                 $model->delete($userId);
             }
@@ -294,6 +302,7 @@ class UserController extends BaseController
         ]);
     }
 
+    /** Admin: render the dashboard with platform-wide statistics */
     public function dashboard(): void
     {
         $this->requireAdmin();

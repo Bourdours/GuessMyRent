@@ -1,6 +1,7 @@
 <section class="game-page">
   <h1 class="visually-hidden">Page de jeu du site GuessMyRent</h1>
 
+  <!-- Guest blocked: limit reached -->
   <?php if ($guestBlocked ?? false): ?>
 
     <div class="game-empty container">
@@ -14,6 +15,7 @@
       </p>
     </div>
 
+  <!-- No estate available -->
   <?php elseif (!$estate): ?>
 
     <div class="game-empty container">
@@ -31,6 +33,7 @@
       </p>
     </div>
 
+  <!-- Game layout -->
   <?php else: ?>
 
     <?php
@@ -44,7 +47,7 @@
 
     <div class="game-layout container">
 
-      <!-- Colonne : galerie -->
+      <!-- Column: gallery -->
       <figure class="game-col-photo">
 
         <div class="game-main-photo" onclick="openLightbox(document.getElementById('mainPhoto').src)">
@@ -55,6 +58,7 @@
           <span class="game-photo-zoom" aria-hidden="true"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
         </div>
 
+        <!-- Thumbnails (only if more than 1 image) -->
         <?php if (count($images) > 1): ?>
           <div class="game-thumbs">
             <?php foreach ($images as $i => $img): ?>
@@ -70,10 +74,10 @@
 
       </figure>
 
-      <!-- Colonne : infos + devinette -->
+      <!-- Column: info + guess -->
       <div class="game-col-side">
 
-        <!-- Infos du bien -->
+        <!-- Estate info -->
         <article class="game-info">
           <h2 class="visually-hidden">Informations du bien</h2>
           <div class="game-info-header">
@@ -117,12 +121,13 @@
           <?php endif; ?>
         </article>
 
-        <!-- Zone de devinette -->
+        <!-- Guess zone -->
         <section class="game-guess-zone">
           <h2>Votre estimation</h2>
           <p class="game-guess-hint">Glissez le curseur où utiliser les boutons +/- pour proposer votre loyer mensuel.<span><br>
               Vous pouvez utiliser les flèches du clavier une fois un premier clique réalisé sur la barre.</span></p>
 
+          <!-- Guess form -->
           <form method="POST" action="<?= BASE_URL ?>/jeu" class="game-form">
             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
             <input type="hidden" name="estate_id" value="<?= (int)$estate['id_estate'] ?>">

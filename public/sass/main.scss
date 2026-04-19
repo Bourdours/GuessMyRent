@@ -1,7 +1,6 @@
-// ============================================================
-//   GUESS MY RENT — Main Stylesheet
-//   Mobile-First
-// ============================================================
+// ═══════════════════════════════════════════════════════════════
+//   GUESS MY RENT — Main Stylesheet (Mobile-First)
+// ═══════════════════════════════════════════════════════════════
 
 @use "variables" as *;
 @use "fonts";
@@ -115,7 +114,7 @@ h3 {
   object-fit: contain;
 }
 
-// Burger
+// ── Burger ────────────────────────────────────────────────────
 .burger {
   display: flex;
   flex-direction: column;
@@ -145,7 +144,7 @@ h3 {
   }
 }
 
-// Mobile nav drawer
+// ── Mobile nav drawer ─────────────────────────────────────────
 .nav-drawer {
   position: fixed;
   top: $header-h;
@@ -186,7 +185,7 @@ h3 {
   }
 }
 
-// Desktop nav
+// ── Desktop nav ───────────────────────────────────────────────
 .nav-desktop {
   display: none;
   align-items: center;
@@ -326,7 +325,7 @@ footer {
   }
 }
 
-// ── Bouton musique flottant ──────────────────────────────────
+// ── Floating music button ─────────────────────────────────────
 .music-btn {
   @include flex-center;
   position: fixed;
@@ -425,10 +424,18 @@ footer {
   font-weight: 600;
 }
 
-.alert-error   { @include alert-variant($c-red); }
-.alert-success { @include alert-variant($c-green); }
-.alert-info    { @include alert-variant($c-purple); }
-.alert-warning { @include alert-variant($c-amber); }
+.alert-error {
+  @include alert-variant($c-red);
+}
+.alert-success {
+  @include alert-variant($c-green);
+}
+.alert-info {
+  @include alert-variant($c-purple);
+}
+.alert-warning {
+  @include alert-variant($c-amber);
+}
 
 .alert-full {
   width: 100%;
@@ -452,10 +459,18 @@ footer {
   @include pill-base;
 }
 
-.pill-green  { @include pill-color($c-green); }
-.pill-amber  { @include pill-color($c-amber); }
-.pill-red    { @include pill-color($c-red); }
-.pill-purple { @include pill-color($c-purple); }
+.pill-green {
+  @include pill-color($c-green);
+}
+.pill-amber {
+  @include pill-color($c-amber);
+}
+.pill-red {
+  @include pill-color($c-red);
+}
+.pill-purple {
+  @include pill-color($c-purple);
+}
 .pill-gold {
   @include pill-color($c-gold, $c-amber, 0.15);
   border: 1px solid rgba($c-gold, 0.3);
@@ -548,7 +563,7 @@ footer {
   justify-content: center;
 }
 
-// Stats band
+// ── Stats band ────────────────────────────────────────────────
 .stats-band {
   background: $c-cream;
   border-top: 3px solid $c-gold;
@@ -582,7 +597,7 @@ footer {
   margin-top: 4px;
 }
 
-// How to play
+// ── How to play ───────────────────────────────────────────────
 .how-to-play {
   padding: 48px $r-lg;
 
@@ -667,7 +682,7 @@ footer {
   }
 }
 
-// Tab switcher
+// ── Tab switcher ──────────────────────────────────────────────
 .tab-switcher {
   display: flex;
   background: $c-cream;
@@ -701,7 +716,7 @@ footer {
   gap: 16px;
 }
 
-// Password strength
+// ── Password strength ─────────────────────────────────────────
 .pwd-strength {
   display: flex;
   gap: 4px;
@@ -737,7 +752,7 @@ footer {
   }
 }
 
-// Password reset
+// ── Password reset ────────────────────────────────────────────
 .auth-back-link {
   display: flex;
   align-items: center;
@@ -835,7 +850,7 @@ footer {
   text-align: right;
 }
 
-// Photo upload zone
+// ── Photo upload zone ─────────────────────────────────────────
 .upload-zone {
   position: relative;
   border: 2px dashed rgba($c-purple, 0.35);
@@ -890,12 +905,12 @@ footer {
     display: none;
   }
 
-  // 1 photo → pleine largeur
+  // 1 photo: full width
   &.count-1 {
     grid-template-columns: 1fr;
   }
 
-  // 3 photos → photo principale en haut pleine largeur
+  // 3 photos: first item spans full width
   &.count-3 .photo-preview-item:first-child {
     grid-column: span 2;
   }
@@ -982,7 +997,7 @@ footer {
   }
 }
 
-// Zone grisée quand 4 photos sélectionnées
+// Upload zone disabled when 4 photos selected
 #uploadZone[data-count="4"] {
   pointer-events: none;
   opacity: 0.45;
@@ -1190,7 +1205,7 @@ footer {
   }
 }
 
-// KeyPerformanceIndicator zone
+// ── KPI grid ──────────────────────────────────────────────────
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1232,7 +1247,7 @@ footer {
   }
 }
 
-// Admin table
+// ── Admin table ───────────────────────────────────────────────
 .admin-table-wrap {
   margin-top: 16px;
   background: $c-white;
@@ -1311,7 +1326,7 @@ footer {
   color: rgba($c-navy, 0.4);
 }
 
-// ── Estate / Depose — fiche détail ────────────────────────────
+// ── Estate / Depose — detail card ────────────────────────────
 .estate-table,
 .depose-table {
   tbody tr {
@@ -1404,7 +1419,7 @@ footer {
   flex-wrap: wrap;
 }
 
-// ── Estate / Depose — formulaire édition ──────────────────────
+// ── Estate / Depose — edit form ───────────────────────────────
 .edit-field {
   display: flex;
   flex-direction: column;
@@ -1494,7 +1509,9 @@ footer {
 
 .api-img-card {
   @include img-card-base;
-  transition: opacity 0.2s, border-color 0.2s;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s;
 
   &.excluded {
     opacity: 0.35;
@@ -1619,7 +1636,7 @@ footer {
   }
 }
 
-// History table
+// ── History table ─────────────────────────────────────────────
 .history-scroll {
   max-height: 430px;
   overflow-y: auto;
@@ -1700,7 +1717,7 @@ footer {
   gap: $r-xl;
 }
 
-// ── Bloc photo ──────────────────────────────────────────────────
+// ── Photo column ──────────────────────────────────────────────
 .game-col-photo {
   background: $c-white;
   border-radius: $rad-md;
@@ -1708,7 +1725,7 @@ footer {
   box-shadow: 0 4px 20px rgba($c-navy, 0.08);
 }
 
-// ── Bloc infos + devinette ──────────────────────────────────────
+// ── Info + guess column ───────────────────────────────────────
 .game-col-side {
   display: flex;
   flex-direction: column;
@@ -1756,7 +1773,7 @@ footer {
   pointer-events: none;
 }
 
-// Lightbox
+// ── Lightbox ──────────────────────────────────────────────────
 .lightbox {
   position: fixed;
   inset: 0;
@@ -1837,7 +1854,7 @@ footer {
   }
 }
 
-// Info section
+// ── Info section ──────────────────────────────────────────────
 .game-info {
   background: $c-white;
   border-radius: $rad-md;
@@ -1947,7 +1964,9 @@ footer {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
   margin: 0 8px;
 
   &:hover {
@@ -2067,7 +2086,7 @@ footer {
   margin-bottom: $r-lg;
 }
 
-// ── Bandeau cookies ──────────────────────────────────────────
+// ── Cookie banner ─────────────────────────────────────────────────────────
 .cookie-banner {
   position: fixed;
   bottom: 0;
@@ -2083,7 +2102,9 @@ footer {
   padding: $r-md $r-lg;
   box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.3);
 
-  &[hidden] { display: none; }
+  &[hidden] {
+    display: none;
+  }
 
   &__text {
     font-size: 0.875rem;
@@ -2106,14 +2127,18 @@ footer {
     border-radius: $rad-sm;
     transition: background 0.2s;
 
-    &:hover { background: $c-purple-lt; }
+    &:hover {
+      background: $c-purple-lt;
+    }
   }
 
   @media (max-width: #{$bp-md}) {
     flex-direction: column;
     align-items: flex-start;
 
-    &__btn { align-self: flex-end; }
+    &__btn {
+      align-self: flex-end;
+    }
   }
 }
 

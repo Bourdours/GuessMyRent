@@ -2,7 +2,7 @@
 
   <?php require __DIR__ . '/v_admin_sidebar.html.php'; ?>
 
-  <!-- Main -->
+  <!-- Main content -->
   <section class="admin-main">
 
     <header class="admin-header-bar">
@@ -11,12 +11,13 @@
 
     <?php require V_SKELETON . 'v_alerts.html.php'; ?>
 
-    <!-- Étape 1 : sélectionner un bien -->
+    <!-- Step 1: select an estate -->
     <section class="admin-table-wrap">
       <header class="admin-table-header">
         <h2>Étape 1 — Sélectionner un bien <span class="pill pill-purple"><?= count($estates ?? []) ?></span></h2>
       </header>
 
+      <!-- Empty state -->
       <?php if (empty($estates)): ?>
         <p class="admin-empty-state">Aucun bien enregistré.</p>
       <?php else: ?>
@@ -79,7 +80,7 @@
                       </form>
                     <?php endif; ?>
                     <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline"
-                          onsubmit="return confirm('Supprimer définitivement ce bien ?')">
+                      onsubmit="return confirm('Supprimer définitivement ce bien ?')">
                       <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                       <input type="hidden" name="estate_id" value="<?= (int)$e['id_estate'] ?>">
                       <input type="hidden" name="action" value="delete">
@@ -94,7 +95,7 @@
       <?php endif; ?>
     </section>
 
-    <!-- Étape 2 : vérifier et décider -->
+    <!-- Step 2: review and decide -->
     <section class="admin-table-wrap" id="estateDetail" style="display:none;">
       <header class="admin-table-header">
         <h2>Étape 2 — Vérifier et décider</h2>
@@ -157,34 +158,34 @@
       </div>
 
       <div class="depose-actions">
-        <!-- Activer : visible si statut !== Jouable (2) -->
+        <!-- Activate: visible if status !== Playable (2) -->
         <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline" id="form-activate" style="display:none;">
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
           <input type="hidden" name="estate_id" id="act-id-activate" value="">
           <input type="hidden" name="action" value="activate">
           <button type="submit" class="btn-primary">Activer</button>
         </form>
-        <!-- Désactiver : visible si statut === Jouable (2) -->
+        <!-- Deactivate: visible if status === Playable (2) -->
         <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline" id="form-deactivate" style="display:none;">
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
           <input type="hidden" name="estate_id" id="act-id-deactivate" value="">
           <input type="hidden" name="action" value="deactivate">
           <button type="submit" class="btn-danger">Désactiver</button>
         </form>
-        <!-- Archiver : visible si statut !== Archivé (3) -->
+        <!-- Archive: visible if status !== Archived (3) -->
         <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline" id="form-archive" style="display:none;">
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
           <input type="hidden" name="estate_id" id="act-id-archive" value="">
           <input type="hidden" name="action" value="archive">
           <button type="submit" class="btn-secondary">Archiver</button>
         </form>
-        <!-- Correction : ouvre le formulaire d'édition (Étape 3) -->
+        <!-- Correction: opens the edit form (Step 3) -->
         <div id="form-correction" style="display:none;">
           <button type="button" class="btn-secondary" onclick="openEditForm()">Correction</button>
         </div>
-        <!-- Supprimer : toujours visible -->
+        <!-- Delete: always visible -->
         <form method="POST" action="<?= BASE_URL ?>/admin/biens" class="form-inline" id="form-delete"
-              onsubmit="return confirm('Supprimer définitivement ce bien ?')" style="display:none;">
+          onsubmit="return confirm('Supprimer définitivement ce bien ?')" style="display:none;">
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
           <input type="hidden" name="estate_id" id="act-id-delete" value="">
           <input type="hidden" name="action" value="delete">
@@ -194,7 +195,7 @@
 
     </section>
 
-    <!-- Étape 3 : modifier le bien -->
+    <!-- Step 3: edit the estate -->
     <section class="admin-table-wrap" id="estateEdit" style="display:none;">
       <header class="admin-table-header">
         <h2>Étape 3 — Modifier le bien</h2>
@@ -205,17 +206,17 @@
         <input type="hidden" name="action" value="update">
         <input type="hidden" name="estate_id" id="edit-estate-id" value="">
         <input type="hidden" name="id_status" id="edit-id-status" value="">
-        <!-- Valeurs courantes (vidées par JS si suppression) -->
+        <!-- Current values (cleared by JS on deletion) -->
         <input type="hidden" name="image1" id="edit-img1" value="">
         <input type="hidden" name="image2" id="edit-img2" value="">
         <input type="hidden" name="image3" id="edit-img3" value="">
         <input type="hidden" name="image4" id="edit-img4" value="">
-        <!-- Valeurs originales (pour suppression du fichier côté serveur) -->
+        <!-- Original values (for server-side file deletion) -->
         <input type="hidden" name="old_image1" id="edit-old-img1" value="">
         <input type="hidden" name="old_image2" id="edit-old-img2" value="">
         <input type="hidden" name="old_image3" id="edit-old-img3" value="">
         <input type="hidden" name="old_image4" id="edit-old-img4" value="">
-        <!-- Fichiers de remplacement -->
+        <!-- Replacement files -->
         <input type="file" name="new_image1" id="edit-new-img1" accept="image/jpeg,image/png,image/webp" style="display:none">
         <input type="file" name="new_image2" id="edit-new-img2" accept="image/jpeg,image/png,image/webp" style="display:none">
         <input type="file" name="new_image3" id="edit-new-img3" accept="image/jpeg,image/png,image/webp" style="display:none">
@@ -289,8 +290,8 @@
   </section>
 </div>
 
+<!-- Data store: passes PHP data to admin.js via data-* attributes -->
 <div id="admin-data" hidden
   data-page="estate-list"
   data-estates="<?= htmlspecialchars(json_encode(array_values($estates ?? []), JSON_HEX_TAG)) ?>"
-  data-base-url="<?= htmlspecialchars(BASE_URL) ?>"
-></div>
+  data-base-url="<?= htmlspecialchars(BASE_URL) ?>"></div>

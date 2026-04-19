@@ -8,6 +8,7 @@ use GmR\model\MessageModel;
 class MessageController extends BaseController
 {
 
+    /** Display the contact form and process submissions */
     public function contact(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -30,6 +31,7 @@ class MessageController extends BaseController
         ]);
     }
 
+    /** Admin: list all messages and handle deletion */
     public function adminMessage(): void
     {
         $this->requireAdmin();
@@ -58,6 +60,7 @@ class MessageController extends BaseController
         ]);
     }
 
+    /** Validate and persist a contact form submission; returns a success or error array */
     private function handleContact(): array
     {
         $email   = trim($_POST['email'] ?? '');

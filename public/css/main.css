@@ -41,8 +41,8 @@ html {
 
 body {
   font-family: "Nunito", sans-serif;
-  background: #F2EBDC;
-  color: #1B0140;
+  background: #f2ebdc;
+  color: #1b0140;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -102,7 +102,7 @@ h3 {
 }
 
 .main-header {
-  background: #1B0140;
+  background: #1b0140;
   height: 56px;
   position: sticky;
   top: 0;
@@ -124,14 +124,14 @@ h3 {
 .header-logo {
   font-family: "Fredoka One", cursive;
   font-size: 1.3rem;
-  color: #F2EBDC;
+  color: #f2ebdc;
   letter-spacing: 0.02em;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 .header-logo .logo-rent {
-  color: #F2B05E;
+  color: #f2b05e;
 }
 
 .header-logo-img {
@@ -151,7 +151,7 @@ h3 {
   display: block;
   width: 24px;
   height: 2px;
-  background: #F2EBDC;
+  background: #f2ebdc;
   border-radius: 2px;
   transition: transform 0.25s, opacity 0.25s;
 }
@@ -171,7 +171,7 @@ h3 {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #1B0140;
+  background: #1b0140;
   z-index: 99;
   display: flex;
   flex-direction: column;
@@ -183,7 +183,7 @@ h3 {
   transform: translateX(0);
 }
 .nav-drawer a {
-  color: #F2EBDC;
+  color: #f2ebdc;
   padding: 14px 32px;
   font-size: 1rem;
   font-weight: 600;
@@ -191,11 +191,11 @@ h3 {
   transition: background 0.15s, color 0.15s;
 }
 .nav-drawer a:hover, .nav-drawer a.active {
-  color: #F2B05E;
+  color: #f2b05e;
   background: rgba(242, 176, 94, 0.07);
 }
 .nav-drawer a.nav-logout {
-  color: #8C2020;
+  color: #8c2020;
 }
 
 .nav-desktop {
@@ -204,7 +204,7 @@ h3 {
   gap: 20px;
 }
 .nav-desktop a {
-  color: #F2EBDC;
+  color: #f2ebdc;
   font-weight: 600;
   font-size: 0.9rem;
   padding: 6px 10px;
@@ -212,27 +212,27 @@ h3 {
   transition: color 0.15s, background 0.15s;
 }
 .nav-desktop a:hover {
-  color: #F2B05E;
+  color: #f2b05e;
 }
 .nav-desktop a.active {
-  color: #F2B05E;
+  color: #f2b05e;
   background: rgba(242, 176, 94, 0.07);
 }
 .nav-desktop .btn-nav-cta {
-  background: #692DA6;
+  background: #692da6;
   color: #ffffff;
   padding: 8px 18px;
   border-radius: 28px;
   font-family: "Fredoka One", cursive;
 }
 .nav-desktop .btn-nav-cta:hover {
-  background: #AE49F2;
+  background: #ae49f2;
   color: #ffffff;
 }
 
 .nav-admin-badge {
-  background: #F2B05E;
-  color: #1B0140;
+  background: #f2b05e;
+  color: #1b0140;
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -256,14 +256,14 @@ h3 {
   }
 }
 footer {
-  background: #1B0140;
+  background: #1b0140;
   color: rgba(242, 235, 220, 0.7);
   text-align: center;
   padding: 32px 20px;
   font-size: 0.85rem;
 }
 footer a {
-  color: #F2B05E;
+  color: #f2b05e;
 }
 footer a:hover {
   text-decoration: underline;
@@ -281,12 +281,12 @@ footer a:hover {
   border: none;
   text-align: center;
   cursor: pointer;
-  background: #692DA6;
+  background: #692da6;
   color: #ffffff;
   transition: background 0.2s, transform 0.1s;
 }
 .btn-primary:hover {
-  background: #AE49F2;
+  background: #ae49f2;
 }
 .btn-primary:active {
   transform: scale(0.97);
@@ -304,13 +304,13 @@ footer a:hover {
   border: none;
   text-align: center;
   cursor: pointer;
-  background: #F2EBDC;
-  color: #1B0140;
+  background: #f2ebdc;
+  color: #1b0140;
   border: 2px solid rgba(27, 1, 64, 0.15) !important;
   transition: border-color 0.2s, background 0.2s;
 }
 .btn-secondary:hover {
-  border-color: #692DA6 !important;
+  border-color: #692da6 !important;
 }
 
 .btn-full {
@@ -327,16 +327,16 @@ footer a:hover {
   align-items: center;
   gap: 6px;
   background: transparent;
-  color: #8C2020;
+  color: #8c2020;
   font-size: 0.85rem;
   font-weight: 700;
   padding: 7px 14px;
   border-radius: 20px;
-  border: 1.5px solid #8C2020 !important;
+  border: 1.5px solid #8c2020 !important;
   transition: background 0.2s, color 0.2s;
 }
 .btn-danger:hover {
-  background: #8C2020;
+  background: #8c2020;
   color: #ffffff;
 }
 
@@ -351,7 +351,7 @@ footer a:hover {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: #692DA6;
+  background: #692da6;
   color: #ffffff;
   font-size: 1.1rem;
   box-shadow: 0 4px 16px rgba(27, 1, 64, 0.3);
@@ -399,12 +399,12 @@ footer a:hover {
 .form-input,
 .form-textarea,
 .form-select {
-  background: #F2EBDC;
+  background: #f2ebdc;
   border: 1.5px solid rgba(27, 1, 64, 0.2);
   border-radius: 10px;
   padding: 10px 14px;
   font-size: 0.95rem;
-  color: #1B0140;
+  color: #1b0140;
   transition: border-color 0.2s, background 0.2s;
   width: 100%;
 }
@@ -412,13 +412,13 @@ footer a:hover {
 .form-textarea:focus,
 .form-select:focus {
   outline: none;
-  border-color: #692DA6;
+  border-color: #692da6;
   background: rgba(174, 73, 242, 0.05);
 }
 .form-input.error,
 .form-textarea.error,
 .form-select.error {
-  border-color: #8C2020;
+  border-color: #8c2020;
   background: rgba(140, 32, 32, 0.05);
 }
 
@@ -436,20 +436,20 @@ footer a:hover {
 
 .alert-error {
   background: rgba(140, 32, 32, 0.1);
-  color: #8C2020;
-  border-left: 3px solid #8C2020;
+  color: #8c2020;
+  border-left: 3px solid #8c2020;
 }
 
 .alert-success {
   background: rgba(59, 109, 17, 0.1);
-  color: #3B6D11;
-  border-left: 3px solid #3B6D11;
+  color: #3b6d11;
+  border-left: 3px solid #3b6d11;
 }
 
 .alert-info {
   background: rgba(105, 45, 166, 0.1);
-  color: #692DA6;
-  border-left: 3px solid #692DA6;
+  color: #692da6;
+  border-left: 3px solid #692da6;
 }
 
 .alert-warning {
@@ -489,7 +489,7 @@ footer a:hover {
 
 .pill-green {
   background: rgba(59, 109, 17, 0.12);
-  color: #3B6D11;
+  color: #3b6d11;
 }
 
 .pill-amber {
@@ -499,12 +499,12 @@ footer a:hover {
 
 .pill-red {
   background: rgba(140, 32, 32, 0.12);
-  color: #8C2020;
+  color: #8c2020;
 }
 
 .pill-purple {
   background: rgba(105, 45, 166, 0.12);
-  color: #692DA6;
+  color: #692da6;
 }
 
 .pill-gold {
@@ -574,7 +574,7 @@ footer a:hover {
   margin-bottom: 16px;
 }
 .hero h1 span {
-  color: #F2B05E;
+  color: #f2b05e;
 }
 .hero .hero-logo-img {
   display: block;
@@ -600,9 +600,9 @@ footer a:hover {
 }
 
 .stats-band {
-  background: #F2EBDC;
-  border-top: 3px solid #F2B05E;
-  border-bottom: 3px solid #F2B05E;
+  background: #f2ebdc;
+  border-top: 3px solid #f2b05e;
+  border-bottom: 3px solid #f2b05e;
   padding: 24px 20px;
 }
 
@@ -623,7 +623,7 @@ footer a:hover {
 .stat-value {
   font-family: "Fredoka One", cursive;
   font-size: 2rem;
-  color: #692DA6;
+  color: #692da6;
   line-height: 1;
 }
 
@@ -673,7 +673,7 @@ footer a:hover {
 .step-number {
   width: 44px;
   height: 44px;
-  background: #692DA6;
+  background: #692da6;
   color: #ffffff;
   font-family: "Fredoka One", cursive;
   font-size: 1.3rem;
@@ -707,11 +707,11 @@ footer a:hover {
   margin-bottom: 24px;
 }
 .auth-logo span {
-  color: #F2B05E;
+  color: #f2b05e;
 }
 .auth-logo h1 {
   font-size: 1.7rem;
-  color: #692DA6;
+  color: #692da6;
   margin-bottom: 4px;
 }
 .auth-logo p {
@@ -721,7 +721,7 @@ footer a:hover {
 
 .tab-switcher {
   display: flex;
-  background: #F2EBDC;
+  background: #f2ebdc;
   border-radius: 26px;
   padding: 4px;
   margin-bottom: 24px;
@@ -738,7 +738,7 @@ footer a:hover {
 }
 .tab-switcher a.active {
   background: #ffffff;
-  color: #692DA6;
+  color: #692da6;
   box-shadow: 0 2px 8px rgba(27, 1, 64, 0.1);
 }
 
@@ -762,13 +762,13 @@ footer a:hover {
   transition: background 0.3s;
 }
 .pwd-bar.weak {
-  background: #8C2020;
+  background: #8c2020;
 }
 .pwd-bar.medium {
-  background: #F2B05E;
+  background: #f2b05e;
 }
 .pwd-bar.strong {
-  background: #3B6D11;
+  background: #3b6d11;
 }
 
 .auth-legal {
@@ -778,7 +778,7 @@ footer a:hover {
   line-height: 1.4;
 }
 .auth-legal a {
-  color: #692DA6;
+  color: #692da6;
 }
 
 .auth-back-link {
@@ -791,7 +791,7 @@ footer a:hover {
   cursor: pointer;
 }
 .auth-back-link:hover {
-  color: #692DA6;
+  color: #692da6;
 }
 
 .contact-hero {
@@ -832,11 +832,11 @@ footer a:hover {
   transition: color 0.2s, border-color 0.2s;
 }
 .contact-tabs a:hover {
-  color: #692DA6;
+  color: #692da6;
 }
 .contact-tabs a.active {
-  color: #692DA6;
-  border-bottom-color: #692DA6;
+  color: #692da6;
+  border-bottom-color: #692da6;
 }
 
 .contact-form {
@@ -866,8 +866,8 @@ footer a:hover {
   transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 .radio-pill input[type=radio]:checked + label {
-  background: #692DA6;
-  border-color: #692DA6;
+  background: #692da6;
+  border-color: #692da6;
   color: #ffffff;
 }
 
@@ -888,11 +888,11 @@ footer a:hover {
   background: rgba(174, 73, 242, 0.03);
 }
 .upload-zone:hover {
-  border-color: #692DA6;
+  border-color: #692da6;
   background: rgba(174, 73, 242, 0.06);
 }
 .upload-zone svg {
-  color: #692DA6;
+  color: #692da6;
   margin: 0 auto;
 }
 .upload-zone p {
@@ -901,7 +901,7 @@ footer a:hover {
   margin-top: 8px;
 }
 .upload-zone p strong {
-  color: #692DA6;
+  color: #692da6;
 }
 .upload-zone p:last-of-type {
   font-size: 0.7rem;
@@ -951,7 +951,7 @@ footer a:hover {
   position: absolute;
   bottom: 8px;
   left: 8px;
-  background: #692DA6;
+  background: #692da6;
   color: #ffffff;
   font-size: 0.68rem;
   font-weight: 700;
@@ -979,7 +979,7 @@ footer a:hover {
   transition: background 0.15s, transform 0.1s;
 }
 .photo-remove:hover {
-  background: #8C2020;
+  background: #8c2020;
   transform: scale(1.1);
 }
 
@@ -1013,7 +1013,7 @@ footer a:hover {
 
 .moderation-note {
   background: rgba(99, 56, 6, 0.08);
-  border-left: 3px solid #F2B05E;
+  border-left: 3px solid #f2b05e;
   border-radius: 0 10px 10px 0;
   padding: 10px 14px;
   font-size: 0.8rem;
@@ -1035,7 +1035,7 @@ footer a:hover {
 .error-page .error-code {
   font-family: "Fredoka One", cursive;
   font-size: 5rem;
-  color: #692DA6;
+  color: #692da6;
   line-height: 1;
   margin-bottom: 8px;
 }
@@ -1068,7 +1068,7 @@ footer a:hover {
   margin-top: 12px;
 }
 .info-page a {
-  color: #692DA6;
+  color: #692da6;
 }
 
 .rules-page {
@@ -1107,8 +1107,8 @@ footer a:hover {
   margin-bottom: 24px;
 }
 .score-table th {
-  background: #692DA6;
-  color: #F2EBDC;
+  background: #692da6;
+  color: #f2ebdc;
   padding: 12px 16px;
   text-align: left;
   font-size: 0.8rem;
@@ -1131,7 +1131,7 @@ footer a:hover {
 }
 .score-table .pts {
   font-family: "Fredoka One", cursive;
-  color: #692DA6;
+  color: #692da6;
   font-size: 1.1rem;
 }
 
@@ -1152,7 +1152,7 @@ footer a:hover {
 .admin-sidebar {
   width: 210px;
   flex-shrink: 0;
-  background: #1B0140;
+  background: #1b0140;
   padding: 32px 0;
   display: none;
 }
@@ -1188,12 +1188,12 @@ footer a:hover {
   border-left: 3px solid transparent;
 }
 .admin-sidebar a:hover {
-  color: #F2EBDC;
+  color: #f2ebdc;
   background: rgba(255, 255, 255, 0.06);
 }
 .admin-sidebar a.active {
-  color: #F2B05E;
-  border-left-color: #F2B05E;
+  color: #f2b05e;
+  border-left-color: #f2b05e;
   background: rgba(242, 176, 94, 0.07);
 }
 
@@ -1246,17 +1246,17 @@ footer a:hover {
 .kpi-value {
   font-family: "Fredoka One", cursive;
   font-size: 1.6rem;
-  color: #1B0140;
+  color: #1b0140;
   line-height: 1;
 }
 .kpi-value.kpi-purple {
-  color: #692DA6;
+  color: #692da6;
 }
 .kpi-value.kpi-gold {
   color: #633806;
 }
 .kpi-value.kpi-green {
-  color: #3B6D11;
+  color: #3b6d11;
 }
 
 .admin-table-wrap {
@@ -1355,7 +1355,7 @@ footer a:hover {
 .estate-table tbody tr.selected,
 .depose-table tbody tr.selected {
   background: rgba(105, 45, 166, 0.1);
-  outline: 2px solid #692DA6;
+  outline: 2px solid #692da6;
   outline-offset: -2px;
 }
 
@@ -1383,7 +1383,7 @@ footer a:hover {
 
 .depose-field-value {
   font-size: 0.95rem;
-  color: #1B0140;
+  color: #1b0140;
   word-break: break-word;
   white-space: normal;
 }
@@ -1404,7 +1404,7 @@ footer a:hover {
   font-size: 1rem;
   font-weight: 600;
   margin: 0 0 0.75rem;
-  color: #1B0140;
+  color: #1b0140;
 }
 
 .depose-images-section {
@@ -1502,7 +1502,7 @@ footer a:hover {
 .api-mapping-table .field-label {
   font-weight: 600;
   white-space: nowrap;
-  color: #1B0140;
+  color: #1b0140;
   width: 120px;
 }
 .api-mapping-table .api-raw {
@@ -1558,12 +1558,12 @@ footer a:hover {
   gap: 0.5rem;
   background: #ffffff;
   font-size: 0.8rem;
-  color: #1B0140;
+  color: #1b0140;
   border-top: 1px solid #d1d5db;
 }
 .api-img-card-footer input[type=checkbox] {
   cursor: pointer;
-  accent-color: #692DA6;
+  accent-color: #692da6;
 }
 .api-img-card-footer label {
   cursor: pointer;
@@ -1614,7 +1614,7 @@ footer a:hover {
 .avatar {
   width: 64px;
   height: 64px;
-  background: #692DA6;
+  background: #692da6;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1623,7 +1623,7 @@ footer a:hover {
   font-size: 1.8rem;
   color: #ffffff;
   margin: 0 auto 12px;
-  border: 3px solid #F2B05E;
+  border: 3px solid #f2b05e;
 }
 
 .profile-hero h2 {
@@ -1636,7 +1636,7 @@ footer a:hover {
   gap: 6px;
   background: rgba(242, 176, 94, 0.12);
   border: 1px solid rgba(242, 176, 94, 0.32);
-  color: #F2B05E;
+  color: #f2b05e;
   font-size: 0.8rem;
   font-weight: 700;
   padding: 4px 14px;
@@ -1645,7 +1645,7 @@ footer a:hover {
 }
 
 .profile-stats {
-  background: #F2EBDC;
+  background: #f2ebdc;
   border-bottom: 1px solid rgba(27, 1, 64, 0.1);
   padding: 16px 20px;
 }
@@ -1662,7 +1662,7 @@ footer a:hover {
 .pstat-value {
   font-family: "Fredoka One", cursive;
   font-size: 1.4rem;
-  color: #692DA6;
+  color: #692da6;
 }
 
 .pstat-label {
@@ -1897,7 +1897,7 @@ footer a:hover {
   display: block;
 }
 .game-thumb.active, .game-thumb:hover {
-  border-color: #692DA6;
+  border-color: #692da6;
 }
 
 .game-info {
@@ -1918,7 +1918,7 @@ footer a:hover {
 .game-city {
   font-weight: 700;
   font-size: 1rem;
-  color: #1B0140;
+  color: #1b0140;
 }
 
 .game-specs {
@@ -1937,7 +1937,7 @@ footer a:hover {
 }
 
 .game-spec-icon {
-  color: #692DA6;
+  color: #692da6;
   width: 16px;
   text-align: center;
 }
@@ -1986,7 +1986,7 @@ footer a:hover {
 .guess-display {
   font-family: "Fredoka One", cursive;
   font-size: 3rem;
-  color: #692DA6;
+  color: #692da6;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -1996,8 +1996,8 @@ footer a:hover {
 
 .guess-step-btn {
   background: none;
-  border: 2px solid #692DA6;
-  color: #692DA6;
+  border: 2px solid #692da6;
+  color: #692da6;
   border-radius: 50%;
   width: 3rem;
   height: 3rem;
@@ -2011,7 +2011,7 @@ footer a:hover {
   margin: 0 8px;
 }
 .guess-step-btn:hover {
-  background: #692DA6;
+  background: #692da6;
   color: #fff;
 }
 
@@ -2041,7 +2041,7 @@ footer a:hover {
   appearance: none;
   height: 6px;
   border-radius: 4px;
-  background: linear-gradient(to right, #692DA6 0%, #692DA6 var(--pct, 9.8%), rgba(27, 1, 64, 0.15) var(--pct, 9.8%), rgba(27, 1, 64, 0.15) 100%);
+  background: linear-gradient(to right, #692da6 0%, #692da6 var(--pct, 9.8%), rgba(27, 1, 64, 0.15) var(--pct, 9.8%), rgba(27, 1, 64, 0.15) 100%);
   outline: none;
   cursor: pointer;
 }
@@ -2050,7 +2050,7 @@ footer a:hover {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #692DA6;
+  background: #692da6;
   border: 3px solid #ffffff;
   box-shadow: 0 2px 8px rgba(27, 1, 64, 0.25);
   cursor: pointer;
@@ -2060,7 +2060,7 @@ footer a:hover {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #692DA6;
+  background: #692da6;
   border: 3px solid #ffffff;
   box-shadow: 0 2px 8px rgba(27, 1, 64, 0.25);
   cursor: pointer;
@@ -2104,7 +2104,7 @@ footer a:hover {
 .result-score-value {
   font-family: "Fredoka One", cursive;
   font-size: 5rem;
-  color: #692DA6;
+  color: #692da6;
   line-height: 1;
 }
 
@@ -2122,8 +2122,8 @@ footer a:hover {
   left: 0;
   right: 0;
   z-index: 2000;
-  background: #1B0140;
-  color: #F2EBDC;
+  background: #1b0140;
+  color: #f2ebdc;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2139,12 +2139,12 @@ footer a:hover {
   line-height: 1.5;
 }
 .cookie-banner__text a {
-  color: #F2B05E;
+  color: #f2b05e;
   text-decoration: underline;
 }
 .cookie-banner__btn {
   flex-shrink: 0;
-  background: #692DA6;
+  background: #692da6;
   color: #ffffff;
   font-family: "Nunito", sans-serif;
   font-size: 0.875rem;
@@ -2154,7 +2154,7 @@ footer a:hover {
   transition: background 0.2s;
 }
 .cookie-banner__btn:hover {
-  background: #AE49F2;
+  background: #ae49f2;
 }
 @media (max-width: 600px) {
   .cookie-banner {
@@ -2210,7 +2210,7 @@ footer a:hover {
 .result-city {
   font-weight: 700;
   font-size: 1rem !important;
-  color: #1B0140 !important;
+  color: #1b0140 !important;
 }
 
 .game-result-actions {

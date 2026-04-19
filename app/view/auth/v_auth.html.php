@@ -16,6 +16,7 @@
 
     <?php require V_SKELETON . 'v_alerts.html.php'; ?>
 
+    <!-- Login form -->
     <form method="POST" action="<?= BASE_URL ?>/auth" class="auth-form" novalidate>
       <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
 
@@ -43,13 +44,14 @@
           placeholder="••••••••">
       </div>
 
-      <p class="text-center">
+      <?php /* <p class="text-center">
         <a href="<?= BASE_URL ?>/auth?action=reset" class="auth-back-link">Mot de passe oublié ?</a>
-      </p>
+      </p> */ ?>
 
       <button type="submit" class="btn-primary btn-full">Se connecter</button>
     </form>
 
+    <!-- Legal notice -->
     <p class="auth-legal mt-lg">
       En vous connectant, vous acceptez nos <a href="<?= BASE_URL ?>/info">CGU</a> et notre <a href="<?= BASE_URL ?>/info">politique de confidentialité</a>.
     </p>

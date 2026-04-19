@@ -3,7 +3,7 @@ session_start();
 
 use Config\Router;
 
-/*  DEFINITION DES CONSTANCES */
+/*  CONSTANTS DEFINITION */
 require dirname(__FILE__) . "/config/config.php";
 
 /* UTILISATION COMPOSER */
@@ -11,6 +11,6 @@ require VENDOR . 'autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-/* DEFINITION DU ROUTAGE */
+/* ROUTING DEFINITION */
 $load = new Router();
 $load->routing();

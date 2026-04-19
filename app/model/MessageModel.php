@@ -12,6 +12,7 @@ class MessageModel extends Model
         $this->primaryKey = "id_message";
     }
 
+    /** Fetch all messages joined with sender pseudo, newest first */
     public function findAllWithUser(): array
     {
         return $this->executeQueryWithBind(
@@ -23,6 +24,7 @@ class MessageModel extends Model
         )->fetchAll();
     }
 
+    /** Fetch all messages sent by a specific user, newest first */
     public function findByUser(int $userId): array
     {
         return $this->executeQueryWithBind(
@@ -31,6 +33,7 @@ class MessageModel extends Model
         )->fetchAll();
     }
 
+    /** Insert a new contact message and return the generated ID */
     public function create(
         string $email,
         string $content,
@@ -49,7 +52,7 @@ class MessageModel extends Model
         return (int) self::connect()->lastInsertId();
     }
 
-    // Supprime tous les messages d'un utilisateur
+    /** Delete all messages belonging to a user */
     public function deleteByUser(int $userId): bool
     {
         return $this->executeQueryWithBind(

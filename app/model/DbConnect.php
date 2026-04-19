@@ -5,13 +5,12 @@ namespace GmR\model;
 use PDO;
 use PDOException;
 
-/**
- *  Classe principale de l'objet de connexion PDO
- */
+/** Singleton PDO connection — shared across all models */
 abstract class DbConnect
 {
     private static ?PDO $pdo = null;
 
+    /** Return the shared PDO instance, creating it on first call */
     protected static function connect(): PDO
     {
         if (self::$pdo === null) {
@@ -26,7 +25,6 @@ abstract class DbConnect
                     PDO::ATTR_EMULATE_PREPARES   => false,
                 ]);
             } catch (PDOException $e) {
-                // Ne jamais exposer les détails de connexion
                 die('Erreur de connexion à la base de données.');
             }
         }

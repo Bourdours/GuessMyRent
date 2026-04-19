@@ -15,8 +15,8 @@ class Router
 
     public function __construct()
     {
-        // Retire le préfixe du sous-dossier (ex: /localweb/GmR/public)
-        // pour que les routes restent /jeu, /auth… peu importe où est installé le projet.
+        // Strip the subdirectory prefix (e.g. /localweb/GmR/public)
+        // so routes remain /jeu, /auth… regardless of where the project is installed.
         $base = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
         $uri  = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 

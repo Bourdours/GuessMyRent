@@ -12,11 +12,11 @@ abstract class Model extends DbConnect
 {
     protected $tableName;
 
-    // Exécute une requête SQL
+    /** Execute a SQL query */
     protected function executeQuery(string $sql): PDOStatement
     {
         try {
-            $query = self::connect()->prepare($sql); // récupère la connexion PDO à la DB // compilation requete SQL protection injections
+            $query = self::connect()->prepare($sql); // get PDO connection and compile SQL query with injection protection
             $query->execute();
             return $query;
         } catch (Exception $e) {
@@ -28,7 +28,7 @@ abstract class Model extends DbConnect
         }
     }
 
-    // Exécute une requête SQL éventuellement paramétrée, avec un binding de valeur
+    /** Execute a SQL query with optional parameter binding */
     protected function executeQueryWithBind(
         string $sql,
         array $params = [],
@@ -59,7 +59,7 @@ abstract class Model extends DbConnect
         }
     }
 
-    // récupère les données d'une table , toute si non décrite dans $attributes
+    /** Fetch all rows from a table; all columns if $attributes is empty */
     function findAll(array $attributes = []): array
     {
         $selectedAttributes = (empty($attributes) ? '*' : implode(', ', $attributes));
@@ -70,6 +70,7 @@ abstract class Model extends DbConnect
 
     protected string $primaryKey;
 
+    /** Find a single row by primary key; returns false if not found */
     public function findById(int $id): array|false
     {
         return $this->executeQueryWithBind(
@@ -78,6 +79,7 @@ abstract class Model extends DbConnect
         )->fetch();
     }
 
+    /** Delete a row by primary key; returns true if a row was removed */
     public function deleteToVoid(int $id): bool
     {
         return $this->executeQueryWithBind(

@@ -5,7 +5,8 @@
     <p>Une question, un problème ou un bien à nous proposer ?</p>
   </div>
 
-  <?php $alertMargin = 'mb-lg'; require V_SKELETON . 'v_alerts.html.php'; ?>
+  <?php $alertMargin = 'mb-lg';
+  require V_SKELETON . 'v_alerts.html.php'; ?>
 
   <!-- Tabs -->
   <div class="contact-tabs">
@@ -17,6 +18,7 @@
     </a>
   </div>
 
+  <!-- Tab: write a message -->
   <?php if ($activeTab === 'message'): ?>
     <!-- Contact form -->
     <form method="POST" action="<?= BASE_URL ?>/contact?tab=message" class="contact-form" novalidate>
@@ -66,13 +68,14 @@
       <button type="submit" class="btn-primary">Envoyer le message</button>
     </form>
 
+    <!-- Tab: propose a property -->
   <?php else: ?>
     <!-- Propose a property form -->
     <form method="POST" action="<?= BASE_URL ?>/contact/proposer" class="contact-form" enctype="multipart/form-data" novalidate>
       <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
       <input type="hidden" name="tab" value="bien">
 
-      <!-- Localisation -->
+      <!-- Location -->
       <div class="form-group">
         <label class="form-label" for="city">Ville *</label>
         <input type="text" id="city" name="city" class="form-input" required maxlength="50" placeholder="Paris">
@@ -88,7 +91,7 @@
         <input type="text" id="adress" name="adress" class="form-input" maxlength="50" placeholder="12 rue du Marais">
       </div>
 
-      <!-- Type -->
+      <!-- Property type -->
       <fieldset class="form-group">
         <legend class="form-label">Type de bien *</legend>
         <div class="radio-group">
@@ -102,7 +105,7 @@
         </div>
       </fieldset>
 
-      <!-- Caractéristiques -->
+      <!-- Property details -->
       <div class="form-group">
         <label class="form-label" for="square_meters">Surface (m²) *</label>
         <input type="number" id="square_meters" name="square_meters" class="form-input" required min="5" max="999" step="0.01" placeholder="45">
@@ -128,7 +131,7 @@
         <input type="text" id="description" name="description" class="form-input" maxlength="50" placeholder="Lumineux, bien exposé, calme...">
       </div>
 
-      <!-- Loyer -->
+      <!-- Rent -->
       <div class="form-group">
         <label class="form-label" for="rent">Loyer mensuel (€) *</label>
         <input type="number" id="rent" name="rent" class="form-input" required min="100" max="99999" step="1" placeholder="854">
@@ -141,6 +144,7 @@
         </label>
       </div>
 
+      <!-- Upload -->
       <fieldset class="form-group">
         <legend class="form-label">Photos (jusqu'à 4, min 1)</legend>
         <div class="upload-zone" id="uploadZone">

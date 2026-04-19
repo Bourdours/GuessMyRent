@@ -16,6 +16,7 @@
 
     <?php require V_SKELETON . 'v_alerts.html.php'; ?>
 
+    <!-- Register form -->
     <form method="POST" action="<?= BASE_URL ?>/auth?action=register" class="auth-form" novalidate>
       <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
 
@@ -56,6 +57,7 @@
           minlength="8"
           autocomplete="new-password"
           placeholder="••••••••">
+        <!-- Password strength indicator -->
         <div class="pwd-strength" role="group" aria-label="Force du mot de passe">
           <div class="pwd-bar" id="pwdBar1"></div>
           <div class="pwd-bar" id="pwdBar2"></div>
@@ -66,6 +68,7 @@
       <button type="submit" class="btn-primary btn-full">Créer mon compte</button>
     </form>
 
+    <!-- Legal notice -->
     <p class="auth-legal mt-lg">
       En créant un compte, vous acceptez nos <a href="<?= BASE_URL ?>/info">CGU</a> et notre <a href="<?= BASE_URL ?>/info">politique de confidentialité</a>.
     </p>

@@ -12,6 +12,7 @@ class UserModel extends Model
         $this->primaryKey = "id_user";
     }
 
+    /** Find a user by email; returns false if not found */
     public function findByEmail(string $email): array|false
     {
         $query = $this->executeQueryWithBind(
@@ -21,6 +22,7 @@ class UserModel extends Model
         return $query->fetch();
     }
 
+    /** Insert a new user and return the generated ID */
     public function create(
         string  $email,
         string  $hashedPassword,
@@ -42,6 +44,7 @@ class UserModel extends Model
         return (int) self::connect()->lastInsertId();
     }
 
+    /** Update a user's public profile (pseudo and avatar) */
     public function updateProfile(int $id, ?string $pseudo, ?string $avatar): bool
     {
         return $this->executeQueryWithBind(
@@ -54,6 +57,7 @@ class UserModel extends Model
         )->rowCount() > 0;
     }
 
+    /** Update a user's email address */
     public function updateEmail(int $id, string $newEmail): bool
     {
         return $this->executeQueryWithBind(
@@ -65,6 +69,7 @@ class UserModel extends Model
         )->rowCount() > 0;
     }
 
+    /** Update a user's hashed password */
     public function updatePassword(int $id, string $hashedPassword): bool
     {
         return $this->executeQueryWithBind(
@@ -76,6 +81,7 @@ class UserModel extends Model
         )->rowCount() > 0;
     }
 
+    /** Admin full-update: email, pseudo, avatar, role, and optionally password */
     public function adminUpdate(int $id, string $email, string $pseudo, ?string $avatar, bool $isAdmin, ?string $hashedPassword): bool
     {
         if ($hashedPassword !== null) {
@@ -104,6 +110,7 @@ class UserModel extends Model
         )->rowCount() > 0;
     }
 
+    /** Nullify user references in GAME/ESTATE then delete the user row */
     public function delete(int $id): void
     {
         $this->executeQueryWithBind('UPDATE GAME SET id_user = NULL WHERE id_user = :id', ['id' => $id]);

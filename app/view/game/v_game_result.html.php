@@ -1,4 +1,5 @@
 <?php
+/* Score pill color and message based on gap */
 $pillCls = match (true) {
   $gap <= 5  => 'pill-green',
   $gap <= 15 => 'pill-gold',
@@ -21,6 +22,7 @@ $scoreMsg = match (true) {
     <p>Voici le résultat de votre estimation.</p>
   </div>
 
+  <!-- Result layout: score card + estate recap -->
   <div class="game-result-layout container">
 
     <!-- Score card -->
@@ -64,6 +66,7 @@ $scoreMsg = match (true) {
 
   <!-- Actions -->
   <div class="game-result-actions container">
+    <!-- Guest: prompt to register -->
     <?php if ($isGuestLimited ?? false): ?>
       <div class="alert alert-warning alert-full">
         <strong>C'était votre partie gratuite !</strong><br>
@@ -71,6 +74,7 @@ $scoreMsg = match (true) {
       </div>
       <a href="<?= BASE_URL ?>/auth?action=register" class="btn-primary">Créer un compte</a>
       <a href="<?= BASE_URL ?>/auth?action=login" class="btn-secondary">Se connecter</a>
+    <!-- Logged-in user: play again or view profile -->
     <?php else: ?>
       <div class="alert alert-info alert-full">
         <strong>Partie enregistrée !</strong> Retrouvez vos statistiques dans votre profil.

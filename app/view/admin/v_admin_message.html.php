@@ -2,7 +2,7 @@
 
     <?php require __DIR__ . '/v_admin_sidebar.html.php'; ?>
 
-    <!-- Main -->
+    <!-- Main content -->
     <section class="admin-main">
 
         <header class="admin-header-bar">
@@ -11,12 +11,13 @@
 
         <?php require V_SKELETON . 'v_alerts.html.php'; ?>
 
-        <!-- Liste des parties -->
+        <!-- Message list -->
         <section class="admin-table-wrap">
             <header class="admin-table-header">
                 <h2>Messages <span class="pill pill-purple"><?= count($message ?? []) ?></span></h2>
             </header>
 
+            <!-- Empty state -->
             <?php if (empty($message)): ?>
                 <p class="admin-empty-state">Aucun message enregistré.</p>
             <?php else: ?>
@@ -57,7 +58,7 @@
             <?php endif; ?>
         </section>
 
-        <!-- Détail d'une partie -->
+        <!-- Message detail -->
         <section class="admin-table-wrap" id="messageDetail" style="display:none;">
             <header class="admin-table-header">
                 <h2>Détail du message</h2>
@@ -100,6 +101,7 @@
     </section>
 </div>
 
+<!-- Data store: passes PHP data to admin.js via data-* attributes -->
 <div id="admin-data" hidden
     data-page="message-list"
     data-message="<?= htmlspecialchars(json_encode(array_values($message ?? []), JSON_HEX_TAG)) ?>"></div>

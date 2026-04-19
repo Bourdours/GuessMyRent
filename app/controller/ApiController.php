@@ -10,6 +10,7 @@ use GmR\model\StatusModel;
 
 class ApiController extends BaseController
 {
+    /** Admin: display the API import form and process estate imports */
     public function adminApi(): void
     {
         $this->requireAdmin();
@@ -43,6 +44,7 @@ class ApiController extends BaseController
         ]);
     }
 
+    /** Validate, download images, and persist an estate from external API data; returns success or error array */
     private function handleApiImport(ApiEstateModel $apiModel): array
     {
         $apiId        = (int) ($_POST['api_id'] ?? 0);
@@ -80,18 +82,18 @@ class ApiController extends BaseController
             return ['error' => 'Au moins une image est requise.'];
         }
 
-        // Type : cherche ou crée
+        // Find or create the estate type
         $typeModel = new TypeModel();
         $type      = $typeModel->findByLabel($typeLabel);
         $typeId    = $type ? (int) $type['id_type'] : $typeModel->create($typeLabel);
 
-        // Statut "déposé"
+        // Get the "submitted" status
         $status = (new StatusModel())->findByLabel('déposé');
         if (!$status) {
             return ['error' => 'Statut "déposé" introuvable en base.'];
         }
 
-        // Téléchargement des images
+        // Download images from URL
         $imageNames = [null, null, null, null];
         $mimeToExt  = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
         $finfo      = new \finfo(FILEINFO_MIME_TYPE);

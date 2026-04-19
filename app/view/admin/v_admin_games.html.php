@@ -2,7 +2,7 @@
 
   <?php require __DIR__ . '/v_admin_sidebar.html.php'; ?>
 
-  <!-- Main -->
+  <!-- Main content -->
   <section class="admin-main">
 
     <header class="admin-header-bar">
@@ -11,12 +11,13 @@
 
     <?php require V_SKELETON . 'v_alerts.html.php'; ?>
 
-    <!-- Liste des parties -->
+    <!-- Game list -->
     <section class="admin-table-wrap">
       <header class="admin-table-header">
         <h2>Parties <span class="pill pill-purple"><?= count($games ?? []) ?></span></h2>
       </header>
 
+      <!-- Empty state -->
       <?php if (empty($games)): ?>
         <p class="admin-empty-state">Aucune partie enregistrée.</p>
       <?php else: ?>
@@ -52,7 +53,7 @@
                   </td>
                   <td class="td-actions" onclick="event.stopPropagation()">
                     <form method="POST" action="<?= BASE_URL ?>/admin/parties" class="form-inline"
-                          onsubmit="return confirm('Supprimer définitivement cette partie ?')">
+                      onsubmit="return confirm('Supprimer définitivement cette partie ?')">
                       <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                       <input type="hidden" name="game_id" value="<?= (int)$g['id_game'] ?>">
                       <input type="hidden" name="action" value="delete">
@@ -67,7 +68,7 @@
       <?php endif; ?>
     </section>
 
-    <!-- Détail d'une partie -->
+    <!-- Game detail -->
     <section class="admin-table-wrap" id="gameDetail" style="display:none;">
       <header class="admin-table-header">
         <h2>Détail de la partie</h2>
@@ -102,7 +103,7 @@
 
       <div class="depose-actions">
         <form method="POST" action="<?= BASE_URL ?>/admin/parties" class="form-inline" id="gform-delete"
-              onsubmit="return confirm('Supprimer définitivement cette partie ?')" style="display:none;">
+          onsubmit="return confirm('Supprimer définitivement cette partie ?')" style="display:none;">
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
           <input type="hidden" name="game_id" id="gact-id-delete" value="">
           <input type="hidden" name="action" value="delete">
@@ -114,7 +115,7 @@
   </section>
 </div>
 
+<!-- Data store: passes PHP data to admin.js via data-* attributes -->
 <div id="admin-data" hidden
   data-page="game-list"
-  data-games="<?= htmlspecialchars(json_encode(array_values($games ?? []), JSON_HEX_TAG)) ?>"
-></div>
+  data-games="<?= htmlspecialchars(json_encode(array_values($games ?? []), JSON_HEX_TAG)) ?>"></div>

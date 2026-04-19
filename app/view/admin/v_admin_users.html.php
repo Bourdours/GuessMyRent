@@ -2,7 +2,7 @@
 
   <?php require __DIR__ . '/v_admin_sidebar.html.php'; ?>
 
-  <!-- Main -->
+  <!-- Main content -->
   <section class="admin-main">
 
     <header class="admin-header-bar">
@@ -11,12 +11,13 @@
 
     <?php require V_SKELETON . 'v_alerts.html.php'; ?>
 
-    <!-- Étape 1 : sélectionner un utilisateur -->
+    <!-- Step 1: select a user -->
     <section class="admin-table-wrap">
       <header class="admin-table-header">
         <h2>Étape 1 — Sélectionner un utilisateur <span class="pill pill-purple"><?= count($users ?? []) ?></span></h2>
       </header>
 
+      <!-- Empty state -->
       <?php if (empty($users)): ?>
         <p class="admin-empty-state">Aucun utilisateur enregistré.</p>
       <?php else: ?>
@@ -45,11 +46,12 @@
                     <?php endif; ?>
                   </td>
                   <td class="td-actions">
+                    <!-- Prevent self-deletion -->
                     <?php if ((int)$u['id_user'] !== (int)$_SESSION['user_id']): ?>
                       <button type="button" class="btn-secondary btn-sm"
-                              onclick="selectUser(<?= (int)$u['id_user'] ?>)">Correction</button>
+                        onclick="selectUser(<?= (int)$u['id_user'] ?>)">Correction</button>
                       <form method="POST" action="<?= BASE_URL ?>/admin/utilisateurs" class="form-inline"
-                            onsubmit="return confirm('Supprimer définitivement cet utilisateur ?')">
+                        onsubmit="return confirm('Supprimer définitivement cet utilisateur ?')">
                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                         <input type="hidden" name="user_id" value="<?= (int)$u['id_user'] ?>">
                         <input type="hidden" name="action" value="delete">
@@ -67,7 +69,7 @@
       <?php endif; ?>
     </section>
 
-    <!-- Étape 2 : modifier l'utilisateur -->
+    <!-- Step 2: edit the user -->
     <section class="admin-table-wrap" id="userEdit" style="display:none;">
       <header class="admin-table-header">
         <h2>Étape 2 — Modifier l'utilisateur</h2>
@@ -114,7 +116,7 @@
   </section>
 </div>
 
+<!-- Data store: passes PHP data to admin.js via data-* attributes -->
 <div id="admin-data" hidden
   data-page="user-list"
-  data-users="<?= htmlspecialchars(json_encode(array_values($users ?? []), JSON_HEX_TAG)) ?>"
-></div>
+  data-users="<?= htmlspecialchars(json_encode(array_values($users ?? []), JSON_HEX_TAG)) ?>"></div>

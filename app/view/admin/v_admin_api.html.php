@@ -2,7 +2,7 @@
 
   <?php require __DIR__ . '/v_admin_sidebar.html.php'; ?>
 
-  <!-- Main -->
+  <!-- Main content -->
   <section class="admin-main">
 
     <header class="admin-header-bar">
@@ -11,7 +11,7 @@
 
     <?php require V_SKELETON . 'v_alerts.html.php'; ?>
 
-    <!-- Étape 1 : récupérer -->
+    <!-- Step 1: fetch -->
     <section class="admin-table-wrap">
       <header class="admin-table-header">
         <h2>Étape 1 — Récupérer les biens</h2>
@@ -22,7 +22,7 @@
       </div>
     </section>
 
-    <!-- Étape 2 : sélectionner -->
+    <!-- Step 2: select -->
     <section class="admin-table-wrap" id="selectWrapper" style="display:none;">
       <header class="admin-table-header">
         <h2>Étape 2 — Sélectionner un bien</h2>
@@ -34,7 +34,7 @@
       </div>
     </section>
 
-    <!-- Étape 3 : vérifier et importer -->
+    <!-- Step 3: review and import -->
     <section class="admin-table-wrap" id="bienDetail" style="display:none;">
       <header class="admin-table-header">
         <h2>Étape 3 — Vérifier et importer</h2>
@@ -81,7 +81,7 @@
                 </td>
               </tr>
 
-              <!-- lieux → 3 champs BDD, 1 cellule API -->
+              <!-- location → 3 DB fields, 1 API cell -->
               <tr>
                 <td class="field-label">Adresse</td>
                 <td class="api-raw" id="raw-lieux" rowspan="3">—</td>
@@ -158,7 +158,7 @@
           </table>
         </div>
 
-        <!-- Aperçu images + sélection -->
+        <!-- Image preview + selection -->
         <div class="api-images-section">
           <h3>Images <span class="api-status" id="img-count-label"></span></h3>
           <div class="api-img-grid" id="imgGrid"></div>
@@ -173,6 +173,7 @@
   </section>
 </div>
 
+<!-- Data store: passes PHP data to admin.js via data-* attributes -->
 <div id="admin-data" hidden
   data-page="api"
   data-imported-ids="<?= htmlspecialchars(json_encode(array_map('intval', $imported_api_ids ?? []))) ?>"

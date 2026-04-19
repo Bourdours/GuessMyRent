@@ -12,17 +12,19 @@ class GameModel extends Model
         $this->primaryKey = "id_game";
     }
 
+    /** Compute the percentage gap between guess and actual rent */
     public static function computeGap(int $guess, int $rent): float
     {
         return abs($guess - $rent) / $rent * 100;
     }
 
-    // score = 100 - gap%, arrondi à l'entier, minimum 0
+    /** Compute score as 100 - gap%, rounded to integer, minimum 0 */
     public static function computeScore(int $guess, int $rent): int
     {
         return max(0, (int) round(100 - self::computeGap($guess, $rent)));
     }
 
+    /** Insert a new game record and return the generated ID */
     public function create(int $guess, ?int $score, int $estateId, ?int $userId): int
     {
         $this->executeQueryWithBind(
@@ -38,6 +40,7 @@ class GameModel extends Model
         return (int) self::connect()->lastInsertId();
     }
 
+    /** Fetch all games played by a user with full estate details, newest first */
     public function findByUser(int $userId): array
     {
         return $this->executeQueryWithBind(
@@ -56,11 +59,13 @@ class GameModel extends Model
         )->fetchAll();
     }
 
+    /** Count total number of games in the database */
     public function countAll(): int
     {
         return (int) $this->executeQuery('SELECT COUNT(*) FROM GAME')->fetchColumn();
     }
 
+    /** Average score across all scored games; returns 0 if no data */
     public function avgScore(): int
     {
         $avg = $this->executeQuery(
@@ -69,6 +74,7 @@ class GameModel extends Model
         return $avg !== false ? (int) round($avg) : 0;
     }
 
+    /** Fetch all games joined with player pseudo and estate city, newest first */
     public function findJoinedAll(): array
     {
         return $this->executeQuery(
@@ -81,6 +87,7 @@ class GameModel extends Model
         )->fetchAll();
     }
 
+    /** Return distinct estate IDs already played by a user */
     public function findPlayedEstateIdsByUser(int $userId): array
     {
         return $this->executeQueryWithBind(
@@ -89,6 +96,7 @@ class GameModel extends Model
         )->fetchAll(\PDO::FETCH_COLUMN) ?: [];
     }
 
+    /** Fetch top players ranked by total points */
     public function leaderboard(int $limit = 10): array
     {
         return $this->executeQueryWithBind(
@@ -106,6 +114,7 @@ class GameModel extends Model
         )->fetchAll();
     }
 
+    /** Return the leaderboard rank of a user (1-based) */
     public function getUserRank(int $userId): int
     {
         $row = $this->executeQueryWithBind(
@@ -126,7 +135,7 @@ class GameModel extends Model
         return (int) ($row['rank_pos'] ?? 1);
     }
 
-    // Supprime toutes les parties d'un utilisateur
+    /** Delete all games belonging to a user */
     public function deleteByUser(int $userId): bool
     {
         return $this->executeQueryWithBind(

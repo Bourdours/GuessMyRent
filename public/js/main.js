@@ -1,9 +1,8 @@
-/* ============================================================
-   GuessMyRent — main.js
-   Burger menu
-   ============================================================ */
+// ═══════════════════════════════════════════════════════════════
+//   MAIN
+// ═══════════════════════════════════════════════════════════════
 
-/* ── Bandeau cookies ─────────────────────────────────────── */
+// ── Cookie banner ─────────────────────────────────────────────
 (function () {
   const COOKIE_KEY = "cookieNoticeAccepted";
   const banner = document.getElementById("cookieBanner");
@@ -20,7 +19,7 @@
   });
 })();
 
-/* ── Musique de fond (global) ────────────────────────────── */
+// ── Background music (global) ─────────────────────────────────
 (function () {
   const audio = document.getElementById("bgMusic");
   const btn = document.getElementById("musicBtn");
@@ -65,7 +64,7 @@
     setPlaying(audio.paused);
   });
 
-  // Ancrage au-dessus du footer
+  // Anchor above the footer
   const footer = document.querySelector("footer");
   const BASE_BOTTOM = 32;
 
@@ -83,7 +82,7 @@
   updateMusicBtnBottom();
 })();
 
-/* ── Burger menu ─────────────────────────────────────────── */
+// ── Burger menu ───────────────────────────────────────────────
 (function () {
   const burger = document.getElementById("burgerBtn");
   const drawer = document.getElementById("navDrawer");
@@ -117,7 +116,7 @@
   });
 })();
 
-/* ── Password strength indicator ────────────────────────── */
+// ── Password strength indicator ───────────────────────────────
 (function () {
   const pwd = document.getElementById("pwdInput");
   const bar1 = document.getElementById("pwdBar1");
@@ -151,7 +150,7 @@
   });
 })();
 
-/* ── Photo upload (max 4, min 1) ────────────────────────────────── */
+// ── Photo upload (max 4, min 1) ───────────────────────────────
 (function () {
   const input = document.getElementById("photoInput");
   const preview = document.getElementById("photoPreview");
@@ -220,7 +219,7 @@
   }
 })();
 
-/* ── Contact textarea char counter ──────────────────────── */
+// ── Contact textarea char counter ─────────────────────────────
 (function () {
   const ta = document.getElementById("content");
   const count = document.getElementById("charCount");

@@ -8,6 +8,7 @@ use GmR\model\EstateModel;
 
 class GameController extends BaseController
 {
+    /** Display the game page or process a guess submission */
     public function play(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -17,7 +18,7 @@ class GameController extends BaseController
 
         $userId = $_SESSION['user_id'] ?? null;
 
-        // Visiteurs non inscrits : limiter à 1 partie
+        // Unregistered visitors: limit to 1 game
         if (!$userId && ($_SESSION['guest_games_count'] ?? 0) >= 1) {
             $this->refreshCsrf();
             $this->render(V_GAME . 'v_game.html.php', [
@@ -33,7 +34,7 @@ class GameController extends BaseController
 
         $estateModel = new EstateModel();
 
-        // Exclure les biens déjà joués par l'utilisateur connecté
+        // Exclude estates already played by the logged-in user
         $excludeIds = $userId ? (new GameModel())->findPlayedEstateIdsByUser($userId) : [];
         $estate     = $estateModel->findRandomActive($excludeIds);
         $avgRent    = $estateModel->avgRent();
@@ -50,6 +51,7 @@ class GameController extends BaseController
         ]);
     }
 
+    /** Admin: list all games and handle deletion */
     public function adminList(): void
     {
         $this->requireAdmin();
@@ -78,6 +80,7 @@ class GameController extends BaseController
         ]);
     }
 
+    /** Validate the guess POST, compute score, persist the game, and render the result */
     private function handleGuess(): void
     {
         $this->validateCsrf();
@@ -102,7 +105,7 @@ class GameController extends BaseController
         $userId = $_SESSION['user_id'] ?? null;
         (new GameModel())->create($guess, $score, $estateId, $userId);
 
-        // Incrémenter le compteur de parties pour les visiteurs non inscrits
+        // Increment game counter for unregistered visitors
         if (!$userId) {
             $_SESSION['guest_games_count'] = ($_SESSION['guest_games_count'] ?? 0) + 1;
         }

@@ -7,13 +7,7 @@
         <p class="rank-label">⭐ Joueur</p>
     </div>
 
-    <!-- Flash messages -->
-    <?php if (!empty($flash_success)): ?>
-        <div class="alert alert-success mb-md" role="status"><?= htmlspecialchars($flash_success) ?></div>
-    <?php endif; ?>
-    <?php if (!empty($flash_error)): ?>
-        <div class="alert alert-error mb-md" role="alert"><?= htmlspecialchars($flash_error) ?></div>
-    <?php endif; ?>
+    <?php require V_SKELETON . 'v_alerts.html.php'; ?>
 
     <!-- Stats band -->
     <section class="profile-stats" aria-label="Statistiques du joueur">
@@ -87,42 +81,42 @@
         </section>
     </div>
 
-    <!-- Classement général -->
+    <!-- Overall leaderboard -->
     <?php if (!empty($leaderboard)): ?>
-    <div class="profile-content">
-        <section class="profile-section">
-            <h3>Classement général</h3>
-            <div class="table-overflow">
-                <table class="history-table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Joueur</th>
-                            <th>Parties</th>
-                            <th>Score moyen</th>
-                            <th>Total pts</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($leaderboard as $i => $row):
-                            $isMe = ($row['pseudo'] === $pseudo);
-                        ?>
-                        <tr <?= $isMe ? 'class="leaderboard-me"' : '' ?>>
-                            <td><strong><?= $i + 1 ?></strong></td>
-                            <td><?= htmlspecialchars($row['pseudo']) ?><?= $isMe ? ' <span class="pill pill-purple">Vous</span>' : '' ?></td>
-                            <td><?= (int)$row['nb_parties'] ?></td>
-                            <td><?= (int)$row['avg_score'] ?> pts</td>
-                            <td><strong><?= number_format((int)$row['total_pts'], 0, ',', ' ') ?> pts</strong></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </div>
+        <div class="profile-content">
+            <section class="profile-section">
+                <h3>Classement général</h3>
+                <div class="table-overflow">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Joueur</th>
+                                <th>Parties</th>
+                                <th>Score moyen</th>
+                                <th>Total pts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($leaderboard as $i => $row):
+                                $isMe = ($row['pseudo'] === $pseudo);
+                            ?>
+                                <tr <?= $isMe ? 'class="leaderboard-me"' : '' ?>>
+                                    <td><strong><?= $i + 1 ?></strong></td>
+                                    <td><?= htmlspecialchars($row['pseudo']) ?><?= $isMe ? ' <span class="pill pill-purple">Vous</span>' : '' ?></td>
+                                    <td><?= (int)$row['nb_parties'] ?></td>
+                                    <td><?= (int)$row['avg_score'] ?> pts</td>
+                                    <td><strong><?= number_format((int)$row['total_pts'], 0, ',', ' ') ?> pts</strong></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
     <?php endif; ?>
 
-    <!-- Détail du bien sélectionné -->
+    <!-- Selected estate detail -->
     <div class="profile-content" id="profilEstateDetail" style="display:none;">
         <section class="profile-section">
             <header style="display:flex; justify-content:space-between; align-items:center;">
@@ -195,7 +189,7 @@
                 <button type="button" class="btn-danger" onclick="toggleProfilPanel('delete')">Supprimer mon compte</button>
             </div>
 
-            <!-- Étape : modifier -->
+            <!-- Step: edit -->
             <div id="profil-panel-edit" style="display:none;" class="profil-panel">
                 <h3>Modifier mon profil</h3>
                 <form method="POST" action="<?= BASE_URL ?>/profil/modifier">
@@ -205,25 +199,25 @@
                         <div class="edit-field">
                             <label class="form-label" for="edit-pseudo">Pseudo</label>
                             <input class="form-input" type="text" id="edit-pseudo" name="pseudo"
-                                   value="<?= htmlspecialchars($pseudo) ?>" required maxlength="50">
+                                value="<?= htmlspecialchars($pseudo) ?>" required maxlength="50">
                         </div>
 
                         <div class="edit-field">
                             <label class="form-label" for="edit-email">Email</label>
                             <input class="form-input" type="email" id="edit-email" name="email"
-                                   value="<?= htmlspecialchars($user['email'] ?? '') ?>" required maxlength="150">
+                                value="<?= htmlspecialchars($user['email'] ?? '') ?>" required maxlength="150">
                         </div>
 
                         <div class="edit-field">
                             <label class="form-label" for="edit-password">Nouveau mot de passe <small>(laisser vide = inchangé)</small></label>
                             <input class="form-input" type="password" id="edit-password" name="new_password"
-                                   minlength="8" autocomplete="new-password">
+                                minlength="8" autocomplete="new-password">
                         </div>
 
                         <div class="edit-field">
                             <label class="form-label" for="edit-confirm">Confirmer le mot de passe</label>
                             <input class="form-input" type="password" id="edit-confirm" name="confirm_password"
-                                   minlength="8" autocomplete="new-password">
+                                minlength="8" autocomplete="new-password">
                         </div>
                     </div>
 
@@ -234,12 +228,12 @@
                 </form>
             </div>
 
-            <!-- Étape : supprimer -->
+            <!-- Step: delete -->
             <div id="profil-panel-delete" style="display:none;" class="profil-panel">
                 <h3>Supprimer mon compte</h3>
                 <p>La suppression est définitive. Vos parties et vos biens proposés sont conservés mais anonymisés.</p>
                 <form method="POST" action="<?= BASE_URL ?>/profil/supprimer"
-                      onsubmit="return confirm('Supprimer définitivement votre compte ?');">
+                    onsubmit="return confirm('Supprimer définitivement votre compte ?');">
                     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                     <div class="depose-actions">
                         <button type="submit" class="btn-danger">Confirmer la suppression</button>
@@ -253,6 +247,7 @@
 
 </section>
 
+<!-- Data store: passes PHP data to profil.js via data-* attributes -->
 <div id="profil-data" hidden
     data-history="<?= htmlspecialchars(json_encode(array_values($history ?? []), JSON_HEX_TAG)) ?>"
     data-base-url="<?= htmlspecialchars($baseUrl) ?>"></div>

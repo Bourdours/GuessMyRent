@@ -12,6 +12,7 @@ class EstateModel extends Model
         $this->primaryKey = "id_estate";
     }
 
+    /** Fetch all estates joined with status and type labels, newest first */
     public function findJoinedAll(): array
     {
         return $this->executeQuery(
@@ -23,6 +24,7 @@ class EstateModel extends Model
         )->fetchAll();
     }
 
+    /** Fetch all estates belonging to a given user, newest first */
     public function findByUser(int $userId): array
     {
         return $this->executeQueryWithBind(
@@ -36,6 +38,7 @@ class EstateModel extends Model
         )->fetchAll();
     }
 
+    /** Fetch all estates with status "jouable" (playable) */
     public function findActive(): array
     {
         return $this->executeQueryWithBind(
@@ -48,6 +51,7 @@ class EstateModel extends Model
         )->fetchAll();
     }
 
+    /** Fetch all estates with status "déposé" (pending validation) */
     public function findInactive(): array
     {
         return $this->executeQueryWithBind(
@@ -60,6 +64,7 @@ class EstateModel extends Model
         )->fetchAll();
     }
 
+    /** Fetch all estates with status "archivé" */
     public function findArchived(): array
     {
         return $this->executeQueryWithBind(
@@ -72,7 +77,7 @@ class EstateModel extends Model
         )->fetchAll();
     }
 
-    /** Retourne un bien actif (id_status = 1) aléatoire pour une partie */
+    /** Returns a random active estate (id_status = 1) for a game */
     public function getRandom(): array|false
     {
         $query = $this->executeQuery(
@@ -81,6 +86,7 @@ class EstateModel extends Model
         return $query->fetch();
     }
 
+    /** Returns a random playable estate, excluding already-played IDs */
     public function findRandomActive(array $excludeIds = []): array|false
     {
         $params  = [];
@@ -109,6 +115,7 @@ class EstateModel extends Model
         )->fetch();
     }
 
+    /** Count all playable estates */
     public function countActive(): int
     {
         return (int) $this->executeQueryWithBind(
@@ -119,6 +126,7 @@ class EstateModel extends Model
         )->fetchColumn();
     }
 
+    /** Count distinct cities among playable estates */
     public function countCities(): int
     {
         return (int) $this->executeQueryWithBind(
@@ -129,6 +137,7 @@ class EstateModel extends Model
         )->fetchColumn();
     }
 
+    /** Update the status of an estate */
     public function updateStatus(int $id, int $statusId): void
     {
         $this->executeQueryWithBind(
@@ -140,6 +149,7 @@ class EstateModel extends Model
         );
     }
 
+    /** Update all editable fields of an estate; returns true if a row was changed */
     public function update(int $id, array $data): bool
     {
         $data['id'] = $id;
@@ -168,6 +178,7 @@ class EstateModel extends Model
         )->rowCount() > 0;
     }
 
+    /** Insert a new estate and return its generated ID */
     public function create(array $data): int
     {
         $this->executeQueryWithBind(
@@ -184,6 +195,7 @@ class EstateModel extends Model
         return (int) self::connect()->lastInsertId();
     }
 
+    /** Average rent across all playable estates; falls back to 800 if no data */
     public function avgRent(): int
     {
         $avg = $this->executeQueryWithBind(

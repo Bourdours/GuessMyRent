@@ -12,6 +12,7 @@ class TypeModel extends Model
         $this->primaryKey = "id_type";
     }
 
+    /** Find a type row by label (case-insensitive); returns false if not found */
     public function findByLabel(string $label): array|false
     {
         return $this->executeQueryWithBind(
@@ -20,6 +21,7 @@ class TypeModel extends Model
         )->fetch();
     }
 
+    /** Insert a new type and return the generated ID */
     public function create(string $label): int
     {
         $this->executeQueryWithBind(
@@ -29,6 +31,7 @@ class TypeModel extends Model
         return (int) self::connect()->lastInsertId();
     }
 
+    /** Update a type label; returns true if a row was changed */
     public function update(int $id, string $label): bool
     {
         return $this->executeQueryWithBind(

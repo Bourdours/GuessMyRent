@@ -1,6 +1,6 @@
 </main>
 
-<!-- Bouton musique flottant (global) -->
+<!-- Floating music button (global) -->
 <audio id="bgMusic" loop>
   <source src="<?= BASE_URL ?>/public/audio/boucle25.ogg" type="audio/ogg">
   <source src="<?= BASE_URL ?>/public/audio/boucle25.mp3" type="audio/mpeg">
@@ -17,7 +17,7 @@
   </nav>
 </footer>
 
-<!-- Bandeau cookies -->
+<!-- Cookie banner -->
 <div id="cookieBanner" class="cookie-banner" role="dialog" aria-modal="false" aria-label="Gestion des cookies" hidden>
   <p class="cookie-banner__text">
     Ce site utilise uniquement des cookies de session nécessaires à son fonctionnement (authentification). Aucun cookie publicitaire ou de tracking n'est utilisé.

@@ -5,7 +5,7 @@ define('BASE_URL', rtrim(dirname($_SERVER['SCRIPT_NAME']), '/'));
 
 define("CONFIG", dirname(__DIR__) . "/config/");
 
-define("APP", dirname(__DIR__). "/app/");
+define("APP", dirname(__DIR__) . "/app/");
 define("CONTROLLER", APP . "controller/");
 define("MODEL", APP . "model/");
 
