@@ -89,6 +89,43 @@ class GameModel extends Model
         )->fetchAll(\PDO::FETCH_COLUMN) ?: [];
     }
 
+    public function leaderboard(int $limit = 10): array
+    {
+        return $this->executeQueryWithBind(
+            'SELECT u.pseudo, u.avatar,
+                    SUM(g.game_result) AS total_pts,
+                    COUNT(*)           AS nb_parties,
+                    ROUND(AVG(g.game_result)) AS avg_score
+             FROM GAME g
+             JOIN USER u ON g.id_user = u.id_user
+             WHERE g.id_user IS NOT NULL AND g.game_result IS NOT NULL
+             GROUP BY g.id_user, u.pseudo, u.avatar
+             ORDER BY total_pts DESC
+             LIMIT :lim',
+            ['lim' => $limit]
+        )->fetchAll();
+    }
+
+    public function getUserRank(int $userId): int
+    {
+        $row = $this->executeQueryWithBind(
+            'SELECT COUNT(*) + 1 AS rank_pos
+             FROM (
+               SELECT id_user, SUM(game_result) AS total_pts
+               FROM GAME
+               WHERE id_user IS NOT NULL AND game_result IS NOT NULL
+               GROUP BY id_user
+             ) t
+             WHERE t.total_pts > (
+               SELECT COALESCE(SUM(game_result), 0)
+               FROM GAME
+               WHERE id_user = :id_user AND game_result IS NOT NULL
+             )',
+            ['id_user' => $userId]
+        )->fetch();
+        return (int) ($row['rank_pos'] ?? 1);
+    }
+
     // Supprime toutes les parties d'un utilisateur
     public function deleteByUser(int $userId): bool
     {

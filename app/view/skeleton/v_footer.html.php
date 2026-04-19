@@ -17,6 +17,15 @@
   </nav>
 </footer>
 
+<!-- Bandeau cookies -->
+<div id="cookieBanner" class="cookie-banner" role="dialog" aria-modal="false" aria-label="Gestion des cookies" hidden>
+  <p class="cookie-banner__text">
+    Ce site utilise uniquement des cookies de session nécessaires à son fonctionnement (authentification). Aucun cookie publicitaire ou de tracking n'est utilisé.
+    <a href="<?= BASE_URL ?>/info#cookies">En savoir plus</a>
+  </p>
+  <button id="cookieAccept" class="cookie-banner__btn">J'ai compris</button>
+</div>
+
 <script src="<?= BASE_URL ?>/public/js/main.js"></script>
 <?php if (!empty($pageScript)): ?>
   <script src="<?= htmlspecialchars($pageScript) ?>" defer></script>

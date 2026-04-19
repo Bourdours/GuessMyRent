@@ -66,6 +66,14 @@ class Router
                 (new UserController())->history();
                 break;
 
+            case '/profil/modifier':
+                (new UserController())->editAccount();
+                break;
+
+            case '/profil/supprimer':
+                (new UserController())->deleteAccount();
+                break;
+
             case '/admin':
                 (new UserController())->dashboard();
                 break;

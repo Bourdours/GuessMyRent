@@ -1722,6 +1722,10 @@ footer a:hover {
 .history-table tbody tr:hover {
   background: rgba(174, 73, 242, 0.03);
 }
+.history-table tbody tr.leaderboard-me {
+  background: rgba(174, 73, 242, 0.08);
+  font-weight: 600;
+}
 
 .profile-actions {
   display: flex;
@@ -1730,6 +1734,22 @@ footer a:hover {
   padding: 0 20px 32px;
   max-width: 800px;
   margin: 0 auto;
+}
+
+.profile-action-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.profil-panel {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1.5px solid rgba(27, 1, 64, 0.1);
+}
+.profil-panel h3 {
+  margin-bottom: 1rem;
 }
 
 .game-page {
@@ -2094,6 +2114,56 @@ footer a:hover {
   letter-spacing: 0.08em;
   color: rgba(27, 1, 64, 0.45);
   margin-bottom: 20px;
+}
+
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  background: #1B0140;
+  color: #F2EBDC;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.3);
+}
+.cookie-banner[hidden] {
+  display: none;
+}
+.cookie-banner__text {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.cookie-banner__text a {
+  color: #F2B05E;
+  text-decoration: underline;
+}
+.cookie-banner__btn {
+  flex-shrink: 0;
+  background: #692DA6;
+  color: #ffffff;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.5rem 1.25rem;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+.cookie-banner__btn:hover {
+  background: #AE49F2;
+}
+@media (max-width: 600px) {
+  .cookie-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cookie-banner__btn {
+    align-self: flex-end;
+  }
 }
 
 .result-row {

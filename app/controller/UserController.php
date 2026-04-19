@@ -128,9 +128,11 @@ class UserController extends BaseController
     public function profil(): void
     {
         $this->requireAuth();
+        $this->refreshCsrf();
 
-        $user    = (new UserModel())->findById($_SESSION['user_id']);
-        $history = (new GameModel())->findByUser($_SESSION['user_id']);
+        $gameModel = new GameModel();
+        $user      = (new UserModel())->findById($_SESSION['user_id']);
+        $history   = $gameModel->findByUser($_SESSION['user_id']);
 
         $pseudo     = $user['username'] ?? $user['pseudo'] ?? '';
         $initial    = mb_strtoupper(mb_substr($pseudo, 0, 1));
@@ -139,20 +141,103 @@ class UserController extends BaseController
         foreach ($history as $g) {
             $totalScore += (int)$g['game_result'];
         }
-        $avgScore   = $totalGames > 0 ? round($totalScore / $totalGames) : 0;
+        $avgScore    = $totalGames > 0 ? round($totalScore / $totalGames) : 0;
+        $userRank    = $totalGames > 0 ? $gameModel->getUserRank($_SESSION['user_id']) : null;
+        $leaderboard = $gameModel->leaderboard(10);
+
+        $flash_success = $_SESSION['flash_success'] ?? null;
+        $flash_error   = $_SESSION['flash_error']   ?? null;
+        unset($_SESSION['flash_success'], $_SESSION['flash_error']);
 
         $this->render(V_PROFIL . 'v_profil.html.php', [
-            'pageTitle'  => 'Mon profil',
-            'user'       => $user,
-            'pseudo'     => $pseudo,
-            'history'    => $history,
-            'initial'    => $initial,
-            'totalGames' => $totalGames,
-            'totalScore' => $totalScore,
-            'avgScore'   => $avgScore,
-            'baseUrl'    => BASE_URL,
-            'pageScript' => BASE_URL . '/public/js/profil.js',
+            'pageTitle'     => 'Mon profil',
+            'user'          => $user,
+            'pseudo'        => $pseudo,
+            'history'       => $history,
+            'initial'       => $initial,
+            'totalGames'    => $totalGames,
+            'totalScore'    => $totalScore,
+            'avgScore'      => $avgScore,
+            'userRank'      => $userRank,
+            'leaderboard'   => $leaderboard,
+            'baseUrl'       => BASE_URL,
+            'csrf_token'    => $_SESSION['csrf_token'],
+            'flash_success' => $flash_success,
+            'flash_error'   => $flash_error,
+            'pageScript'    => BASE_URL . '/public/js/profil.js',
         ]);
+    }
+
+    public function editAccount(): void
+    {
+        $this->requireAuth();
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: ' . BASE_URL . '/profil');
+            exit;
+        }
+
+        $this->validateCsrf();
+
+        $userId  = (int) $_SESSION['user_id'];
+        $pseudo  = trim($_POST['pseudo'] ?? '');
+        $email   = trim($_POST['email'] ?? '');
+        $newPwd  = $_POST['new_password'] ?? '';
+        $confirm = $_POST['confirm_password'] ?? '';
+
+        if ($pseudo === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['flash_error'] = 'Pseudo et email valide requis.';
+            header('Location: ' . BASE_URL . '/profil');
+            exit;
+        }
+
+        if ($newPwd !== '' && strlen($newPwd) < 8) {
+            $_SESSION['flash_error'] = 'Le mot de passe doit contenir au moins 8 caractères.';
+            header('Location: ' . BASE_URL . '/profil');
+            exit;
+        }
+
+        if ($newPwd !== '' && $newPwd !== $confirm) {
+            $_SESSION['flash_error'] = 'Les mots de passe ne correspondent pas.';
+            header('Location: ' . BASE_URL . '/profil');
+            exit;
+        }
+
+        $model = new UserModel();
+        $model->updateProfile($userId, $pseudo, null);
+        $model->updateEmail($userId, $email);
+
+        if ($newPwd !== '') {
+            $algo = defined('PASSWORD_ARGON2ID') ? PASSWORD_ARGON2ID : PASSWORD_BCRYPT;
+            $model->updatePassword($userId, password_hash($newPwd, $algo));
+        }
+
+        $_SESSION['pseudo']        = $pseudo;
+        $_SESSION['flash_success'] = 'Profil mis à jour avec succès.';
+
+        header('Location: ' . BASE_URL . '/profil');
+        exit;
+    }
+
+    public function deleteAccount(): void
+    {
+        $this->requireAuth();
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: ' . BASE_URL . '/profil');
+            exit;
+        }
+
+        $this->validateCsrf();
+
+        $userId = (int) $_SESSION['user_id'];
+        (new UserModel())->delete($userId);
+
+        $_SESSION = [];
+        session_destroy();
+
+        header('Location: ' . BASE_URL . '/');
+        exit;
     }
 
     public function history(): void

@@ -1,3 +1,17 @@
+# Dépendances
 vendor/
+node_modules/
+
+# Environnement
 .env
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Sass cache
+.sass-cache/
+*.css.map
+
+# Dossier perso
 trash/

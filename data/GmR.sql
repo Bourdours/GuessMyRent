@@ -167,16 +167,6 @@ CREATE TABLE `USER` (
   `is_admin` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `USER`
---
-
-INSERT INTO `USER` (`id_user`, `email`, `password`, `pseudo`, `avatar`, `is_admin`) VALUES
-(1, 'admin@admin.fr', '$2y$10$TZG1SzNKT.3aEHM7rpfxwOH5bpKdRmkTCThr62AMDn.YaNB5Q/Jum', 'Admin', NULL, 1),
-
---
--- Index pour les tables déchargées
---
 
 --
 -- Index pour la table `API_ESTATE`

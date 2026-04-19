@@ -2,6 +2,13 @@ Options -Indexes
 
 RewriteEngine On
 
+# Redirige HTTP vers HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Bloque l'accès direct aux dossiers sensibles
+RewriteRule ^(vendor|config|app|data)/ - [F,L]
+
 # Redirige tout vers index.php sauf les fichiers/dossiers existants
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

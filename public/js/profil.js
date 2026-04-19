@@ -79,3 +79,22 @@ function closeProfilDetail() {
   document.getElementById('profilEstateDetail').style.display = 'none';
   document.querySelectorAll('.history-table tbody tr').forEach(tr => tr.classList.remove('selected'));
 }
+
+// ═══════════════════════════════════════════════════════════════
+//   PROFIL — panneaux actions (modifier / supprimer)
+// ═══════════════════════════════════════════════════════════════
+
+function toggleProfilPanel(name) {
+  const panels = ['edit', 'delete'];
+  panels.forEach(function (p) {
+    const el = document.getElementById('profil-panel-' + p);
+    if (!el) return;
+    if (p === name) {
+      const isOpen = el.style.display !== 'none';
+      el.style.display = isOpen ? 'none' : '';
+      if (!isOpen) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      el.style.display = 'none';
+    }
+  });
+}

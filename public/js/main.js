@@ -3,6 +3,23 @@
    Burger menu
    ============================================================ */
 
+/* ── Bandeau cookies ─────────────────────────────────────── */
+(function () {
+  const COOKIE_KEY = "cookieNoticeAccepted";
+  const banner = document.getElementById("cookieBanner");
+  const btn = document.getElementById("cookieAccept");
+  if (!banner || !btn) return;
+
+  if (!localStorage.getItem(COOKIE_KEY)) {
+    banner.removeAttribute("hidden");
+  }
+
+  btn.addEventListener("click", function () {
+    localStorage.setItem(COOKIE_KEY, "1");
+    banner.setAttribute("hidden", "");
+  });
+})();
+
 /* ── Musique de fond (global) ────────────────────────────── */
 (function () {
   const audio = document.getElementById("bgMusic");
