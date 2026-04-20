@@ -16,12 +16,14 @@ class ApiController extends BaseController
         $this->requireAdmin();
 
         $apiModel    = new ApiEstateModel();
+        // Pre-load already-imported IDs to disable them in the JS dropdown
         $importedIds = array_map('intval', $apiModel->findAllExternalIds());
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->validateCsrf();
 
             $result      = $this->handleApiImport($apiModel);
+            // Reload imported IDs so the newly imported one appears as disabled
             $importedIds = array_map('intval', $apiModel->findAllExternalIds());
             $this->refreshCsrf();
 
@@ -47,8 +49,9 @@ class ApiController extends BaseController
     /** Validate, download images, and persist an estate from external API data; returns success or error array */
     private function handleApiImport(ApiEstateModel $apiModel): array
     {
+        // Sanitize and cast all form inputs
         $apiId        = (int) ($_POST['api_id'] ?? 0);
-        $rent         = (int) round((int) ($_POST['rent'] ?? 0) / 10) * 10;
+        $rent         = (int) round((int) ($_POST['rent'] ?? 0) / 10) * 10;  // round to nearest 10
         $isCharges    = (int) ($_POST['is_charges_included'] ?? 0);
         $adress       = trim($_POST['adress'] ?? '') ?: null;
         $city         = trim($_POST['city'] ?? '');
@@ -62,13 +65,15 @@ class ApiController extends BaseController
         $floor        = $floorRaw !== '' ? (int) $floorRaw : null;
         $description  = trim($_POST['description'] ?? '') ?: null;
         $typeLabel    = trim($_POST['type_label'] ?? '') ?: 'Autre';
-        $imageUrls = array_values(array_filter([
+        // Collect only non-empty image URLs (up to 4)
+        $imageUrls    = array_values(array_filter([
             trim($_POST['image_url_1'] ?? ''),
             trim($_POST['image_url_2'] ?? ''),
             trim($_POST['image_url_3'] ?? ''),
             trim($_POST['image_url_4'] ?? ''),
         ]));
 
+        // Guard: validate required fields before hitting the DB
         if ($apiId <= 0) {
             return ['error' => 'ID API invalide.'];
         }
@@ -82,18 +87,18 @@ class ApiController extends BaseController
             return ['error' => 'Au moins une image est requise.'];
         }
 
-        // Find or create the estate type
+        // Find or create the estate type (API may introduce new labels)
         $typeModel = new TypeModel();
         $type      = $typeModel->findByLabel($typeLabel);
         $typeId    = $type ? (int) $type['id_type'] : $typeModel->create($typeLabel);
 
-        // Get the "submitted" status
+        // All imported estates start with "déposé" status (pending admin review)
         $status = (new StatusModel())->findByLabel('déposé');
         if (!$status) {
             return ['error' => 'Statut "déposé" introuvable en base.'];
         }
 
-        // Download images from URL
+        // Download each image URL to a temp file, validate MIME, then move to estates dir
         $imageNames = [null, null, null, null];
         $mimeToExt  = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
         $finfo      = new \finfo(FILEINFO_MIME_TYPE);
@@ -103,7 +108,7 @@ class ApiController extends BaseController
             if ($url === '') continue;
 
             $content = @file_get_contents($url, false, $ctx);
-            if ($content === false) continue;
+            if ($content === false) continue;  // skip unreachable URLs silently
 
             $tmp = tempnam(sys_get_temp_dir(), 'api_img_');
             file_put_contents($tmp, $content);
@@ -111,7 +116,7 @@ class ApiController extends BaseController
 
             if (!isset($mimeToExt[$mime])) {
                 unlink($tmp);
-                continue;
+                continue;  // skip unsupported formats silently
             }
 
             $filename       = uniqid('estate_', true) . '.' . $mimeToExt[$mime];

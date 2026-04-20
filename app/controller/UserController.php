@@ -32,6 +32,7 @@ class UserController extends BaseController
 
         $this->refreshCsrf();
 
+        // Consume a flash error set by a previous redirect (e.g. requireAuth)
         $flash = $_SESSION['flash_error'] ?? null;
         unset($_SESSION['flash_error']);
 
@@ -59,6 +60,7 @@ class UserController extends BaseController
         $model    = new UserModel();
         $user     = $model->findByEmail($email);
 
+        // Intentionally vague error to avoid user enumeration
         if (!$user || !password_verify($password, $user['password'])) {
             $this->refreshCsrf();
             $this->render(V_AUTH . 'v_auth.html.php', [
@@ -69,6 +71,7 @@ class UserController extends BaseController
             return;
         }
 
+        // Rotate session ID on privilege change to prevent session fixation
         session_regenerate_id(true);
         $_SESSION['user_id']  = $user['id_user'];
         $_SESSION['pseudo']   = $user['pseudo'];
@@ -95,6 +98,7 @@ class UserController extends BaseController
             return;
         }
 
+        // Use Argon2id when available, fall back to bcrypt
         $algo   = defined('PASSWORD_ARGON2ID') ? PASSWORD_ARGON2ID : PASSWORD_BCRYPT;
         $hashed = password_hash($password, $algo);
         $model  = new UserModel();
@@ -102,6 +106,7 @@ class UserController extends BaseController
         try {
             $userId = $model->create($email, $hashed, $pseudo);
         } catch (RuntimeException) {
+            // DB throws on duplicate email (UNIQUE constraint)
             $this->refreshCsrf();
             $this->render(V_AUTH . 'v_auth_register.html.php', [
                 'csrf_token' => $_SESSION['csrf_token'],
@@ -111,6 +116,7 @@ class UserController extends BaseController
             return;
         }
 
+        // Rotate session ID on privilege change to prevent session fixation
         session_regenerate_id(true);
         $_SESSION['user_id']  = $userId;
         $_SESSION['pseudo']   = $pseudo;
@@ -139,17 +145,21 @@ class UserController extends BaseController
         $user      = (new UserModel())->findById($_SESSION['user_id']);
         $history   = $gameModel->findByUser($_SESSION['user_id']);
 
+        // Compute display name and avatar initial
         $pseudo     = $user['username'] ?? $user['pseudo'] ?? '';
         $initial    = mb_strtoupper(mb_substr($pseudo, 0, 1));
+
+        // Aggregate stats from game history
         $totalGames = count($history);
         $totalScore = 0;
         foreach ($history as $g) {
-            $totalScore += (int)$g['game_result'];
+            $totalScore += (int) $g['game_result'];
         }
         $avgScore    = $totalGames > 0 ? round($totalScore / $totalGames) : 0;
         $userRank    = $totalGames > 0 ? $gameModel->getUserRank($_SESSION['user_id']) : null;
         $leaderboard = $gameModel->leaderboard(10);
 
+        // Consume flash messages set by editAccount / deleteAccount redirects
         $success = $_SESSION['flash_success'] ?? null;
         $error   = $_SESSION['flash_error']   ?? null;
         unset($_SESSION['flash_success'], $_SESSION['flash_error']);
@@ -191,12 +201,14 @@ class UserController extends BaseController
         $newPwd  = $_POST['new_password'] ?? '';
         $confirm = $_POST['confirm_password'] ?? '';
 
+        // Validate required fields
         if ($pseudo === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['flash_error'] = 'Pseudo et email valide requis.';
             header('Location: ' . BASE_URL . '/profil');
             exit;
         }
 
+        // Validate password only when the user wants to change it
         if ($newPwd !== '' && strlen($newPwd) < 8) {
             $_SESSION['flash_error'] = 'Le mot de passe doit contenir au moins 8 caractères.';
             header('Location: ' . BASE_URL . '/profil');
@@ -218,6 +230,7 @@ class UserController extends BaseController
             $model->updatePassword($userId, password_hash($newPwd, $algo));
         }
 
+        // Sync session pseudo with the new value
         $_SESSION['pseudo']        = $pseudo;
         $_SESSION['flash_success'] = 'Profil mis à jour avec succès.';
 
@@ -230,6 +243,7 @@ class UserController extends BaseController
     {
         $this->requireAuth();
 
+        // Only reachable via POST (the form has a confirm dialog on the client side)
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: ' . BASE_URL . '/profil');
             exit;
@@ -238,8 +252,10 @@ class UserController extends BaseController
         $this->validateCsrf();
 
         $userId = (int) $_SESSION['user_id'];
+        // Nullifies FK references in GAME/ESTATE before deleting the user row
         (new UserModel())->delete($userId);
 
+        // Destroy the session entirely so the user is fully logged out
         $_SESSION = [];
         session_destroy();
 
@@ -279,6 +295,7 @@ class UserController extends BaseController
                 $isAdmin = (bool) ($_POST['is_admin'] ?? false);
                 $newPwd  = $_POST['new_password'] ?? '';
 
+                // Hash new password only if provided, otherwise keep existing
                 $hashed = ($newPwd !== '') ? password_hash($newPwd, PASSWORD_DEFAULT) : null;
                 $model->adminUpdate($userId, $email, $pseudo, $avatar, $isAdmin, $hashed);
             }
@@ -288,6 +305,7 @@ class UserController extends BaseController
                 $model->delete($userId);
             }
 
+            // PRG pattern: redirect to avoid resubmission on refresh
             header('Location: ' . BASE_URL . '/admin/utilisateurs');
             exit;
         }
@@ -307,6 +325,7 @@ class UserController extends BaseController
     {
         $this->requireAdmin();
 
+        // Aggregate key counters for the dashboard widgets
         $stats = [
             'active_estates'  => count((new EstateModel())->findActive()),
             'pending_estates' => count((new EstateModel())->findInactive()),
@@ -319,5 +338,4 @@ class UserController extends BaseController
             'stats'     => $stats,
         ]);
     }
-
 }

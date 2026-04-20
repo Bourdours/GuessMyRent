@@ -13,7 +13,7 @@ class MessageController extends BaseController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->validateCsrf();
-            $result = $this->handleContact();
+            $result = $this->handleContact();   // returns ['success' => ...] or ['error' => ...]
             $this->refreshCsrf();
             $this->render(V_CONTACT . 'v_contact.html.php', array_merge(
                 ['pageTitle' => 'Contact', 'csrf_token' => $_SESSION['csrf_token'], 'activeTab' => 'message'],
@@ -22,6 +22,7 @@ class MessageController extends BaseController
             return;
         }
 
+        // GET: preserve the active tab from the query string
         $activeTab = $_GET['tab'] ?? 'message';
         $this->refreshCsrf();
         $this->render(V_CONTACT . 'v_contact.html.php', [
@@ -39,13 +40,14 @@ class MessageController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->validateCsrf();
 
-            $action = $_POST['action'] ?? '';
+            $action    = $_POST['action'] ?? '';
             $messageId = (int) ($_POST['message_id'] ?? 0);
 
             if ($action === 'delete' && $messageId > 0) {
                 (new MessageModel())->deleteToVoid($messageId);
             }
 
+            // PRG pattern: redirect to avoid resubmission on refresh
             header('Location: ' . BASE_URL . '/admin/messagerie');
             exit;
         }
@@ -53,8 +55,8 @@ class MessageController extends BaseController
         $this->refreshCsrf();
 
         $this->render(V_ADMIN . 'v_admin_message.html.php', [
-            'pageTitle' => 'Gestion des messages - Admin',
-            'message' => (new MessageModel())->findAllWithUser(),
+            'pageTitle'  => 'Gestion des messages - Admin',
+            'message'    => (new MessageModel())->findAllWithUser(),
             'csrf_token' => $_SESSION['csrf_token'],
             'pageScript' => BASE_URL . '/public/js/admin.js',
         ]);
@@ -65,6 +67,7 @@ class MessageController extends BaseController
     {
         $email   = trim($_POST['email'] ?? '');
         $content = trim($_POST['content'] ?? '');
+        // Only accept subjects from the predefined whitelist
         $allowed = ['Question générale', 'Signaler un bug', 'Signaler un bien incorrect', 'Autre'];
         $objet   = in_array($_POST['objet'] ?? '', $allowed, true) ? $_POST['objet'] : null;
 

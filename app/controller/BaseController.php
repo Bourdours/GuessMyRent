@@ -32,7 +32,8 @@ abstract class BaseController
     {
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
             http_response_code(403);
-            die('Requête invalide.');
+            $this->render(VIEW . 'v_403.html.php', ['pageTitle' => '403 — Accès refusé']);
+            exit;
         }
     }
 

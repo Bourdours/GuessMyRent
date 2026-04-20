@@ -12,12 +12,14 @@ class EstateController extends BaseController
     /** Display the estate proposal form and process authenticated submissions */
     public function propose(): void
     {
+        // Redirect to registration if the user is not logged in
         $this->requireAuth('Vous devez être inscrit et connecté pour proposer un bien.');
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->validateCsrf();
-            $result = $this->handlePropose();
+            $result = $this->handlePropose();   // returns ['success' => ...] or ['error' => ...]
             $this->refreshCsrf();
+            // Re-render the form with the result (no redirect: user may need to see the error)
             $this->render(V_CONTACT . 'v_contact.html.php', array_merge(
                 ['pageTitle' => 'Proposer un bien', 'csrf_token' => $_SESSION['csrf_token'], 'activeTab' => 'bien'],
                 $result
@@ -25,6 +27,7 @@ class EstateController extends BaseController
             return;
         }
 
+        // GET: display the empty proposal form
         $this->refreshCsrf();
         $this->render(V_CONTACT . 'v_contact.html.php', [
             'pageTitle'  => 'Proposer un bien',
@@ -36,27 +39,30 @@ class EstateController extends BaseController
     /** Validate the proposal form, upload images, and insert the estate; returns success or error array */
     private function handlePropose(): array
     {
-        $city             = trim($_POST['city'] ?? '');
-        $postal           = trim($_POST['postal'] ?? '');
-        $adress           = trim($_POST['adress'] ?? '') ?: null;
-        $typeLabel        = $_POST['type'] ?? '';
-        $squareMeters     = (float) ($_POST['square_meters'] ?? 0);
-        $rent             = (int) round((int) ($_POST['rent'] ?? 0) / 10) * 10;
-        $room             = $_POST['room'] !== '' ? (int) ($_POST['room'] ?? 0) : null;
-        $chamber          = $_POST['chamber'] !== '' ? (int) ($_POST['chamber'] ?? 0) : null;
-        $floor            = $_POST['floor'] !== '' ? (int) ($_POST['floor'] ?? 0) : null;
-        $description      = trim($_POST['description'] ?? '') ?: null;
+        // Sanitize and cast all form inputs
+        $city              = trim($_POST['city'] ?? '');
+        $postal            = trim($_POST['postal'] ?? '');
+        $adress            = trim($_POST['adress'] ?? '') ?: null;
+        $typeLabel         = $_POST['type'] ?? '';
+        $squareMeters      = (float) ($_POST['square_meters'] ?? 0);
+        $rent              = (int) round((int) ($_POST['rent'] ?? 0) / 10) * 10;  // round to nearest 10
+        $room              = $_POST['room'] !== '' ? (int) ($_POST['room'] ?? 0) : null;
+        $chamber           = $_POST['chamber'] !== '' ? (int) ($_POST['chamber'] ?? 0) : null;
+        $floor             = $_POST['floor'] !== '' ? (int) ($_POST['floor'] ?? 0) : null;
+        $description       = trim($_POST['description'] ?? '') ?: null;
         $isChargesIncluded = isset($_POST['is_charges_included']) ? 1 : 0;
 
         if ($city === '' || $postal === '' || $typeLabel === '' || $squareMeters <= 0 || $rent <= 0) {
             return ['error' => 'Veuillez remplir tous les champs obligatoires.'];
         }
 
+        // Resolve type ID from label (must already exist in DB)
         $type = (new TypeModel())->findByLabel($typeLabel);
         if (!$type) {
             return ['error' => 'Type de bien invalide.'];
         }
 
+        // All user-submitted estates start with "déposé" status (pending review)
         $status = (new StatusModel())->findByLabel('déposé');
         if (!$status) {
             return ['error' => 'Statut indisponible, veuillez réessayer.'];
@@ -66,6 +72,7 @@ class EstateController extends BaseController
             return ['error' => 'Au moins une photo est requise.'];
         }
 
+        // Validate and move each uploaded photo (max 4, 5 MB each, JPG/PNG/WebP only)
         $imageNames = [null, null, null, null];
         $mimeToExt  = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
         $finfo      = new \finfo(FILEINFO_MIME_TYPE);
@@ -81,6 +88,7 @@ class EstateController extends BaseController
                 return ['error' => 'Image ' . ($i + 1) . ' invalide (JPG, PNG, WebP — 5 Mo max).'];
             }
 
+            // Double-check: ensure the file is a real image, not a disguised file
             if (getimagesize($tmpName) === false) {
                 return ['error' => 'Image ' . ($i + 1) . ' corrompue ou invalide.'];
             }
@@ -130,6 +138,7 @@ class EstateController extends BaseController
             $model    = new EstateModel();
 
             if ($action === 'update') {
+                // Resolve type label before updating; silently skip if invalid
                 $type = (new TypeModel())->findByLabel(trim($_POST['type_label'] ?? ''));
                 if ($type) {
                     $images = $this->processImageSlots();
@@ -155,6 +164,7 @@ class EstateController extends BaseController
                     ]);
                 }
             } elseif ($action === 'delete') {
+                // Load estate first to retrieve image filenames before the row is gone
                 $estate = $model->findById($estateId);
                 if ($model->deleteToVoid($estateId) && $estate) {
                     $imgDir = IMG . 'estates/';
@@ -168,6 +178,7 @@ class EstateController extends BaseController
                     }
                 }
             } else {
+                // Status-only actions: map action name to status ID
                 $statusMap = [
                     'activate'   => 2,
                     'archive'    => 3,
@@ -178,6 +189,7 @@ class EstateController extends BaseController
                 }
             }
 
+            // PRG pattern: redirect to avoid resubmission on refresh
             header('Location: ' . BASE_URL . '/admin/biens/en-attente');
             exit;
         }
@@ -206,6 +218,7 @@ class EstateController extends BaseController
             $model    = new EstateModel();
 
             if ($action === 'update') {
+                // Resolve type label before updating; silently skip if invalid
                 $type = (new TypeModel())->findByLabel(trim($_POST['type_label'] ?? ''));
                 if ($type) {
                     $images = $this->processImageSlots();
@@ -231,6 +244,7 @@ class EstateController extends BaseController
                     ]);
                 }
             } elseif ($action === 'delete') {
+                // Load estate first to retrieve image filenames before the row is gone
                 $estate = $model->findById($estateId);
                 if ($model->deleteToVoid($estateId) && $estate) {
                     $imgDir = IMG . 'estates/';
@@ -244,6 +258,7 @@ class EstateController extends BaseController
                     }
                 }
             } else {
+                // Status-only actions: map action name to status ID
                 $statusMap = [
                     'activate'   => 2,
                     'deactivate' => 1,
@@ -255,6 +270,7 @@ class EstateController extends BaseController
                 }
             }
 
+            // PRG pattern: redirect to avoid resubmission on refresh
             header('Location: ' . BASE_URL . '/admin/biens');
             exit;
         }
@@ -279,26 +295,28 @@ class EstateController extends BaseController
         $slots     = [];
 
         for ($n = 1; $n <= 4; $n++) {
-            $key    = 'image' . $n;
-            $oldKey = 'old_image' . $n;
-            $newKey = 'new_image' . $n;
+            $key    = 'image' . $n;     // current filename (may be cleared by JS)
+            $oldKey = 'old_image' . $n; // original filename (for deletion)
+            $newKey = 'new_image' . $n; // replacement upload
 
-            $current = trim($_POST[$key]    ?? '');
-            $old     = trim($_POST[$oldKey] ?? '');
-
+            $current   = trim($_POST[$key]    ?? '');
+            $old       = trim($_POST[$oldKey] ?? '');
             $hasUpload = !empty($_FILES[$newKey]['tmp_name'])
-                      && $_FILES[$newKey]['error'] === UPLOAD_ERR_OK;
+                && $_FILES[$newKey]['error'] === UPLOAD_ERR_OK;
 
             if ($hasUpload) {
                 $tmpName = $_FILES[$newKey]['tmp_name'];
                 $mime    = $finfo->file($tmpName);
 
-                if (isset($mimeToExt[$mime])
+                // Validate MIME, size, and image integrity before moving
+                if (
+                    isset($mimeToExt[$mime])
                     && $_FILES[$newKey]['size'] <= 5 * 1024 * 1024
                     && getimagesize($tmpName) !== false
                 ) {
                     $filename = uniqid('estate_', true) . '.' . $mimeToExt[$mime];
                     if (move_uploaded_file($tmpName, $imgDir . $filename)) {
+                        // Delete the old file now that the new one is in place
                         if ($old !== '') {
                             $f = $imgDir . basename($old);
                             if (is_file($f)) unlink($f);
@@ -307,18 +325,23 @@ class EstateController extends BaseController
                         continue;
                     }
                 }
+                // Upload failed validation: keep the old file unchanged
                 $slots[] = $old ?: null;
             } elseif ($current === '' && $old !== '') {
+                // Slot was cleared by the user: delete the file and mark as empty
                 $f = $imgDir . basename($old);
                 if (is_file($f)) unlink($f);
                 $slots[] = null;
             } else {
+                // No change: keep the current filename
                 $slots[] = $current ?: null;
             }
         }
 
+        // Compact: remove nulls and reindex so image1 is always the first photo
         $filled = array_values(array_filter($slots, fn($s) => $s !== null));
 
+        // Safety fallback: never save an estate with zero images
         if (empty($filled)) {
             $filled[] = trim($_POST['old_image1'] ?? '');
         }

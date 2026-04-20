@@ -25,7 +25,7 @@ abstract class DbConnect
                     PDO::ATTR_EMULATE_PREPARES   => false,
                 ]);
             } catch (PDOException $e) {
-                die('Erreur de connexion à la base de données.');
+                throw new \RuntimeException('Database connection failed.', 0, $e);
             }
         }
 

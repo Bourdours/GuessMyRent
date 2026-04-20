@@ -34,13 +34,14 @@ class GameController extends BaseController
 
         $estateModel = new EstateModel();
 
-        // Exclude estates already played by the logged-in user
+        // Exclude estates already played by the logged-in user to avoid repeats
         $excludeIds = $userId ? (new GameModel())->findPlayedEstateIdsByUser($userId) : [];
         $estate     = $estateModel->findRandomActive($excludeIds);
         $avgRent    = $estateModel->avgRent();
 
         $this->refreshCsrf();
 
+        // $estate is null when all estates have been played
         $this->render(V_GAME . 'v_game.html.php', [
             'pageTitle'    => 'Jouer',
             'estate'       => $estate ?: null,
@@ -66,6 +67,7 @@ class GameController extends BaseController
                 (new GameModel())->deleteToVoid($gameId);
             }
 
+            // PRG pattern: redirect to avoid resubmission on refresh
             header('Location: ' . BASE_URL . '/admin/parties');
             exit;
         }
@@ -88,20 +90,23 @@ class GameController extends BaseController
         $guess    = (int) ($_POST['guess'] ?? 0);
         $estateId = (int) ($_POST['estate_id'] ?? 0);
 
+        // Guard: reject tampered or empty values
         if ($guess <= 0 || $estateId <= 0) {
             header('Location: ' . BASE_URL . '/jeu');
             exit;
         }
 
+        // Guard: estate may have been deleted between page load and submit
         $estate = (new EstateModel())->findById($estateId);
         if (!$estate) {
             header('Location: ' . BASE_URL . '/jeu');
             exit;
         }
 
-        $score  = GameModel::computeScore($guess, (int) $estate['rent']);
-        $gap    = GameModel::computeGap($guess, (int) $estate['rent']);
+        $score = GameModel::computeScore($guess, (int) $estate['rent']);
+        $gap   = GameModel::computeGap($guess, (int) $estate['rent']);
 
+        // Persist the game (id_user is null for guests)
         $userId = $_SESSION['user_id'] ?? null;
         (new GameModel())->create($guess, $score, $estateId, $userId);
 
@@ -113,14 +118,14 @@ class GameController extends BaseController
         $this->refreshCsrf();
 
         $this->render(V_GAME . 'v_game_result.html.php', [
-            'pageTitle'       => 'Résultat',
-            'estate'          => $estate,
-            'guess'           => $guess,
-            'score'           => $score,
-            'gap'             => round($gap, 1),
-            'csrf_token'      => $_SESSION['csrf_token'],
-            'pageScript'      => BASE_URL . '/public/js/game.js',
-            'isGuestLimited'  => !$userId,
+            'pageTitle'      => 'Résultat',
+            'estate'         => $estate,
+            'guess'          => $guess,
+            'score'          => $score,
+            'gap'            => round($gap, 1),
+            'csrf_token'     => $_SESSION['csrf_token'],
+            'pageScript'     => BASE_URL . '/public/js/game.js',
+            'isGuestLimited' => !$userId,
         ]);
     }
 }
