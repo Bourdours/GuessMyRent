@@ -55,7 +55,7 @@
             id="mainPhoto"
             src="<?= BASE_URL ?>/public/img/estates/<?= htmlspecialchars($images[0]) ?>"
             alt="Photo principale du bien">
-          <span class="game-photo-zoom" aria-hidden="true"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+          <span class="game-photo-zoom" aria-hidden="true">🔍</span>
         </div>
 
         <!-- Thumbnails (only if more than 1 image) -->
@@ -87,30 +87,30 @@
 
           <ul class="game-specs">
             <li class="game-spec">
-              <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-ruler-combined"></i></span>
+              <span class="game-spec-icon" aria-hidden="true">📐</span>
               <span><?= htmlspecialchars($estate['square_meters']) ?> m²</span>
             </li>
             <?php if (!empty($estate['room'])): ?>
               <li class="game-spec">
-                <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-door-open"></i></span>
+                <span class="game-spec-icon" aria-hidden="true">🚪</span>
                 <span><?= (int)$estate['room'] ?> pièce<?= $estate['room'] > 1 ? 's' : '' ?></span>
               </li>
             <?php endif; ?>
             <?php if (!empty($estate['chamber'])): ?>
               <li class="game-spec">
-                <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-bed"></i></span>
+                <span class="game-spec-icon" aria-hidden="true">🛏</span>
                 <span><?= (int)$estate['chamber'] ?> chambre<?= $estate['chamber'] > 1 ? 's' : '' ?></span>
               </li>
             <?php endif; ?>
             <?php if (!empty($estate['floor']) && $estate['floor'] !== '0'): ?>
               <li class="game-spec">
-                <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-building"></i></span>
+                <span class="game-spec-icon" aria-hidden="true">🏢</span>
                 <span>Étage <?= htmlspecialchars($estate['floor']) ?></span>
               </li>
             <?php endif; ?>
             <?php if (!empty($estate['is_charges_included'])): ?>
               <li class="game-spec">
-                <span class="game-spec-icon" aria-hidden="true"><i class="fa-solid fa-circle-check"></i></span>
+                <span class="game-spec-icon" aria-hidden="true">✅</span>
                 <span>Charges comprises</span>
               </li>
             <?php endif; ?>
@@ -133,9 +133,9 @@
             <input type="hidden" name="estate_id" value="<?= (int)$estate['id_estate'] ?>">
 
             <div class="guess-display">
-              <button type="button" class="guess-step-btn" id="guessMinus" aria-label="Diminuer de 10"><i class="fa-solid fa-minus"></i></button>
+              <button type="button" class="guess-step-btn" id="guessMinus" aria-label="Diminuer de 10">−</button>
               <span id="guessValue"><?= $avgRent ?></span> €<span class="guess-unit">/mois</span>
-              <button type="button" class="guess-step-btn" id="guessPlus" aria-label="Augmenter de 10"><i class="fa-solid fa-plus"></i></button>
+              <button type="button" class="guess-step-btn" id="guessPlus" aria-label="Augmenter de 10">+</button>
             </div>
 
             <div class="guess-slider-wrap">
@@ -165,7 +165,7 @@
 
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()" aria-hidden="true" aria-modal="true" role="dialog">
-      <button class="lightbox-close" aria-label="Fermer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      <button class="lightbox-close" aria-label="Fermer"><span aria-hidden="true">✕</span></button>
       <img id="lightboxImg" src="#" alt="Photo agrandie">
     </div>
 

@@ -1,4 +1,5 @@
 <?php
+session_name('GmR_session');
 session_start();
 
 use Config\Router;

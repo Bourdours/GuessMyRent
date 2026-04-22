@@ -31,11 +31,13 @@
   function showOn() {
     btn.classList.remove("music-btn--off");
     btn.setAttribute("aria-label", "Couper la musique");
+    btn.querySelector("span").textContent = "🔊";
   }
 
   function showOff() {
     btn.classList.add("music-btn--off");
     btn.setAttribute("aria-label", "Activer la musique");
+    btn.querySelector("span").textContent = "🔇";
   }
 
   function setPlaying(playing) {

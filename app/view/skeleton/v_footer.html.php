@@ -6,7 +6,7 @@
   <source src="<?= BASE_URL ?>/public/audio/boucle25.mp3" type="audio/mpeg">
 </audio>
 <button id="musicBtn" class="music-btn music-btn--off" aria-label="Activer la musique">
-  <i class="fa-solid fa-music" aria-hidden="true"></i>
+  <span aria-hidden="true">🔇</span>
 </button>
 
 <footer>

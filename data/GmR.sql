@@ -174,7 +174,7 @@ CREATE TABLE `USER` (
 ALTER TABLE `API_ESTATE`
   ADD PRIMARY KEY (`id_api`),
   ADD UNIQUE KEY `api_external_id` (`api_external_id`),
-  ADD KEY `id_estate` (`id_estate`);
+  ADD UNIQUE KEY `id_estate` (`id_estate`);
 
 --
 -- Index pour la table `ESTATE`

@@ -21,6 +21,7 @@ A perfect guess earns 100 points. Scores accumulate across games and feed a lead
 | Frontend | Vanilla JS, SCSS (compiled via Sass) |
 | Config   | `vlucas/phpdotenv`                   |
 | Routing  | Custom `Router` class (no framework) |
+| External API | Supabase (property data, read-only)  |
 
 ## Project structure
 
