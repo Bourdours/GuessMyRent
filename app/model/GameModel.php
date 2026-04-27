@@ -91,7 +91,7 @@ class GameModel extends Model
     public function findPlayedEstateIdsByUser(int $userId): array
     {
         return $this->executeQueryWithBind(
-            'SELECT DISTINCT id_estate FROM GAME WHERE id_user = :id_user',
+            'SELECT DISTINCT id_estate FROM GAME WHERE id_user = :id_user AND id_estate IS NOT NULL',
             ['id_user' => $userId]
         )->fetchAll(\PDO::FETCH_COLUMN) ?: [];
     }

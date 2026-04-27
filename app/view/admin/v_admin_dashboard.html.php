@@ -21,7 +21,7 @@
       <article class="kpi-card">
         <dl>
           <dt class="kpi-label">Biens en attente</dt>
-          <dd class="kpi-value kpi-amber"><?= (int)($stats['pending_estates'] ?? 0) ?></dd>
+          <dd class="kpi-value kpi-gold"><?= (int)($stats['pending_estates'] ?? 0) ?></dd>
         </dl>
       </article>
       <article class="kpi-card">
